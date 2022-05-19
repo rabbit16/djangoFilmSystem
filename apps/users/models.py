@@ -28,6 +28,7 @@ class User(AbstractUser):
                                              )
     sex = models.BooleanField(verbose_name="性别", help_text="性别", default=True)
     birthday = models.DateTimeField(verbose_name="生日", help_text="生日", default=timezone.now)
+    Integral = models.IntegerField(help_text="积分", verbose_name="积分")
     class Meta:
         db_table = 'tb_users'
         verbose_name = '用户'
@@ -103,7 +104,7 @@ class Movie(models.Model):
     Movie_id = models.CharField(max_length=20, help_text="电影id", verbose_name="电影id")
     Movie_name = models.CharField(max_length=20, verbose_name='电影名', help_text="电影名")
     Movie_time = models.CharField(max_length=20, verbose_name="电影上映时间", help_text="电影上映时间")
-    Movie_img = models.CharField(max_length=100, verbose_name="电影上映时间", help_text="电影上映时间")
+    Movie_img = models.CharField(max_length=100, verbose_name="电影图片", help_text="电影图片")
     m_movietype = models.ManyToManyField(Movie_type)
 
     class Meta:
