@@ -1,0 +1,123 @@
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#header{
+    height: 100px;
+    border: 1px solid;
+	color: #000000
+}
+
+#header .h_center{
+    width: 1200px;
+    height: 88px;
+    margin: 0 auto;   /*并且父元素的宽度是确定的，意思是这个元素处于其父元素的居中位置，并且这个元素的上下外边距为0*/
+}
+
+#header .h_center img{
+    float: left;
+    height: 70px;
+    width: 80px;
+    margin-top: 15px;
+}
+
+#header .h_center p{
+    float: left;
+    text-align: left;
+    width: 335px;
+    font-size: 22px;
+    border: 2px solid black;
+    margin-top: 25px;
+    margin-left: 20px;
+    color: floralwhite;
+    background: lightcoral;
+    padding: 12px;
+}
+
+#login_body{
+    height: 600px;
+    background-image: url("../images/login_background.png");
+    background-position: center;
+    background-size: 1000px 600px;
+}
+
+#login_body .login_b_center{
+    width: 1250px;
+    height: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#login_body .login_bg{
+    width: 350px;
+    height: 351px;
+    background: rgba(255, 255, 255, 0.7);   /*rgba最后的参数可修改透明度*/
+    position: absolute;
+    right: -10px;
+    top: 90px;
+    padding: 30px;
+
+}
+
+/* 密码登录框设置 */
+#login div{
+    height: 40px;
+    margin-top: 20px;
+}
+
+#login span{
+    width: 37px;
+    height: 40px;
+    display: inline-block;
+    background: rgba(43, 43, 43, 0.2);
+    float: left;
+    border: 1px grey;
+}
+
+#login .userName span{
+	background-size: 38px 38px;
+	background-image: url("../images/username.png");
+}
+
+#login .password span{
+	background-size: 38px 38px;
+    background-image: url("../images/password.png");
+}
+
+#login input{
+    width: 250px;
+    height: 40px;
+    float: left;
+}
+
+#login .login_btn input{
+    background-color: rgba(43, 43, 43, 0.6);
+    width: 290px;
+    border: none;
+    color: floralwhite;
+    float: center;
+}
+
+/* 鼠标悬浮在字体上，字体颜色发生改变 */
+#login .login_btn a:hover{
+    color: black;
+    float: left;
+}
+
+#login .forgot_password{
+	color: black;
+    text-align: right;
+    margin-top: 10px;
+	font-size: 15px;
+}
+
+/* 去除默认样式的下划线 */
+a{
+    text-decoration:none;
+}
+
+
+

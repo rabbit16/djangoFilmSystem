@@ -1,0 +1,11 @@
+#footer{
+    text-align: center;
+    height: 300px;
+    padding-top: 30px;
+	font-size: 15px;
+}
+#footer .copyright{
+    margin-top: 20px;
+	font-size: 10px;
+}
+
