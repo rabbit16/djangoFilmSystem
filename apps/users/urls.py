@@ -10,5 +10,7 @@ app_name = 'index'
 urlpatterns = [
     path('', views.index.as_view(), name='see_index'),
     path("login/", views.Login.as_view(), name="login"),
-    path("register/", views.Register.as_view(), name="register")
+    path("register/", views.Register.as_view(), name="register"),
+    path("session/", views.Session.as_view(), name="session"),
+    path("Seat/", views.Seat.as_view(), name="seat")
 ]
