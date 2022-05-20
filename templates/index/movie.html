@@ -3,14 +3,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="referrer" content="no-referrer" />   <!--可以让img标签预加载网络图片-->
-		<title>首页</title>
+		<title>电影</title>
 	<!--    设置标签图标-->
 		<link rel="shortcut icon" href="images/logo.png">
-		<link rel="stylesheet" href="css/index1.1.css">
+		<link rel="stylesheet" href="css/index1.1.css">   <!--可改成allMovie.css还没写-->
 		<link rel="stylesheet" href="css/footer.css">
 		<link rel="stylesheet" href="css/header.css">
-		<!-- <link rel="stylesheet" href="css/goods_list.css"> -->
-		<!-- <link rel="stylesheet" href="css/next_page.css"> -->
 		<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>   <!--在线jquery.min.js引用-->
 		<script type="text/javascript" src="js/photo.js"></script>
 		<script>
@@ -65,11 +63,142 @@
 			<!--底部导航        -->
 			<div class="nav">
 				<ul>
-					<li><a href="index.html">首页</a></li>
-					<li><a href="allMovie.html">电影</a></li>
+					<li><a href="#">首页</a></li>
+					<li><a href="#">电影</a></li>
 					<li><a href="#">榜单</a></li>
 				</ul>
 			</div>
+		</div>
+		<div class="movies-channel">   <!--begin从这里到stop都是抄的猫眼 还没改完-->
+		  <div class="tags-panel">
+		    <ul class="tags-lines">
+		      <li class="tags-line" data-val="{tagTypeName:'cat'}">
+		        <div class="tags-title">类型 :</div>
+		        <ul class="tags">
+		          <li class="active" data-state-val="{ catTagName:'全部'}" >
+		            <a data-act="tag-click" data-val="{TagName:'全部'}" href="javascript:void(0);" style="cursor: default">全部</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'爱情'}" href="?catId=3">爱情</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'喜剧'}" href="?catId=2">喜剧</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'动画'}" href="?catId=4">动画</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'剧情'}" href="?catId=1">剧情</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'惊悚'}" href="?catId=7">惊悚</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'科幻'}" href="?catId=10">科幻</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'动作'}" href="?catId=5">动作</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'悬疑'}" href="?catId=8">悬疑</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'犯罪'}" href="?catId=11">犯罪</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'冒险'}" href="?catId=9">冒险</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'战争'}" href="?catId=12">战争</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'奇幻'}" href="?catId=14">奇幻</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'家庭'}" href="?catId=16">家庭</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'古装'}" href="?catId=17">古装</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'武侠'}" href="?catId=18">武侠</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'历史'}" href="?catId=20">历史</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'传记'}" href="?catId=21">传记</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'歌舞'}" href="?catId=23">歌舞</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'音乐'}" href="?catId=27">音乐</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'灾难'}" href="?catId=28">灾难</a>
+		          </li>
+		          <li >
+		            <a data-act="tag-click" data-val="{TagName:'其他'}" href="?catId=100">其他</a>
+		          </li>
+		        </ul>
+		      </li>
+		    </ul>
+		  </div>
+		  <div class="movies-panel">
+		    <div class="movies-sorter">
+		      <div class="cat-sorter">
+		        <ul>
+		          <li>
+		            <span class="sort-control-group" data-act='sort-click' data-val="{tagId: 1 }"
+		                  style="cursor: default"
+		            >
+		              <span class="sort-control sort-radio sort-radio-checked"></span>
+		              <span class="sort-control-label">按热门排序</span>
+		            </span>
+		          </li>
+		          <li>
+		            <span class="sort-control-group" data-act='sort-click' data-val="{tagId: 2 }"
+		                  data-href="?sortId=2"
+		                  onclick="location.href=this.getAttribute('data-href')"
+		            >
+		              <span class="sort-control sort-radio"></span>
+		              <span class="sort-control-label">按时间排序</span>
+		            </span>
+		          </li>
+		          <li>
+		            <span class="sort-control-group" data-act='sort-click' data-val="{tagId: 3 }"
+		                  data-href="?sortId=3"
+		                  onclick="location.href=this.getAttribute('data-href')"
+		            >
+		              <span class="sort-control sort-radio"></span>
+		              <span class="sort-control-label">按评价排序</span>
+		            </span>
+		          </li>
+		        </ul>
+		      </div>
+		      <div class="play-sorter">
+		        <span class="sort-control-group" data-act='isplay-click' data-val="{isplay:1}"
+		          data-href="?isPlay=1"
+		          onclick="location.href=this.getAttribute('data-href')">
+		          <span class="sort-control sort-checkbox"></span>
+		          <span class="sort-control-label">可播放</span>
+		        </span>
+		      </div>
+		    </div>
+		    <div class="movies-list">
+		    
+		    <dl class="movie-list">
+		  <dd>
+		    <div class="movie-item film-channel">
+		      <a href="/films/1328765" target="_blank" data-act="movie-click" data-val="{movieid:1328765}">
+		        <div class="movie-poster">
+		          <img class="poster-default" src="//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:5788b470/image/loading_2.e3d934bf.png" />
+		          <img data-src="https://p0.pipi.cn/mmdb/25bfd69ae7a5bff0ee230fed0210646bfdde9.jpg?imageView2/1/w/160/h/220" alt="我是真的讨厌异地恋海报封面" />
+		        </div>
+		      </a>
+		        <div class="channel-action channel-action-sale">
+		  <a>购票</a>   <!--stop-->
 		</div>
 		<!--banner-->
 		<div id="ad" style="text-align: center;">

@@ -6,8 +6,8 @@
 }
 
 #header{
-    height: 210px;
-    background: white;
+    height: 200px;
+    background: #01ABAA;
 }
 
 #header .header_top{
@@ -76,22 +76,24 @@
     margin-left: 50px;
 }
 #header .h_c_search form .t_input{
-    width: 555px;
+    width: 200px;
     height: 40px;
     border: 2px solid black;
     padding-left: 10px;
+    border-radius: 20px 20px 20px 20px;
 }
 
 #header .h_c_search form .t_button{
     width: 75px;
     height: 40px;
-    border: 1px solid grey;
+    border: 2px solid black;
     float: right;
-    color: #ff00c8;
+    color: #000000;
+    background-color: white;
     margin-left: 5px;
-
-
+    border-radius: 10px 10px 10px 10px;
 }
+
 #header .h_c_search .hot{
     margin-left: 80px;
     margin-top: 5px;
@@ -112,13 +114,15 @@
     height: 110px;
 }
 #header .nav{
-    width: 1200px;
+    width: 1500px;
     height: 44px;
+    /*margin-top: 10px;*/
     margin: 0 auto;
-    background: darkslategrey;
+    background: #000000;
     line-height: 44px;
-    border-radius:8px 8px 8px 8px ;
+    /*border-radius:8px 8px 8px 8px ;*/
 }
+
 #header .nav ul{
     list-style: none;
     width: 1200px;

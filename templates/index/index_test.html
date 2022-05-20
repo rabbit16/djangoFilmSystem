@@ -1,15 +1,16 @@
-{% load static %} <!-- static标签来加载静态文件，此为前提 -->
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    {% block title %}<title>主页</title>{% endblock %}
+    {% block title %}<title>主页测试</title>{% endblock %}
 <!--    <base href="/">-->
     {% block link %}
         <link rel="shortcut icon" href="{% static 'images/logo.png' %}"> <!-- 设置标签图标 -->
-        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+        <link rel="stylesheet" href="{% static 'css/index_test.css' %}">
+        <link rel="stylesheet" href="{% static 'css/goods_list.css' %}">
     {% endblock %}
         <link rel="stylesheet" href="{% static 'css/footer.css' %}">
-        <link rel="stylesheet" href="{% static 'css/header.css' %}">
+        <link rel="stylesheet" href="{% static 'css/header_test.css' %}">
 </head>
 
 <body>
@@ -17,25 +18,26 @@
 {% block header %}
 <div id="header">
     <!--顶部 登录-->
-    <div class="header_top">
-        <!-- 中部 -->
-        <div class="header_top_center">
-            <!-- 中部左侧 -->
-            <div class="h_top_left">
-                欢迎来到胡萝剧场！
-            </div>
-            <!-- 中部右侧-->
-            <div class="h_top_right">
-                <a href="{% url 'index:index_test' %}">主页测试</a>
-                &nbsp;&nbsp;&nbsp;
-                <a href="{% url 'index:register' %}">注册</a>
-                &nbsp;&nbsp;&nbsp;
-                <a href="{% url 'index:login' %}">登录</a>
-                &nbsp;&nbsp;&nbsp;
-                <a href="{% url 'index:login' %}">我的信息</a>
-            </div>
-        </div>
-    </div>
+<!--    <div class="header_top">-->
+<!--        &lt;!&ndash; 中部 &ndash;&gt;-->
+<!--        <div class="header_top_center">-->
+<!--            &lt;!&ndash; 中部左侧 &ndash;&gt;-->
+<!--            <div class="h_top_left">-->
+<!--                欢迎来到胡萝剧场！-->
+<!--            </div>-->
+<!--            &lt;!&ndash; 中部右侧&ndash;&gt;-->
+<!--            <div class="h_top_right">-->
+<!--                <a href="{% url 'index:index_test' %}">主页测试</a>-->
+<!--                &nbsp;&nbsp;&nbsp;-->
+<!--                <a href="{% url 'index:register' %}">注册</a>-->
+<!--                &nbsp;&nbsp;&nbsp;-->
+<!--                <a href="{% url 'index:login' %}">登录</a>-->
+<!--                &nbsp;&nbsp;&nbsp;-->
+<!--                <a href="{% url 'index:login' %}">我的信息</a>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
     <!-- 中部搜索-->
     <div class="header_center">
 <!--        中部左边logo-->
@@ -43,7 +45,7 @@
             <img src="{% static 'images/logo.png' %}" alt="">
         </div>
         <div class="h_c_search">
-            <form action="#">   <!-- <form action="form_action.asp" method="get"> -->
+            <form action="#">
                 <input type="text" placeholder="请输入电影名" class="t_input">
                 <input type="submit" class="t_button" value="搜索">
             </form>
@@ -75,7 +77,7 @@
 
 
 {% block banner %}
-    <div id="ad" style="text-align: center;">   <!-- 文本居中 -->
+    <div id="ad" style="text-align: center;">
     <ul id="ad_img" >
         <li><img src="{% static 'images/banner/heidi.png' %}" width="1100" height="600" /></li>
         <li><img src="{% static 'images/banner/joker.png' %}" width="1100" height="600" /></li>
@@ -90,10 +92,12 @@
     </ul>
 </div>
 {% endblock %}
+<!--banner-->
 
 
+<!--精选图片-->
 {% block main %}
-<div id="ms">
+    <div id="ms">
     <div class="ms_top">
         <span>热映电影</span>
         <span>胡萝剧场 有你好看</span>
@@ -218,6 +222,7 @@
             </ul>
         </div>
     </div>
+
 </div>
 {% endblock %}
 
@@ -258,7 +263,7 @@
 {% endblock %}
 
 {% block script %}
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>   <!-- 导入压缩的jQuery库 -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'js/photo.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/message.js' %}"></script>
     <script>

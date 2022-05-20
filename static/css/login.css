@@ -1,30 +1,36 @@
-
 *{
     margin:0;
     padding: 0;
     box-sizing: border-box;
 }
 
-#header{
+#log_header{
     height: 100px;
+    width: 100%;
     border: 1px solid;
 	color: #000000
 }
 
-#header .h_center{
+#log_header .log_h_center{
     width: 1200px;
-    height: 88px;
+    height: 110px;
     margin: 0 auto;   /*并且父元素的宽度是确定的，意思是这个元素处于其父元素的居中位置，并且这个元素的上下外边距为0*/
+    display: flex;
 }
 
-#header .h_center img{
-    float: left;
+#log_header .log_h_left{
+     height: 110px;
+     flex: 1;
+ }
+
+#log_header .log_h_left img{
     height: 70px;
     width: 80px;
+    float: left;
     margin-top: 15px;
 }
 
-#header .h_center p{
+#log_header .log_h_center p{
     float: left;
     text-align: left;
     width: 335px;
@@ -59,16 +65,15 @@
     right: -10px;
     top: 90px;
     padding: 30px;
-
 }
 
 /* 密码登录框设置 */
-#login div{
+.form-contain div{
     height: 40px;
     margin-top: 20px;
 }
 
-#login span{
+.form-contain span{
     width: 37px;
     height: 40px;
     display: inline-block;
@@ -77,23 +82,28 @@
     border: 1px grey;
 }
 
-#login .userName span{
+/*#login .userName span{*/
+/*	background-size: 38px 38px;*/
+/*	background-image: url("../images/username.png");*/
+/*}*/
+
+.form-contain .userName span{
 	background-size: 38px 38px;
 	background-image: url("../images/username.png");
 }
 
-#login .password span{
+.form-contain .password span{
 	background-size: 38px 38px;
     background-image: url("../images/password.png");
 }
 
-#login input{
+.form-contain input{
     width: 250px;
     height: 40px;
     float: left;
 }
 
-#login .login_btn input{
+.form-contain .login_btn input{
     background-color: rgba(43, 43, 43, 0.6);
     width: 290px;
     border: none;
@@ -102,12 +112,12 @@
 }
 
 /* 鼠标悬浮在字体上，字体颜色发生改变 */
-#login .login_btn a:hover{
+.form-contain .login_btn a:hover{
     color: black;
     float: left;
 }
 
-#login .forgot_password{
+.form-contain .forgot_password{
 	color: black;
     text-align: right;
     margin-top: 10px;

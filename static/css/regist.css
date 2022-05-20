@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 #reg_header{
     height: 110px;
     width: 100%;
@@ -15,28 +16,30 @@
     margin: 0 auto;
     display: flex;
 }
+
 #reg_header .reg_h_left{
      height: 110px;
      flex: 1;
  }
 
 #reg_header .reg_h_left img{
-    height: 100px;
-    width: 120px;
+    height: 70px;
+    width: 80px;
     float: left;
+    margin-top: 15px;
 }
-#reg_header .reg_h_left h3{
+#reg_header .reg_h_left h2{
     float: left;
-    margin-top: 80px;
-    margin-left: 10px;
+    margin-top: 35px;
+    margin-left: 30px;
 }
+
 #reg_header .reg_h_right{
     height: 110px;
     flex: 1;
     padding-top: 50px;
     padding-left: 30px;
 }
-
 
 .reg_back {
     /*设置整体的尺寸、背景色、边距等*/

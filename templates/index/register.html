@@ -1,35 +1,32 @@
 {% extends "index/index.html" %}
 {% load static %}
 
+{% block title %}<title>注册</title>{% endblock %}
+<base href="/">
 {% block link %}
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}">
     <link rel="stylesheet" href="{% static 'css/regist.css' %}">
-{#    <link rel="shortcut icon" href="images/camera.ico">#}
-    <link rel="shortcut icon" href="{% static 'images/camera.ico' %}">
 {% endblock %}
 
-{% block banner %}
-
-{% endblock %}
-{#    <link rel="stylesheet" href="css/regist.css">#}
 
 <!--头部-->
 {% block header %}
-    <div id="reg_header">
+<div id="reg_header">
     <div class="reg_h_center">
         <div class="reg_h_left">
             <img src="{% static 'images/logo.png' %}" alt="">
-            <h3>欢迎注册</h3>
+            <h2>欢迎注册</h2>
         </div>
     </div>
 </div>
 {% endblock %}
 
-{% block next_button %}
-
+{% block banner %}
 {% endblock %}
 
+
 {% block main %}
-    <div class="reg_back">
+<div class="reg_back">
     <div class="reg_left">
         <p>新用户注册</p>
         <p>USER REGISTER</p>
@@ -39,10 +36,9 @@
             <form action="" method="post" class="form-contain">
                 {% csrf_token %}
                 <table>
-                    <tr>
+                    <tr>   <!-- table -->
                         <td class="td_left"><label for="username">用户名</label></td>
-                        <td class="td_right"><input type="text" name="username" placeholder="请输入用户名"
-                                                    id="user_name"></td>
+                        <td class="td_right"><input type="text" name="username" placeholder="请输入用户名" id="user_name"></td>
                     </tr>
                     <tr>
                         <td class="td_left"><label for="password">密码</label></td>
@@ -54,8 +50,7 @@
 {#                    </tr>#}
                     <tr>
                         <td class="td_left"><label for="Email">Email</label></td>
-                        <td class="td_right"><input type="email" name="email" placeholder="请输入Email" id="Email">
-                        </td>
+                        <td class="td_right"><input type="email" name="email" placeholder="请输入Email" id="Email"></td>
                     </tr>
                     <tr>
                         <td class="td_left"><label for="rename">姓名</label></td>
@@ -64,8 +59,7 @@
                     </tr>
                     <tr>
                         <td class="td_left"><label for="Telphone">手机号</label></td>
-                        <td class="td_right"><input type="text" name="telphone" placeholder="请输入您的手机号"
-                                                    id="mobile"></td>
+                        <td class="td_right"><input type="text" name="telphone" placeholder="请输入您的手机号" id="mobile"></td>
                     </tr>
                     <tr>
                         <td class="td_left"><label>性别</label></td>
@@ -80,7 +74,7 @@
                     <tr>
                         <td class="td_left"><label for="checkcode" style="position: relative;top: 11px;">验证码</label></td>
                         <td class="captcha-graph-img"><input type="text" id="input_captcha" name="captcha_graph" class="form-captcha">
-                            <a href="javascript:void(0);" class="captcha-graph-img">
+                            <a href="javascript:void(0);" class="captcha-graph-img">   <!-- 死链接 -->
                               <img src="" alt="验证码" title="点击刷新" id="c" style="position: relative;width: 93px;height: 38px">
                             </a>
                         <!-- 10.png为验证码图片 -->
@@ -93,10 +87,14 @@
         </div>
     </div>
     <div class="reg_right">
-        <p>已有账号?<a href="login.html">立即登录</a></p>
+        <p>已有账号?<a href="{% url 'index:login' %}">立即登录</a></p>
     </div>
 </div>
 {% endblock %}
+
+{% block next_button %}
+{% endblock %}
+
 
 {% block script %}
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>

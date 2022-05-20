@@ -1,0 +1,163 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title>电影详情</title>{% endblock %}
+
+    {% block link %}
+        <link rel="shortcut icon" href="{% static 'images/logo.png' %}"> <!-- 设置标签图标 -->
+        <link rel="stylesheet" href="{% static 'css/movieDetail.css' %}">
+    {% endblock %}
+        <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+        <link rel="stylesheet" href="{% static 'css/header.css' %}">
+</head>
+
+<body>
+<!--头部-->
+{% block header %}
+<div id="header">
+    <!--顶部 登录-->
+    <div class="header_top">
+        <!-- 中部 -->
+        <div class="header_top_center">
+            <!-- 中部左侧 -->
+            <div class="h_top_left">
+                欢迎来到胡萝剧场！
+            </div>
+            <!-- 中部右侧-->
+            <div class="h_top_right">
+                <a href="{% url 'index:register' %}">注册</a>
+                &nbsp;&nbsp;&nbsp;
+                <a href="{% url 'index:login' %}">登录</a>
+                &nbsp;&nbsp;&nbsp;
+                <a href="{% url 'index:register' %}">我的信息</a>
+<!--                <a href="#">购物车</a>-->
+<!--                <a href="#">我的订单</a>-->
+            </div>
+        </div>
+    </div>
+    <!-- 中部搜索-->
+    <div class="header_center">
+<!--        中部左边logo-->
+        <div class="h_c_logo">
+            <img src="{% static 'images/logo.png' %}" alt="">
+        </div>
+        <div class="h_c_search">
+            <form action="#">
+                <input type="text" placeholder="请输入电影名" class="t_input">
+                <input type="submit" class="t_button" value="搜索">
+            </form>
+            <div class="hot">
+                <a href="#">头号玩家</a>
+                &nbsp;
+                <a href="#">李孝谦</a>
+                &nbsp;
+                <a href="#">黑白魔女库伊拉</a>
+                &nbsp;
+                <a href="#">五个扑水的少年</a>
+            </div>
+        </div>
+<!--&lt;!&ndash;        中部右边二维码&ndash;&gt;-->
+<!--        <div class="h_c_code">-->
+<!--            <img src="images/code.jpg" alt="">-->
+<!--        </div>-->
+    </div>
+    <!--底部导航        -->
+    <div class="nav">
+        <ul>
+            <li><a href="#">首页</a></li>
+            <li><a href="{% url 'index:movie' %}">电影</a></li>
+            <li><a href="{% url 'index:rank' %}">榜单</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+<!--精选图片-->
+{% block main %}
+    <div id="ms">
+<!--    <div class="ms_top">-->
+<!--        <span>热映电影</span>-->
+<!--        <span>胡萝剧场 有你好看</span>-->
+<!--    </div>-->
+    <div class="ms_body">
+        <div class="ms_body_center">
+            <ul>
+                <li>
+                    <a href="">
+                        <img src="https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2395517414.webp" alt="">
+                        <p class="name">爱乐之城</p>
+                        <div class="photoby">
+                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
+                            <p>lzh</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <ul>
+            <li>
+                <div class="ms_body_right"> <!-- 可改成电影信息 -->
+                    <ul>
+                        <li>
+                            <p class="name">我是真的讨厌异地恋</p>
+                            <p class="englishName">Stay With Me</p>
+                            <p class="tags">爱情 青春 喜剧</p>
+                            <p class="timeLength">108分钟</p>
+                            <p class="releaseDate">2022-04-29</p>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div class="want_to_see">
+                    <span></span><input type="button" value="想看">
+                </div>
+            </li>
+            <li>
+                <div class="ticket">
+                    <a href="{% url 'index:ticket'%}">
+                        <span></span><input type="button" value="购票">
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</div>
+{% endblock %}
+
+
+
+<!--尾部-->
+{% block footer %}
+    <div id="footer">
+    <div class="link">
+        <a href="">关于我们</a>
+        |
+        <a href="">联系我们</a>
+        |
+        <a href="">友情链接</a>
+        |
+    </div>
+    <div class="copyright">
+        Copyright © 1999 - 2020 胡萝. All Rights Reserved.
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/photo.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/message.js' %}"></script>
+    <script>
+        $(document).ready(function function_name() {
+            changeImg()
+        })
+    </script>
+{% endblock %}
+
+
+</body>
+</html>
+
