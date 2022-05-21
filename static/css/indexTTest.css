@@ -10,8 +10,9 @@ a{
     text-decoration:none ;
 }
 /*Banner*/
+
 #ad{
-    width:1060px;
+    width:1200px;
     height:600px;
     position:relative;
     margin: 0 auto;
@@ -22,54 +23,64 @@ a{
     list-style:none;
 }
 
-#ad_img li{
-    display:none;
-    margin-top: 10px;
+/*#ad_img li{*/
+/*    display:none;*/
+/*    margin-top: 0px;*/
+
+/*}*/
+
+#ad_img img{
+    width: 1200px;
+    height: 400px;
 }
 
 /*角落显示数字的ul*/
 #ad_num{
     overflow:hidden;
     position:absolute;
-    bottom:100px;
-    right:10px;
+    bottom:150px;
+    right:15px;
     color:#FFF;
 }
+
 /*数字的浮动*/
 #ad_num li{
-    border:#FFF solid 1px;
+    border: white solid 1.5px;
     float:left;
     margin:0px 5px;
     padding:3px 10px;
 }
+
 .numsover{
-    background-color:#F08080;
-    color:#F00;
+    /*background-color:white;*/
+    background: rgba(255, 255, 255, 0.7);
+    color:black;
+    font-weight: bold;
 }
+
 /*精选图片*/
 #ms{
     width: 1920px;
     margin: 0 auto;
 }
 #ms .ms_top{
-    width: 500px;
+    width: 140px;
     height: 55px;
-    /*-webkit-background-size: 1200px 55px;*/
     background-size: 1200px 55px;
     line-height: 55px;
-    margin-left: 2px;
-    border-top-right-radius: 20px;
-    margin-top: 20px;
-    background: gray;
+    margin-left: 0px;
+    border-radius: 0px;
+    margin-top: 0px;
+    background: #CAEBF2;
 }
+
 #ms .ms_top span{
-    color: whitesmoke ;
-}
-#ms .ms_top span:first-child{
+    color: #333333;
     font-weight: bold;
-    margin: 0 10px;
+    margin: 0 30px;
     font-size: 20px;
 }
+
 #ms .ms_body{
     width: 1900px;
     display: flex;
@@ -82,6 +93,7 @@ a{
     border: 1px solid darkgray;
     border-radius: 8px 8px 8px 8px;
 }
+
 #ms .ms_body li p.name{
     padding-left: 10px;
     display: block;
@@ -145,5 +157,61 @@ a{
     margin-top: 20px;
 }
 
+.hl_body a {
+    color: black;
+    text-decoration: none;
+}
 
+/*<!-- div 大小设定 -->*/
+.hl_body {
+    float: left;
+    width: 340px;
+    margin-top: 106px;
+    margin-left: 118px;
+    background: #fff;
+    border: 1px solid #FFF;
+    box-shadow: #d0d0d0 1px 1px 10px 0px;
+}
+
+.hl_body ul {
+    counter-reset: section;
+}
+
+.hl_body li {
+    float: left;
+    width: 260px;
+    border-bottom: 1px solid #b8c2cc;
+    line-height: 46px;
+    height: 46px;
+    overflow: hidden;
+    color: #525C66;
+    font-size: 14px;
+}
+
+.hl_body li:before {
+    counter-increment: section;
+    content: counter(section);
+    display: inline-block;
+    padding: 0 12px;
+    margin-right: 10px;
+    height: 18px;
+    line-height: 18px;
+    background: #b8c2cc;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 9px
+}
+
+/*<!-- 排名前三名颜色控制 -->*/
+.hl_body li:nth-child(1):before {
+    background: #0164b4
+}
+
+.hl_body li:nth-child(2):before {
+    background: #0164b4
+}
+
+.hl_body li:nth-child(3):before {
+    background: #0164b4
+}
 

@@ -3,74 +3,46 @@
 <head>
     <meta charset="UTF-8">
     {% block title %}<title>主页测试</title>{% endblock %}
-<!--    <base href="/">-->
     {% block link %}
-        <link rel="shortcut icon" href="{% static 'images/logo.png' %}"> <!-- 设置标签图标 -->
-        <link rel="stylesheet" href="{% static 'css/index_test.css' %}">
-        <link rel="stylesheet" href="{% static 'css/goods_list.css' %}">
+        <link rel="shortcut icon" href="{% static 'images/logo.png' %}">
+        <link rel="stylesheet" href="{% static 'css/indexTTest.css' %}">
+        <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
     {% endblock %}
         <link rel="stylesheet" href="{% static 'css/footer.css' %}">
-        <link rel="stylesheet" href="{% static 'css/header_test.css' %}">
+        <link rel="stylesheet" href="{% static 'css/headerTest.css' %}">
+    <style>
+        {#body{background-color: #EFEFEF}#}
+        body{background-color: #333333}
+    </style>
 </head>
 
 <body>
-<!--头部-->
 {% block header %}
 <div id="header">
-    <!--顶部 登录-->
-<!--    <div class="header_top">-->
-<!--        &lt;!&ndash; 中部 &ndash;&gt;-->
-<!--        <div class="header_top_center">-->
-<!--            &lt;!&ndash; 中部左侧 &ndash;&gt;-->
-<!--            <div class="h_top_left">-->
-<!--                欢迎来到胡萝剧场！-->
-<!--            </div>-->
-<!--            &lt;!&ndash; 中部右侧&ndash;&gt;-->
-<!--            <div class="h_top_right">-->
-<!--                <a href="{% url 'index:index_test' %}">主页测试</a>-->
-<!--                &nbsp;&nbsp;&nbsp;-->
-<!--                <a href="{% url 'index:register' %}">注册</a>-->
-<!--                &nbsp;&nbsp;&nbsp;-->
-<!--                <a href="{% url 'index:login' %}">登录</a>-->
-<!--                &nbsp;&nbsp;&nbsp;-->
-<!--                <a href="{% url 'index:login' %}">我的信息</a>-->
-
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-    <!-- 中部搜索-->
+    <div class="header_top"></div>
     <div class="header_center">
-<!--        中部左边logo-->
         <div class="h_c_logo">
             <img src="{% static 'images/logo.png' %}" alt="">
+        </div>
+        <div class="nav">
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li><a href="{% url 'index:movie' %}">电影</a></li>
+                <li><a href="{% url 'index:rank' %}">榜单</a></li>
+            </ul>
         </div>
         <div class="h_c_search">
             <form action="#">
                 <input type="text" placeholder="请输入电影名" class="t_input">
-                <input type="submit" class="t_button" value="搜索">
+                <button type="submit" class="t_button"><i class="fa fa-search"></i></button>
             </form>
-            <div class="hot">
-                <a href="#">头号玩家</a>
-                &nbsp;
-                <a href="#">李孝谦</a>
-                &nbsp;
-                <a href="#">黑白魔女库伊拉</a>
-                &nbsp;
-                <a href="#">五个扑水的少年</a>
-            </div>
         </div>
-<!--&lt;!&ndash;        中部右边二维码&ndash;&gt;-->
-<!--        <div class="h_c_code">-->
-<!--            <img src="images/code.jpg" alt="">-->
-<!--        </div>-->
-    </div>
-    <!--底部导航        -->
-    <div class="nav">
-        <ul>
-            <li><a href="#">首页</a></li>
-            <li><a href="{% url 'index:movie' %}">电影</a></li>
-            <li><a href="{% url 'index:rank' %}">榜单</a></li>
-        </ul>
+        <div class="user_message">
+            <a href="{% url 'index:login' %}">
+                <img class="user_photo" src="{% static 'images/username.png' %}">
+                <p>登录</p>
+            </a>
+        </div>
     </div>
 </div>
 {% endblock %}
@@ -79,10 +51,10 @@
 {% block banner %}
     <div id="ad" style="text-align: center;">
     <ul id="ad_img" >
-        <li><img src="{% static 'images/banner/heidi.png' %}" width="1100" height="600" /></li>
-        <li><img src="{% static 'images/banner/joker.png' %}" width="1100" height="600" /></li>
-        <li><img src="{% static 'images/banner/whiteSnake.png' %}" width="1100" height="600" /></li>
-        <li><img src="{% static 'images/banner/zootopia.png' %}" width="1100" height="600" /></li>
+        <li><img src="{% static 'images/banner/heidi.png' %}"></li>
+        <li><img src="{% static 'images/banner/joker.png' %}"></li>
+        <li><img src="{% static 'images/banner/whiteSnake.png' %}"></li>
+        <li><img src="{% static 'images/banner/zootopia.png' %}"></li>
     </ul>
     <ul id="ad_num">
         <li>1</li>
@@ -92,33 +64,14 @@
     </ul>
 </div>
 {% endblock %}
-<!--banner-->
 
 
-<!--精选图片-->
 {% block main %}
-    <div id="ms">
+<div id="ms" style="float: left;">
     <div class="ms_top">
-        <span>热映电影</span>
-        <span>胡萝剧场 有你好看</span>
+        <span>正在热映</span>
     </div>
     <div class="ms_body">
-<!--        <div class="ms_body_left">-->
-<!--            <ul>-->
-<!--&lt;!&ndash;                {% for image in images %}&ndash;&gt;-->
-<!--                    <li>-->
-<!--                    <a href="">-->
-<!--                        <img src="{{ image.url }}" alt="">-->
-<!--                        <p class="name">字</p>-->
-<!--                        <div class="photoby">-->
-<!--                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>-->
-<!--                            <p>lzh</p>-->
-<!--                        </div>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--&lt;!&ndash;                {% endfor %}&ndash;&gt;-->
-<!--            </ul>-->
-<!--        </div>-->
         <div class="ms_body_left">
             <ul>
                 <li>
@@ -127,7 +80,7 @@
                         <p class="name">天书奇谭</p>
                         <div class="photoby">
                             <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
-                            <p>罗天亮</p>
+                            <p>胡萝</p>
                         </div>
                     </a>
                 </li>
@@ -222,7 +175,25 @@
             </ul>
         </div>
     </div>
-
+</div>
+<div id="hl" style="float: left;">
+    <div class="hl_top">
+        <span>今日票房</span>
+    </div>
+    <div class="hl_body">
+        <ul>
+            <li><a>测试用-青岛XX公司01</a></li>
+            <li><a>测试用-青岛XX公司02</a></li>
+            <li><a>测试用-青岛XX公司03</a></li>
+            <li><a>测试用-青岛XX公司04</a></li>
+            <li><a>测试用-青岛XX公司05</a></li>
+            <li><a>测试用-青岛XX公司06</a></li>
+            <li><a>测试用-青岛XX公司07</a></li>
+            <li><a>测试用-青岛XX公司08</a></li>
+            <li><a>测试用-青岛XX公司09</a></li>
+            <li><a>测试用-青岛XX公司10</a></li>
+        </ul>
+    </div>
 </div>
 {% endblock %}
 

@@ -21,10 +21,10 @@ class index(View):
     def post(self, request):
         pass
 
-class Index_test(View):
+class IndexTest(View):
 
     def get(self, request):
-        return render(request, "index/index_test.html")
+        return render(request, "index/indexTest.html")
 
     def post(self, request):
         pass
