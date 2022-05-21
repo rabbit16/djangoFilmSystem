@@ -103,11 +103,13 @@ class Ticket(models.Model):
 class Movie(models.Model):
     Movie_id = models.CharField(max_length=20, help_text="电影id", verbose_name="电影id")
     Movie_name = models.CharField(max_length=20, verbose_name='电影名', help_text="电影名")
-    Movie_time = models.CharField(max_length=20, verbose_name="电影上映时间", help_text="电影上映时间")
+    Movie_time = models.DateTimeField(verbose_name="电影上映时间", help_text="电影上映时间", default=timezone.now)
     Movie_img = models.CharField(max_length=100, verbose_name="电影图片", help_text="电影图片")
     m_movietype = models.ManyToManyField(Movie_type)
-
+    abstract = models.CharField(max_length=500, verbose_name="简介", help_text="简介", default="")
+    hotPlay = models.BooleanField(verbose_name="是否为热映", help_text="是否为热映", default=False)
     class Meta:
+        ordering = ['-Movie_time']
         db_table = 'tb_Movie'
         verbose_name = '电影'
 

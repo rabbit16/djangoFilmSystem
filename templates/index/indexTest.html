@@ -78,104 +78,135 @@
     <div class="ms_body">
         <div class="ms_body_left">
             <ul>
-                <li>
-                    <a href="{% url 'index:movieDetail' %}">
-                        <img src="https://img9.doubanio.com/view/photo/l/public/p2700138245.webp" alt="">
-                        <p class="name">天书奇谭</p>
+                {% for hotfilm in hotfilmlefts %}
+                    <li>
+{#                    <a href="{% url 'index:movieDetail' %}">#}
+                    <a href="#">
+                        <img src="{{ hotfilm.Movie_img }}" alt="">
+                        <p class="name">{{ hotfilm.Movie_name }}</p>
                         <div class="photoby">
                             <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
-                            <p>胡萝</p>
+                            <p>{{ hotfilm.abstract }}</p>
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="">
-                        <img src="https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2395517414.webp" alt="">
-                        <p class="name">爱乐之城</p>
-                        <div class="photoby">
-                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
-                            <p>lzh</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2868462052.webp" alt="">
-                        <p class="name">花束般的恋爱</p>
-                        <div class="photoby">
-                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
-                            <p>lzh</p>
-                        </div>
-                    </a>
-                </li>
+                {% endfor %}
+
+
+{#                <li>#}
+{#                    <a href="">#}
+{#                        <img src="https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2395517414.webp" alt="">#}
+{#                        <p class="name">爱乐之城</p>#}
+{#                        <div class="photoby">#}
+{#                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>#}
+{#                            <p>lzh</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="">#}
+{#                        <img src="https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2868462052.webp" alt="">#}
+{#                        <p class="name">花束般的恋爱</p>#}
+{#                        <div class="photoby">#}
+{#                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>#}
+{#                            <p>lzh</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
             </ul>
         </div>
         <div class="ms_body_center">
             <ul>
-                <li>
-                    <a href="{% url 'index:movieDetail' %}">
-                        <img src="https://img9.doubanio.com/view/photo/m/public/p2655030796.webp" alt="">
-                        <p class="name">白蛇2：青蛇劫起</p>
+                {% for hotfilm in hotfilmcenters %}
+                    <li>
+{#                    <a href="{% url 'index:movieDetail' %}">#}
+                    <a href="#">
+                        <img src="{{ hotfilm.Movie_img }}" alt="">
+                        <p class="name">{{ hotfilm.Movie_name }}</p>
                         <div class="photoby">
                             <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
-                            <p>罗天亮</p>
+                            <p>{{ hotfilm.abstract }}</p>
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="">
-                        <img src="https://img2.doubanio.com/view/photo/m/public/p1219939183.webp" alt="">
-                        <p class="name">亚当斯一家</p>
-                        <div class="photoby">
-                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
-                            <p>lzh</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="https://img9.doubanio.com/view/photo/m/public/p2535260806.webp" alt="">
-                        <p class="name">无双</p>
-                        <div class="photoby">
-                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
-                            <p>lzh</p>
-                        </div>
-                    </a>
-                </li>
+                {% endfor %}
+{#                <li>#}
+{#                    <a href="{% url 'index:movieDetail' %}">#}
+{#                        <img src="https://img9.doubanio.com/view/photo/m/public/p2655030796.webp" alt="">#}
+{#                        <p class="name">白蛇2：青蛇劫起</p>#}
+{#                        <div class="photoby">#}
+{#                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>#}
+{#                            <p>罗天亮</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="">#}
+{#                        <img src="https://img2.doubanio.com/view/photo/m/public/p1219939183.webp" alt="">#}
+{#                        <p class="name">亚当斯一家</p>#}
+{#                        <div class="photoby">#}
+{#                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>#}
+{#                            <p>lzh</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="">#}
+{#                        <img src="https://img9.doubanio.com/view/photo/m/public/p2535260806.webp" alt="">#}
+{#                        <p class="name">无双</p>#}
+{#                        <div class="photoby">#}
+{#                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>#}
+{#                            <p>lzh</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
             </ul>
         </div>
         <div class="ms_body_right">
             <ul>
-                <li>
-                    <a href="">
-                        <img src="https://img1.doubanio.com/view/photo/m/public/p2277799019.webp" alt="">
-                        <p class="name">狮子王</p>
+                {% for hotfilm in hotfilmrights %}
+                    <li>
+{#                    <a href="{% url 'index:movieDetail' %}">#}
+                    <a href="#">
+                        <img src="{{ hotfilm.Movie_img }}" alt="">
+                        <p class="name">{{ hotfilm.Movie_name }}</p>
                         <div class="photoby">
                             <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
-                            <p>lzh</p>
+                            <p>{{ hotfilm.abstract }}</p>
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="">
-                        <img src="https://img1.doubanio.com/view/photo/m/public/p2016401659.webp" alt="">
-                        <p class="name">傲慢与偏见</p>
-                        <div class="photoby">
-                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
-                            <p>lzh</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="https://img1.doubanio.com/view/photo/l/public/p2125670899.webp" alt="">
-                        <p class="name">梁祝</p>
-                        <div class="photoby">
-                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
-                            <p>lzh</p>
-                        </div>
-                    </a>
-                </li>
+                {% endfor %}
+{#                <li>#}
+{#                    <a href="">#}
+{#                        <img src="https://img1.doubanio.com/view/photo/m/public/p2277799019.webp" alt="">#}
+{#                        <p class="name">狮子王</p>#}
+{#                        <div class="photoby">#}
+{#                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>#}
+{#                            <p>lzh</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="">#}
+{#                        <img src="https://img1.doubanio.com/view/photo/m/public/p2016401659.webp" alt="">#}
+{#                        <p class="name">傲慢与偏见</p>#}
+{#                        <div class="photoby">#}
+{#                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>#}
+{#                            <p>lzh</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="">#}
+{#                        <img src="https://img1.doubanio.com/view/photo/l/public/p2125670899.webp" alt="">#}
+{#                        <p class="name">梁祝</p>#}
+{#                        <div class="photoby">#}
+{#                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>#}
+{#                            <p>lzh</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
             </ul>
         </div>
         <div class="hl_body">
