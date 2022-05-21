@@ -117,7 +117,7 @@ class Movie(models.Model):
         verbose_name = '电影'
 
     def __str__(self):
-        return self.Movie_id
+        return self.Movie_name
 
 
 class Times(models.Model):  # 电影场次
