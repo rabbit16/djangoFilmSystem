@@ -54,6 +54,8 @@ class Studio(models.Model):
     class Meta:
         db_table = 'tb_Studio'
         verbose_name = '演播厅'
+    def __str__(self):
+        return self.Studio_id
 
 class Movie_type(models.Model):  # 电影标签
     # Romance = models.CharField(max_length=20, help_text="爱情片", verbose_name="爱情片")
@@ -80,6 +82,9 @@ class Movie_type(models.Model):  # 电影标签
     class Meta:
         db_table = "tb_movie_type"
         verbose_name = "电影标签"
+
+    def __str__(self):
+        return self.type_id
 
 
 
@@ -111,6 +116,9 @@ class Movie(models.Model):
         db_table = 'tb_Movie'
         verbose_name = '电影'
 
+    def __str__(self):
+        return self.Movie_id
+
 
 class Times(models.Model):  # 电影场次
     S_user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -123,3 +131,5 @@ class Times(models.Model):  # 电影场次
         db_table = "tb_session"
         verbose_name = "电影场次"
 
+    def __str__(self):
+        return self.session
