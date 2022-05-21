@@ -7,7 +7,7 @@ from django.shortcuts import render,HttpResponse
 from django.views import View
 
 # from index.models import User
-from users.models import User
+from users.models import User, Movie as movies
 from utils.res_code import to_json_data, Code, error_map
 from verifications.forms import RegisterForm
 from django.contrib.auth import authenticate, login
@@ -24,7 +24,11 @@ class index(View):
 class IndexTest(View):
 
     def get(self, request):
-        return render(request, "index/indexTest.html")
+        return render(request, "index/indexTest.html", context={
+            "hotfilmlefts": movies.objects.filter(hotPlay=True)[:3],
+            "hotfilmcenters": movies.objects.filter(hotPlay=True)[3:6],
+            "hotfilmrights": movies.objects.filter(hotPlay=True)[6:9],
+        })
 
     def post(self, request):
         pass
