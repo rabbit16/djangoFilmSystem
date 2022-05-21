@@ -8,5 +8,6 @@ from django.urls import path, re_path
 from administer import views
 app_name = 'admin'
 urlpatterns = [
-    path('', views.index.as_view(), name='index')
+    path('', views.index.as_view(), name='index'),
+    path('film/', views.filmPublish.as_view(), name='film')
 ]
