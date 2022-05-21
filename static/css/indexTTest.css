@@ -63,6 +63,7 @@ a{
     width: 1920px;
     margin: 0 auto;
 }
+
 #ms .ms_top{
     width: 140px;
     height: 55px;
@@ -157,8 +158,26 @@ a{
     margin-top: 20px;
 }
 
+.hl_top{
+    width: 140px;
+    height: 55px;
+    background-size: 1200px 55px;
+    line-height: 55px;
+    margin-left: 0px;
+    border-radius: 0px;
+    margin-top: 0px;
+    background: #CAEBF2;
+}
+
+.hl_top span{
+    color: #333333;
+    font-weight: bold;
+    margin: 0 30px;
+    font-size: 20px;
+}
+
 .hl_body a {
-    color: black;
+    color: white;
     text-decoration: none;
 }
 
@@ -166,9 +185,9 @@ a{
 .hl_body {
     float: left;
     width: 340px;
-    margin-top: 106px;
-    margin-left: 118px;
-    background: #fff;
+    margin-top: 80px;
+    margin-left: 0px;
+    background: #333333;
     border: 1px solid #FFF;
     box-shadow: #d0d0d0 1px 1px 10px 0px;
 }

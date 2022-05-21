@@ -67,7 +67,7 @@
 
 
 {% block main %}
-<div id="ms" style="float: left;">
+<div id="ms">
     <div class="ms_top">
         <span>正在热映</span>
     </div>
@@ -174,9 +174,26 @@
                 </li>
             </ul>
         </div>
+        <div class="hl_top">
+            <span>今日票房</span>
+        </div>
+        <div class="hl_body">
+            <ul>
+                <li><a>测试用-青岛XX公司01</a></li>
+                <li><a>测试用-青岛XX公司02</a></li>
+                <li><a>测试用-青岛XX公司03</a></li>
+                <li><a>测试用-青岛XX公司04</a></li>
+                <li><a>测试用-青岛XX公司05</a></li>
+                <li><a>测试用-青岛XX公司06</a></li>
+                <li><a>测试用-青岛XX公司07</a></li>
+                <li><a>测试用-青岛XX公司08</a></li>
+                <li><a>测试用-青岛XX公司09</a></li>
+                <li><a>测试用-青岛XX公司10</a></li>
+            </ul>
+        </div>
     </div>
 </div>
-<div id="hl" style="float: left;">
+<div id="hl">
     <div class="hl_top">
         <span>今日票房</span>
     </div>
@@ -198,22 +215,22 @@
 {% endblock %}
 
 
-<!--翻页按钮 干脆就只放在all movie-->
-{% block next_button %}
-    <div class="page-icon">
-    <span class="page-disabled"><i></i>上一页</span>
-    <span class="page-current">1</span>
-    <a href="#">2</a>
-    <a href="#">3</a>
-    <a href="#">4</a>
-    <a href="#">5</a>
-    <a href="#">6</a>
-    <a href="#">7</a>
-    <a href="#">...</a>
-    <a href="#">10</a>
-    <a class="page-next" href="#">下一页<i></i></a>
-</div>
-{% endblock %}
+{#<!--翻页按钮 干脆就只放在all movie-->#}
+{#{% block next_button %}#}
+{#    <div class="page-icon">#}
+{#    <span class="page-disabled"><i></i>上一页</span>#}
+{#    <span class="page-current">1</span>#}
+{#    <a href="#">2</a>#}
+{#    <a href="#">3</a>#}
+{#    <a href="#">4</a>#}
+{#    <a href="#">5</a>#}
+{#    <a href="#">6</a>#}
+{#    <a href="#">7</a>#}
+{#    <a href="#">...</a>#}
+{#    <a href="#">10</a>#}
+{#    <a class="page-next" href="#">下一页<i></i></a>#}
+{#</div>#}
+{#{% endblock %}#}
 
 
 <!--尾部-->
