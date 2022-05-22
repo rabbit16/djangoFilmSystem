@@ -1,0 +1,187 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#reg_body
+
+#reg_header{
+    height: 110px;
+    width: 100%;
+    box-shadow: 0px 0px 10px orange;
+}
+
+#reg_header .reg_h_center{
+    width: 1200px;
+    height: 110px;
+    margin: 0 auto;
+    display: flex;
+}
+
+#reg_header .reg_h_left{
+     height: 110px;
+     flex: 1;
+ }
+
+#reg_header .reg_h_left img{
+    height: 70px;
+    width: 80px;
+    float: left;
+    margin-top: 15px;
+}
+#reg_header .reg_h_left h2{
+    float: left;
+    margin-top: 35px;
+    margin-left: 30px;
+}
+
+#reg_header .reg_h_right{
+    height: 110px;
+    flex: 1;
+    padding-top: 50px;
+    padding-left: 30px;
+}
+
+.reg_back {
+    /*设置整体的尺寸、背景色、边距等*/
+    width: 1200px;
+    height: 600px;
+    /*background: white;*/
+    background-image: url("../images/register_background.jpg");
+    /*opacity: 1; !* 调整透明度 *!*/
+    background-position: center;
+    background-size: 1200px 1000px;
+    background-repeat: no-repeat;
+    margin-top: 20px;
+    margin-left: 112px;
+}
+
+.form-contain{
+    position: relative;
+    top: 10px;
+}
+
+.reg_left {
+    /*设置左浮动和外边距*/
+    float: left;
+    margin: 10px;
+}
+
+/*.reg_left > p:first-child {*/
+/*    !*设置段落（新用户注册）颜色和字体大小*!*/
+/*    color: rgba(256, 256, 256, 0.7);*/
+/*    font-size: 20px;*/
+/*}*/
+
+/*.reg_left > p:last-child {*/
+/*    !*设置段落（USER REGISTER）颜色和字体大小*!*/
+/*    color: #A6A6A6;*/
+/*    font-size: 20px;*/
+/*}*/
+
+.reg_left p{
+    text-align: right;
+    color: rgba(256, 256, 256, 0.9);
+    font-size: 25px;
+    position: relative;
+    top: 0px;
+    left: 850px;
+}
+
+.reg_center {
+    /*设置中间的各种输入框等*/
+	text-align: center; /*让div内部文字居中*/
+	width: 450px;
+	height: 350px;
+    background-color: rgba(43, 43, 43, 0.4);
+	margin: auto;
+	position: absolute;
+	top: -10px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.reg_right {
+    /*设置右边段落浮动和外间距*/
+    float: right;
+    margin: 30px;
+}
+
+.reg_right p{
+    position: relative;
+    top: 420px;
+    right: 350px;
+}
+
+
+.reg_right > p:first-child {
+    font-size: 15px;
+    color: rgba(256, 256, 256, 0.6);
+}
+
+.reg_right p a{
+    /*设置超链接（立即登录）颜色*/
+    color: #FF3B3F;
+    font-weight: bold;
+}
+
+.td_left {
+    /*设置表单中字体对齐方式和宽度、高度*/
+    width: 100px;
+    text-align: right;
+    height: 40px;
+    color: rgba(256, 256, 256, 0.7);
+}
+
+.td_right {
+    /*设置输入框内边距*/
+    padding-left: 40px;
+    height: 40px;
+}
+
+#user_name, #pwd, #Email, #rename, #mobile, #Birthday{
+    /*设置输入框大小和边框*/
+    width: 200px;
+    height: 30px;
+    border: 1px solid #A4A4A4;
+    /* 设置边框为圆角 */
+    border-radius: 8px;
+    padding-left: 10px;
+}
+
+.td_right span{
+    color: rgba(256, 256, 256, 0.7);
+}
+
+#input_captcha{
+    /*设置输入框大小和边框*/
+    width: 100px;
+    height: 30px;
+    border: 1px solid #A4A4A4;
+    /* 设置边框为圆角 */
+    border-radius: 8px;
+    margin-left: 40px;
+    margin-top: 5px;
+}
+
+.captcha-graph-img{
+    /*验证码图片*/
+    vertical-align: middle;
+    height: 30px;
+    width: 95px;
+}
+
+#btn_sub{
+    /*注册按钮*/
+    margin-left: 100px;
+    margin-top: 30px;
+    background: rgba(43, 43, 43, 0.8);
+    color: rgba(256, 256, 256, 0.9);
+    font-size: 16px;
+    width: 150px;
+    height: 40px;
+    border: 1px solid rgba(43, 43, 43, 0.8);
+    border-radius: 20px;
+}
