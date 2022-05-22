@@ -5,21 +5,21 @@
 <base href="/">
 {% block link %}
     <link rel="shortcut icon" href="{% static 'images/logo.png' %}">
-    <link rel="stylesheet" href="{% static 'css/regist.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
 {% endblock %}
 
 
 <!--头部-->
-{% block header %}
-<div id="reg_header">
-    <div class="reg_h_center">
-        <div class="reg_h_left">
-            <img src="{% static 'images/logo.png' %}" alt="">
-            <h2>欢迎注册</h2>
-        </div>
-    </div>
-</div>
-{% endblock %}
+{#{% block header %}#}
+{#<div id="reg_header">#}
+{#    <div class="reg_h_center">#}
+{#        <div class="reg_h_left">#}
+{#            <img src="{% static 'images/logo.png' %}" alt="">#}
+{#            <h2>欢迎注册</h2>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{#{% endblock %}#}
 
 {% block banner %}
 {% endblock %}
@@ -63,8 +63,8 @@
                     </tr>
                     <tr>
                         <td class="td_left"><label>性别</label></td>
-                        <td class="td_right"><input type="radio" name="gender" value="male" checked class="gender"> 男
-                            <input type="radio" name="gender" value="female" class="gender"> 女
+                        <td class="td_right"><input type="radio" name="gender" value="male" checked class="gender"><span> 男</span>
+                            <input type="radio" name="gender" value="female" class="gender"><span> 女</span>
                         </td>
                     </tr>
                     <tr>
@@ -72,7 +72,7 @@
                         <td class="td_right"><input type="date" name="birthday" id="Birthday"></td>
                     </tr>
                     <tr>
-                        <td class="td_left"><label for="checkcode" style="position: relative;top: 11px;">验证码</label></td>
+                        <td class="td_left"><label for="checkcode">验证码</label></td>
                         <td class="captcha-graph-img"><input type="text" id="input_captcha" name="captcha_graph" class="form-captcha">
                             <a href="javascript:void(0);" class="captcha-graph-img">   <!-- 死链接 -->
                               <img src="" alt="验证码" title="点击刷新" id="c" style="position: relative;width: 93px;height: 38px">

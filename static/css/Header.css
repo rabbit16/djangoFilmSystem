@@ -59,6 +59,7 @@
     width: 190px;
     height: 100px;
     float: left;
+    z-index: 1;   /* 将logo永置于各种banner上方 */
 }
 
 #header .header_center .h_c_search{

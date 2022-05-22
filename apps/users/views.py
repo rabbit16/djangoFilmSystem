@@ -16,7 +16,11 @@ from django.contrib.auth import authenticate, login
 class index(View):
 
     def get(self, request):
-        return render(request, "index/index.html")
+        return render(request, "index/index.html", context={
+            "hotfilmlefts": movies.objects.filter(hotPlay=True)[:3],
+            "hotfilmcenters": movies.objects.filter(hotPlay=True)[3:6],
+            "hotfilmrights": movies.objects.filter(hotPlay=True)[6:9],
+        })
 
     def post(self, request):
         pass
@@ -24,11 +28,12 @@ class index(View):
 class IndexTest(View):
 
     def get(self, request):
-        return render(request, "index/indexTest.html", context={
-            "hotfilmlefts": movies.objects.filter(hotPlay=True)[:3],
-            "hotfilmcenters": movies.objects.filter(hotPlay=True)[3:6],
-            "hotfilmrights": movies.objects.filter(hotPlay=True)[6:9],
-        })
+        return render(request, "index/indexTest.html")
+        #               , context={
+        #     "hotfilmlefts": movies.objects.filter(hotPlay=True)[:3],
+        #     "hotfilmcenters": movies.objects.filter(hotPlay=True)[3:6],
+        #     "hotfilmrights": movies.objects.filter(hotPlay=True)[6:9],
+        # })
 
     def post(self, request):
         pass

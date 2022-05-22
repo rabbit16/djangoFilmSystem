@@ -27,6 +27,8 @@ a{
 }
 
 #ad_img img{
+    position: relative;
+    top: -70px;
     width: 1200px;
     height: 400px;
 }
@@ -59,6 +61,8 @@ a{
 #ms{
     width: 1920px;
     margin: 0 auto;
+    position: relative;
+    top: -120px;
 }
 
 #ms .ms_top{
@@ -212,7 +216,7 @@ a{
 .hl_body {
     float: left;
     width: 300px;
-    height: 700px;
+    height: 500px;
     margin-top: 20px;
     margin-left: 125px;
     background: #333333;
@@ -222,6 +226,8 @@ a{
 
 .hl_body ul {
     counter-reset: section;
+    margin-top: 10px;
+    margin-left: 40px;
 }
 
 .hl_body li {
