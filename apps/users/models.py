@@ -44,16 +44,21 @@ class Seat(models.Model):
         db_table = 'tb_Seat'
         verbose_name = '座位'
     def __str__(self):
-        return self.Seat_id
+        return self.Seat_name
 
 class Studio(models.Model):
     Studio_id = models.CharField(max_length=20,help_text="演播厅id",verbose_name="演播厅id")
     Studio_name = models.CharField(max_length=20, help_text="演播厅名称", verbose_name="演播厅名称")
     Studio_type = models.CharField(max_length=20, help_text="演播厅类型", verbose_name="演播厅类型")
     Seating = models.CharField(max_length=20, help_text="座位个数", verbose_name="座位个数")
+    price_weight = models.FloatField(verbose_name="价格权重", help_text="价格权重")
+
     class Meta:
         db_table = 'tb_Studio'
         verbose_name = '演播厅'
+
+    def __str__(self):
+        return self.Studio_type
 
 class Movie_type(models.Model):  # 电影标签
     # Romance = models.CharField(max_length=20, help_text="爱情片", verbose_name="爱情片")
@@ -75,13 +80,12 @@ class Movie_type(models.Model):  # 电影标签
     type_id = models.IntegerField(verbose_name="标签序号", help_text="标签序号")
     type_name = models.CharField(max_length=20, help_text="电影标签", verbose_name="电影标签")
 
-
-
     class Meta:
         db_table = "tb_movie_type"
         verbose_name = "电影标签"
 
-
+    def __str__(self):
+        return self.type_name
 
 class Ticket(models.Model):
     Ticket_id = models.IntegerField(max_length=20,help_text="电影票id",verbose_name="电影票id")
@@ -105,6 +109,7 @@ class Movie(models.Model):
     Movie_name = models.CharField(max_length=20, verbose_name='电影名', help_text="电影名")
     Movie_time = models.DateTimeField(verbose_name="电影上映时间", help_text="电影上映时间", default=timezone.now)
     Movie_img = models.CharField(max_length=100, verbose_name="电影图片", help_text="电影图片")
+    Movie_price = models.FloatField(verbose_name="电影原价", help_text="电影原价")
     m_movietype = models.ManyToManyField(Movie_type)
     abstract = models.CharField(max_length=500, verbose_name="简介", help_text="简介", default="")
     hotPlay = models.BooleanField(verbose_name="是否为热映", help_text="是否为热映", default=False)
@@ -113,6 +118,8 @@ class Movie(models.Model):
         db_table = 'tb_Movie'
         verbose_name = '电影'
 
+    def __str__(self):
+        return self.Movie_name
 
 class Times(models.Model):  # 电影场次
     S_user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -125,3 +132,5 @@ class Times(models.Model):  # 电影场次
         db_table = "tb_session"
         verbose_name = "电影场次"
 
+    def __str__(self):
+        return self.session
