@@ -8,7 +8,7 @@ class Problems_type(models.Model):  # 问题标签
     type_name = models.CharField(max_length=20, help_text="问题标签", verbose_name="问题标签")
 
     class Meta:
-        db_table = "tb_movie_type"
+        db_table = "tb_problem_type"
         verbose_name = "问题标签"
 
     def __str__(self):

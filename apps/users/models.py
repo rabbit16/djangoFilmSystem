@@ -51,7 +51,7 @@ class Studio(models.Model):
     Studio_name = models.CharField(max_length=20, help_text="演播厅名称", verbose_name="演播厅名称")
     Studio_type = models.CharField(max_length=20, help_text="演播厅类型", verbose_name="演播厅类型")
     Seating = models.CharField(max_length=20, help_text="座位个数", verbose_name="座位个数")
-    price_weight = models.FloatField(verbose_name="价格权重", help_text="价格权重")
+    price_weight = models.FloatField(verbose_name="价格权重", help_text="价格权重", default=0)
 
     class Meta:
         db_table = 'tb_Studio'
@@ -109,7 +109,7 @@ class Movie(models.Model):
     Movie_name = models.CharField(max_length=20, verbose_name='电影名', help_text="电影名")
     Movie_time = models.DateTimeField(verbose_name="电影上映时间", help_text="电影上映时间", default=timezone.now)
     Movie_img = models.CharField(max_length=100, verbose_name="电影图片", help_text="电影图片")
-    Movie_price = models.FloatField(verbose_name="电影原价", help_text="电影原价")
+    Movie_price = models.FloatField(verbose_name="电影原价", help_text="电影原价", default=0)
     m_movietype = models.ManyToManyField(Movie_type)
     abstract = models.CharField(max_length=500, verbose_name="简介", help_text="简介", default="")
     hotPlay = models.BooleanField(verbose_name="是否为热映", help_text="是否为热映", default=False)
