@@ -44,7 +44,7 @@ class Seat(models.Model):
         db_table = 'tb_Seat'
         verbose_name = '座位'
     def __str__(self):
-        return self.Seat_id
+        return self.Seat_name
 
 class Studio(models.Model):
     Studio_id = models.CharField(max_length=20,help_text="演播厅id",verbose_name="演播厅id")
@@ -58,7 +58,7 @@ class Studio(models.Model):
         verbose_name = '演播厅'
 
     def __str__(self):
-        return self.Studio_id
+        return self.Studio_type
 
 class Movie_type(models.Model):  # 电影标签
     # Romance = models.CharField(max_length=20, help_text="爱情片", verbose_name="爱情片")
@@ -85,7 +85,7 @@ class Movie_type(models.Model):  # 电影标签
         verbose_name = "电影标签"
 
     def __str__(self):
-        return self.type_id
+        return self.type_name
 
 class Ticket(models.Model):
     Ticket_id = models.IntegerField(max_length=20,help_text="电影票id",verbose_name="电影票id")
@@ -117,7 +117,7 @@ class Movie(models.Model):
         verbose_name = '电影'
 
     def __str__(self):
-        return self.Movie_id
+        return self.Movie_name
 
 class Times(models.Model):  # 电影场次
     S_user = models.ForeignKey(User, on_delete=models.CASCADE)
