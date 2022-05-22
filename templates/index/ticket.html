@@ -1,17 +1,23 @@
+{% extends 'index/index.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<!-- 以上为自己添加 -->
 <head>
-	<!-- 页面元信息 -->
 	<meta charset="utf-8">
-	<title>购票</title>
-	<!-- CSS模板 -->
-	<link rel="shortcut icon" href="../static/images/logo.png">
-	<link rel="stylesheet" href="../static/css/ticket.css">
+	{% block title %}<title>购票</title>{% endblock %}
+    {% block link %}
+        <link rel="stylesheet" href="{% static 'css/ticket.css' %}">
+    {% endblock %}
 </head>
 
+<body>
+{% block header %}
+{% endblock %}
 
-<body>   <!--自己添加-->
+{% block banner %}
+{% endblock %}
+
+{% block main %}
 	<div class="movie-container">
 		<h1>欢迎来到——胡萝剧场</h1>
 		<div>
@@ -168,5 +174,10 @@
 	  }
 			}
 		</script>
+{% endblock %}
 
-</body>   <!--自己添加-->
+{% block footer %}
+{% endblock %}
+
+</body>
+</html>

@@ -124,6 +124,7 @@
 #header .nav ul li{
     flex: 1;
     text-align: center;
+    z-index: 1;
 }
 
 #header .nav ul li a{
@@ -140,7 +141,7 @@
     height: 40px;
     position: relative;
     top: -2px;
-    right: 7px;
+    right: -30px;
     float: right;
     margin-left: 5px;
     color: #333333;
@@ -159,4 +160,5 @@
     margin-left: 5px;
     border-radius: 1000px;
 }
+
 

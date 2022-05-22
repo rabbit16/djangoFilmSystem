@@ -13,7 +13,7 @@ from verifications.forms import RegisterForm
 from django.contrib.auth import authenticate, login
 
 
-class index(View):
+class Index(View):
 
     def get(self, request):
         return render(request, "index/index.html", context={
