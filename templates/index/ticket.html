@@ -11,17 +11,16 @@
 </head>
 
 <body>
-{% block header %}
-{% endblock %}
+{#{% block header %}#}
+{#{% endblock %}#}
 
 {% block banner %}
 {% endblock %}
 
 {% block main %}
-	<div class="movie-container">
-		<h1>欢迎来到——胡萝剧场</h1>
+<div class="movie-container">
 		<div>
-			选择影片:
+			<span class="choose">选择影片</span>
 			<select id="movie">
 				<option value="32">白蛇缘起（票价：32元）</option>
 				<option value="35">小丑（票价：35元）</option>
@@ -29,7 +28,7 @@
 				<option value="30">海蒂（票价：30元）</option>
 			</select>
 		</div>
-		<ul class="showcase">
+    <ul class="showcase">
 		<li>
 			<div class="seat"></div>
 			<small>可选</small>
@@ -42,74 +41,74 @@
 			<div class="seat occupied"></div>
 			<small>不可选</small>
 		</li>
-		</ul>
-			<div class="screen"></div>
-			<div class="container">
-				<div class="row">
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-				</div>
-				<div class="row">
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat occupied"></div>
-					<div class="seat occupied"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-				</div>
-				<div class="row">
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat occupied"></div>
-					<div class="seat occupied"></div>
-				</div>
-				<div class="row">
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-				</div>
-				<div class="row">
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat occupied"></div>
-					<div class="seat occupied"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-				</div>
-				<div class="row">
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat"></div>
-					<div class="seat occupied"></div>
-					<div class="seat occupied"></div>
-					<div class="seat occupied"></div>
-					<div class="seat"></div>
-				</div>
-			</div>
-			<p class="text">
-				您已经选择了:<span id="count">0</span>个座位,总计票价为<span id="total">0</span>元
-			</p>
+    </ul>
+    <div class="screen"></div>
+    <div class="container">
+        <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+        </div>
+        <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat occupied"></div>
+            <div class="seat occupied"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+        </div>
+        <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat occupied"></div>
+            <div class="seat occupied"></div>
+        </div>
+        <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+        </div>
+		<div class="row">
+			<div class="seat"></div>
+			<div class="seat"></div>
+			<div class="seat"></div>
+			<div class="seat occupied"></div>
+			<div class="seat occupied"></div>
+			<div class="seat"></div>
+			<div class="seat"></div>
+			<div class="seat"></div>
+		</div>
+		<div class="row">
+			<div class="seat"></div>
+			<div class="seat"></div>
+			<div class="seat"></div>
+			<div class="seat"></div>
+			<div class="seat occupied"></div>
+			<div class="seat occupied"></div>
+			<div class="seat occupied"></div>
+			<div class="seat"></div>
+		</div>
 	</div>
+	<p class="text">
+        您已经选择了<span id="count">0</span>个座位,总计票价为<span id="total">0</span>元
+    </p>
+</div>
 	<script type="text/javascript">
 			const container = document.querySelector(".container");
 			const seats = document.querySelectorAll(".row .seat:not(.occupied)");
@@ -176,8 +175,8 @@
 		</script>
 {% endblock %}
 
-{% block footer %}
-{% endblock %}
+{#{% block footer %}#}
+{#{% endblock %}#}
 
 </body>
 </html>

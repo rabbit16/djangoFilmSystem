@@ -54,7 +54,7 @@
     background-size: 1200px 1000px;
     background-repeat: no-repeat;
     margin-top: 20px;
-    margin-left: 112px;
+    margin-left: 192px;
 }
 
 .form-contain{
@@ -111,13 +111,13 @@
 
 .reg_right p{
     position: relative;
-    top: 420px;
+    top: 450px;
     right: 350px;
 }
 
 
 .reg_right > p:first-child {
-    font-size: 15px;
+    font-size: 16px;
     color: rgba(256, 256, 256, 0.6);
 }
 
