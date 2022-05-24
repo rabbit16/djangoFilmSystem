@@ -213,4 +213,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch7_backend.Elasticsearch7SearchEngine',
+        'URL': 'http://121.37.87.67:9300/',  # 此处为elasticsearch运行的服务器ip地址，端口号默认为9200
+        'INDEX_NAME': 'djf',  # 指定elasticsearch建立的索引库的名称 数据库名
+    },
+}
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
