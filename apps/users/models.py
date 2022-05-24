@@ -21,7 +21,6 @@ class User(AbstractUser):
     buyManager = models.BooleanField(verbose_name="售票员", help_text="售票员", default=False)
     mobile = models.CharField(max_length=11, verbose_name='手机号', help_text="手机号", unique=True,
                               error_messages={'unique': "该手机号已注册"})
-    email_ac = models.BooleanField(default=False, verbose_name="邮箱状态")
     registration_data = models.DateTimeField(verbose_name="注册时间",
                                              help_text="注册时间",
                                              default=timezone.now
@@ -34,7 +33,7 @@ class User(AbstractUser):
         verbose_name = '用户'
 
     def __str__(self):
-        return self.name
+        return self.mobile
 
 class Seat(models.Model):
     Seat_id = models.IntegerField(max_length=20, help_text="座位id", verbose_name="座位id")
@@ -58,7 +57,7 @@ class Studio(models.Model):
         verbose_name = '演播厅'
 
     def __str__(self):
-        return self.Studio_type
+        return self.Studio_id
 
 class Movie_type(models.Model):  # 电影标签
     # Romance = models.CharField(max_length=20, help_text="爱情片", verbose_name="爱情片")
@@ -90,9 +89,9 @@ class Movie_type(models.Model):  # 电影标签
 class Ticket(models.Model):
     Ticket_id = models.IntegerField(max_length=20,help_text="电影票id",verbose_name="电影票id")
     Seat_id = models.IntegerField(max_length=20, help_text="座位id", verbose_name="座位id")
-    Seat_name = models.IntegerField(max_length=20, help_text="座位名称", verbose_name="座位名称")
+    Seat_name = models.CharField(max_length=20, help_text="座位名称", verbose_name="座位名称")
     Studio_id = models.IntegerField(max_length=20, help_text="演播厅id", verbose_name="演播厅id")
-    Studio_name = models.IntegerField(max_length=20, help_text="演播厅名称", verbose_name="演播厅名称")
+    Studio_name = models.CharField(max_length=20, help_text="演播厅名称", verbose_name="演播厅名称")
     Movie_name = models.CharField(max_length=20, verbose_name='电影名' , help_text="电影名")
     Movie_time = models.DateTimeField(verbose_name="电影时间", help_text="电影时间")
     s_user = models.ForeignKey(User, on_delete=models.CASCADE)
