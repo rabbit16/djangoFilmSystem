@@ -221,5 +221,5 @@ HAYSTACK_CONNECTIONS = {
         'INDEX_NAME': 'djf',  # 指定elasticsearch建立的索引库的名称 数据库名
     },
 }
-
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

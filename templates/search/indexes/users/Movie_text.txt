@@ -1,0 +1,3 @@
+{{ object.Movie_name }}
+{{ object.Movie_time }}
+{{ object.abstract }}
