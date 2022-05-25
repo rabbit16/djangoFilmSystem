@@ -133,3 +133,14 @@ class Times(models.Model):  # 电影场次
 
     def __str__(self):
         return self.session
+
+class Comment(models.Model):
+    Comment_id = models.IntegerField(max_length=20,help_text="评论id",verbose_name="评论id")
+    Comment_contain = models.TextField(help_text="评论内容", verbose_name="评论内容")
+    s_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    class Meta:
+        db_table = 'tb_Comment'
+        verbose_name = '评论表'
+
+    def __str__(self):
+        return self.Comment_id
