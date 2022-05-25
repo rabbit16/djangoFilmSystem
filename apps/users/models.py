@@ -129,21 +129,21 @@ class Comment(models.Model):
     Comment_content = models.TextField(help_text="评论内容", verbose_name="评论内容")
     Comment_time = models.DateTimeField(verbose_name="评论时间", help_text="评论时间", default=timezone.now)
     Comment_likes = models.IntegerField(max_length=100,help_text="点赞数",verbose_name="点赞数")
-    Comment_author = models.ForeignKey(User, on_delete=models.CASCADE)
+    Comment_author = models.ForeignKey('User', on_delete=models.CASCADE)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
-        ordering = ['-update_time', '-id']
+        ordering = ['-Comment_time', '-Comment_id']
         db_table = 'tb_Comment'
         verbose_name = '评论表'
         verbose_name_plural = verbose_name  # 显示的复数名称
 
     def to_dict_data(self):
         comment_dict = {
-            'content_id': self.id,
-            'content': self.content,
-            'author': self.author.username,
-            'update_time': self.update_time.strftime('%Y年%m月%d日 %H:%M'),
+            'Comment_id': self.Comment_id,
+            'Comment_content': self.Comment_content,
+            'Comment_author': self.Comment_author.username,
+            'Comment_time': self. Comment_time.strftime('%Y年%m月%d日 %H:%M'),
             'parent': self.parent.to_dict_data() if self.parent else None,
         }
         return comment_dict
