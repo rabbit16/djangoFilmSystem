@@ -97,7 +97,7 @@ class Movie(models.Model):
     Movie_id = models.CharField(max_length=20, help_text="电影id", verbose_name="电影id")
     Movie_name = models.CharField(max_length=20, verbose_name='电影名', help_text="电影名")
     Movie_time = models.DateTimeField(verbose_name="电影上映时间", help_text="电影上映时间", default=timezone.now)
-    Movie_img = models.CharField(max_length=100, verbose_name="电影图片", help_text="电影图片")
+    Movie_img = models.urlField(max_length=100, verbose_name="电影图片", help_text="电影图片")
     Movie_price = models.FloatField(verbose_name="电影原价", help_text="电影原价", default=0)
     m_movietype = models.ManyToManyField(Movie_type)
     abstract = models.TextField(max_length=500, verbose_name="简介", help_text="简介", default="")
