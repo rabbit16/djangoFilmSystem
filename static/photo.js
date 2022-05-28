@@ -14,7 +14,6 @@ function changeImg() {
         isStop = true;
         /*先把数字的背景改了*/
         $(this).addClass("numsover").siblings().removeClass("numsover");
-
         /*图片的索引和数字的索引是对应的，所以获取当前的数字的索引就可以获得图片，从而对图片进行操作*/
         index = $nums.index(this);
         $imgs.eq(index).show("slow");
@@ -29,8 +28,6 @@ function changeImg() {
         index++;
         $nums.eq(index).addClass("numsover").siblings().removeClass("numsover");
         $imgs.eq(index).show("slow").siblings().hide("slow");
-
-    }, 3000);
-
+    }, 5000);
 }
 

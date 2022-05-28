@@ -4,8 +4,26 @@
     padding-top: 30px;
 	font-size: 15px;
 }
+
+#footer .link{
+    color: white;
+}
+
+#footer a{
+    text-decoration: none;
+}
+
+#footer a:link{
+    color: white;
+}
+
+#footer a:visited{
+    color: #CAEBF2;
+}
+
 #footer .copyright{
     margin-top: 20px;
 	font-size: 10px;
+    color: white;
 }
 

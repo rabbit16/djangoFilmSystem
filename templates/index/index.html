@@ -2,261 +2,250 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><title>{% block title %}{% endblock %}</title></title>
-<!--    设置标签图标-->
+    {% block title %}<title>主页</title>{% endblock %}
     {% block link %}
-        <link rel="stylesheet" href="{% static 'css/index1.1.css' %}">
-        <link rel="stylesheet" href="{% static 'css/goods_list.css' %}">
-
+        <link rel="shortcut icon" href="{% static 'images/logo.png' %}">
+        <link rel="stylesheet" href="{% static 'css/Index.css' %}">
     {% endblock %}
-    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
-    <link rel="stylesheet" href="{% static 'css/header.css' %}">
-
-
+        <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+        <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+        <link rel="stylesheet" href="{% static 'css/Header.css' %}">
+{#现在有一个问题就是css改名字不行，只有改成header不行#}
+    <style>
+        {#body{background-color: #EFEFEF}#}
+        body{background-color: #333333}
+    </style>
 </head>
+
 <body>
-
-<!--头部-->
 {% block header %}
-    <div id="header">
-    <!--顶部 登录-->
-    <div class="header_top">
-        <!-- 中部 -->
-        <div class="header_top_center">
-            <!-- 中部左侧 -->
-            <div class="h_top_left">
-                欢迎来到未命名图库
-            </div>
-            <!-- 中部右侧-->
-            <div class="h_top_right">
-                <a href="{% url 'index:login' %}">登录</a>
-                <a href="{% url 'index:register' %}">免费注册</a>
-
-                <a href="#">购物车</a>
-                <a href="#">我的订单</a>
-            </div>
-
-
-        </div>
-    </div>
-    <!-- 中部搜索-->
+<div id="header">
+    <div class="header_top"></div>
     <div class="header_center">
-<!--        中部左边logo-->
         <div class="h_c_logo">
-{#            <img src="images/logo.png" alt="">#}
             <img src="{% static 'images/logo.png' %}" alt="">
+        </div>
+        <div class="nav">
+            <ul>
+                <li><a href="{% url 'index:index' %}">首页</a></li>
+                <li><a href="{% url 'index:movie' %}">电影</a></li>
+                <li><a href="{% url 'index:rank' %}">榜单</a></li>
+                <li><a href="{% url 'index:indexTest' %}">原主页</a></li>
+            </ul>
         </div>
         <div class="h_c_search">
             <form action="#">
-                <input type="text" placeholder="请输入..." class="t_input">
-                <input type="submit" class="t_button" value="搜索">
+                <input type="text" placeholder="请输入电影名" class="t_input">
+                <button type="submit" class="t_button"><i class="fa fa-search"></i></button>
             </form>
-
-            <div class="hot">
-                <a href="#">山川</a>
-                <a href="#">沙漠</a>
-                <a href="#">星空</a>
-                <a href="#">静物</a>
-            </div>
-
         </div>
-<!--        中部右边二维码-->
-        <div class="h_c_code">
-            <img src="images/code.jpg" alt="">
+        <div class="user_message">
+            <a href="{% url 'index:login' %}">
+                <img class="user_photo" src="{% static 'images/username.png' %}">
+                <p>登录</p>
+            </a>
         </div>
-    </div>
-    <!--底部导航        -->
-    <div class="nav">
-        <ul>
-            <li><a href="#">首页</a></li>
-            <li><a href="#">最新图片</a></li>
-            <li><a href="#">最热图片</a></li>
-            <li><a href="#">山川湖海</a></li>
-            <li><a href="#">大漠孤烟</a></li>
-            <li><a href="#">人像精选</a></li>
-        </ul>
     </div>
 </div>
 {% endblock %}
+
 
 {% block banner %}
     <div id="ad" style="text-align: center;">
     <ul id="ad_img" >
-        <li><img src="{% static 'images/banner/heidi.png' %}" width="1100" height="600" /></li>
-        <li><img src="{% static 'images/banner/heidi.png' %}" width="1100" height="600" /></li>
-        <li><img src="{% static 'images/banner/heidi.png' %}" width="1100" height="600" /></li>
-        <li><img src="{% static 'images/banner/heidi.png' %}" width="1100" height="600" /></li>
+        <li><img src="{% static 'images/banner/heidi.png' %}"></li>
+        <li><img src="{% static 'images/banner/joker.png' %}"></li>
+        <li><img src="{% static 'images/banner/whiteSnake.png' %}"></li>
+        <li><img src="{% static 'images/banner/zootopia.png' %}"></li>
+    </ul>
+    <ul id="ad_num">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
     </ul>
 </div>
 {% endblock %}
-<!--banner-->
 
 
-
-<!--精选图片-->
 {% block main %}
-    <div id="ms">
-    <div class="ms_top">
-        <span>精选图片</span>
-        <span>总有一副让你怦然心动</span>
+<div id="ms">
+    <div class="ms_top" style="float: left;">
+        <span>正在热映</span>
+    </div>
+    <div class="interval_top" style="float: left;"></div>
+    <div class="hl_top" style="float: left;">
+        <span>今日票房</span>
     </div>
     <div class="ms_body">
         <div class="ms_body_left">
             <ul>
-                {% for image in images %}
+                {% for hotfilm in hotfilmlefts %}
                     <li>
-                    <a href="">
-                        <img src="{{ image.url }}" alt="">
-                        <p class="name">一个好听的名字</p>
+{#                    <a href="{% url 'index:movieDetail' %}">#}
+                    <a href="#">
+                        <img src="{{ hotfilm.Movie_img }}" alt="">
+                        <p class="name">{{ hotfilm.Movie_name }}</p>
                         <div class="photoby">
-                            <img src="images/camera.jpg " width="10" height="10" alt=""/>
-                            <p>lzh</p>
+                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
+                            <p>{{ hotfilm.abstract }}</p>
                         </div>
                     </a>
                 </li>
                 {% endfor %}
-
+{#                <li>#}
+{#                    <a href="">#}
+{#                        <img src="https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2395517414.webp" alt="">#}
+{#                        <p class="name">爱乐之城</p>#}
+{#                        <div class="photoby">#}
+{#                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>#}
+{#                            <p>lzh</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="">#}
+{#                        <img src="https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2868462052.webp" alt="">#}
+{#                        <p class="name">花束般的恋爱</p>#}
+{#                        <div class="photoby">#}
+{#                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>#}
+{#                            <p>lzh</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
             </ul>
         </div>
         <div class="ms_body_center">
             <ul>
-                <li>
-                    <a href="">
-                        <img src="images/gallery/06.jpg" alt="">
-                        <p class="name">一个好听的名字</p>
+                {% for hotfilm in hotfilmcenters %}
+                    <li>
+{#                    <a href="{% url 'index:movieDetail' %}">#}
+                    <a href="#">
+                        <img src="{{ hotfilm.Movie_img }}" alt="">
+                        <p class="name">{{ hotfilm.Movie_name }}</p>
                         <div class="photoby">
-                            <img src="images/camera.jpg " width="10" height="10" alt=""/>
-                            <p>lzh</p>
-                        </div>
-
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="images/gallery/07.jpg" alt="">
-                        <p class="name">一个好听的名字</p>
-                        <div class="photoby">
-                            <img src="images/camera.jpg " width="10" height="10" alt=""/>
-                            <p>lzh</p>
+                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
+                            <p>{{ hotfilm.abstract }}</p>
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="">
-                        <img src="images/gallery/08.jpg" alt="">
-                        <p class="name">一个好听的名字</p>
-                        <div class="photoby">
-                            <img src="images/camera.jpg " width="10" height="10" alt=""/>
-                            <p>lzh</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="images/gallery/09.jpg" alt="">
-                        <p class="name">一个好听的名字</p>
-                        <div class="photoby">
-                            <img src="images/camera.jpg " width="10" height="10" alt=""/>
-                            <p>lzh</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="images/gallery/10.jpg" alt="">
-                        <p class="name">一个好听的名字</p>
-                        <div class="photoby">
-                            <img src="images/camera.jpg " width="10" height="10" alt=""/>
-                            <p>lzh</p>
-                        </div>
-                    </a>
-                </li>
+                {% endfor %}
+{#                <li>#}
+{#                    <a href="{% url 'index:movieDetail' %}">#}
+{#                        <img src="https://img9.doubanio.com/view/photo/m/public/p2655030796.webp" alt="">#}
+{#                        <p class="name">白蛇2：青蛇劫起</p>#}
+{#                        <div class="photoby">#}
+{#                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>#}
+{#                            <p>罗天亮</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="">#}
+{#                        <img src="https://img2.doubanio.com/view/photo/m/public/p1219939183.webp" alt="">#}
+{#                        <p class="name">亚当斯一家</p>#}
+{#                        <div class="photoby">#}
+{#                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>#}
+{#                            <p>lzh</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="">#}
+{#                        <img src="https://img9.doubanio.com/view/photo/m/public/p2535260806.webp" alt="">#}
+{#                        <p class="name">无双</p>#}
+{#                        <div class="photoby">#}
+{#                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>#}
+{#                            <p>lzh</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
             </ul>
         </div>
         <div class="ms_body_right">
             <ul>
-                <li>
-                    <a href="">
-                        <img src="images/gallery/11.jpg" alt="">
-                        <p class="name">一个好听的名字</p>
+                {% for hotfilm in hotfilmrights %}
+                    <li>
+{#                    <a href="{% url 'index:movieDetail' %}">#}
+                    <a href="#">
+                        <img src="{{ hotfilm.Movie_img }}" alt="">
+                        <p class="name">{{ hotfilm.Movie_name }}</p>
                         <div class="photoby">
-                            <img src="images/camera.jpg " width="10" height="10" alt=""/>
-                            <p>lzh</p>
-                        </div>
-                    </a>
-
-
-
-                </li>
-                <li>
-                    <a href="">
-                        <img src="images/gallery/12.jpg" alt="">
-                        <p class="name">一个好听的名字</p>
-                        <div class="photoby">
-                            <img src="images/camera.jpg " width="10" height="10" alt=""/>
-                            <p>lzh</p>
-                        </div>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="">
-                        <img src="images/gallery/13.jpg" alt="">
-                        <p class="name">一个好听的名字</p>
-                        <div class="photoby">
-                            <img src="images/camera.jpg " width="10" height="10" alt=""/>
-                            <p>lzh</p>
+                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
+                            <p>{{ hotfilm.abstract }}</p>
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="">
-                        <img src="images/gallery/14.jpg" alt="">
-                        <p class="name">一个好听的名字</p>
-                        <div class="photoby">
-                            <img src="images/camera.jpg " width="10" height="10" alt=""/>
-                            <p>lzh</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="images/gallery/15.jpg" alt="">
-                        <p class="name">一个好听的名字</p>
-                        <div class="photoby">
-                            <img src="images/camera.jpg " width="10" height="10" alt=""/>
-                            <p>lzh</p>
-                        </div>
-                    </a>
-                </li>
+                {% endfor %}
+{#                <li>#}
+{#                    <a href="">#}
+{#                        <img src="https://img1.doubanio.com/view/photo/m/public/p2277799019.webp" alt="">#}
+{#                        <p class="name">狮子王</p>#}
+{#                        <div class="photoby">#}
+{#                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>#}
+{#                            <p>lzh</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="">#}
+{#                        <img src="https://img1.doubanio.com/view/photo/m/public/p2016401659.webp" alt="">#}
+{#                        <p class="name">傲慢与偏见</p>#}
+{#                        <div class="photoby">#}
+{#                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>#}
+{#                            <p>lzh</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="">#}
+{#                        <img src="https://img1.doubanio.com/view/photo/l/public/p2125670899.webp" alt="">#}
+{#                        <p class="name">梁祝</p>#}
+{#                        <div class="photoby">#}
+{#                            <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>#}
+{#                            <p>lzh</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
+            </ul>
+        </div>
+        <div class="hl_body">
+            <ul>
+                <li><a>天书奇谭</a></li>
+                <li><a>我是真的喜欢李孝谦</a></li>
+                <li><a>梁祝</a></li>
+                <li><a>黑白魔女库伊拉</a></li>
+                <li><a>楚门的世界</a></li>
+                <li><a>怦然心动</a></li>
+                <li><a>无间道</a></li>
+                <li><a>何以为家</a></li>
+                <li><a>末代皇帝</a></li>
+                <li><a>指环王1：护戒使者</a></li>
             </ul>
         </div>
     </div>
-
 </div>
 {% endblock %}
 
 
-<!--翻页按钮-->
-{% block next_button %}
-    <div class="page-icon">
-    <span class="page-disabled"><i></i>上一页</span>
-    <span class="page-current">1</span>
-    <a href="#">2</a>
-    <a href="#">3</a>
-    <a href="#">4</a>
-    <a href="#">5</a>
-    <a href="#">6</a>
-    <a href="#">7</a>
-    ……
-    <a href="#">...</a>
-    <a href="#">10</a>
-    <a class="page-next" href="#">下一页<i></i></a>
-</div>
-{% endblock %}
+{#<!--翻页按钮 干脆就只放在all movie-->#}
+{#{% block next_button %}#}
+{#    <div class="page-icon">#}
+{#    <span class="page-disabled"><i></i>上一页</span>#}
+{#    <span class="page-current">1</span>#}
+{#    <a href="#">2</a>#}
+{#    <a href="#">3</a>#}
+{#    <a href="#">4</a>#}
+{#    <a href="#">5</a>#}
+{#    <a href="#">6</a>#}
+{#    <a href="#">7</a>#}
+{#    <a href="#">...</a>#}
+{#    <a href="#">10</a>#}
+{#    <a class="page-next" href="#">下一页<i></i></a>#}
+{#</div>#}
+{#{% endblock %}#}
 
 
-<!--尾部-->
 {% block footer %}
     <div id="footer">
     <div class="link">
@@ -264,20 +253,16 @@
         |
         <a href="">联系我们</a>
         |
-        <a href="">商家入驻</a>
-        |
         <a href="">友情链接</a>
-        |
     </div>
     <div class="copyright">
-        Copyright © 1999 - 2020 LZH. All Rights Reserved.
+        Copyright © 2022 - 2122 早起的萝卜等天亮. All Rights Reserved.
     </div>
 </div>
 {% endblock %}
 
 {% block script %}
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-{#    <script type="text/javascript" src="js/photo.js"></script>#}
     <script type="text/javascript" src="{% static 'js/photo.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/message.js' %}"></script>
     <script>
@@ -286,7 +271,6 @@
         })
     </script>
 {% endblock %}
-
 
 </body>
 </html>
