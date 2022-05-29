@@ -12,7 +12,7 @@ from utils.res_code import to_json_data, Code, error_map
 from verifications.forms import RegisterForm
 from django.contrib.auth import authenticate, login
 from django.db.models import Max
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 def discount(user_rank):
@@ -133,6 +133,31 @@ class Movie(View):
             "errno": '1'
         })
 
+    def add(self, request):
+        movie_info = json.loads(request.body.decode())
+        if not movies.objects.all().exists():
+            id = 1
+        else:
+            id = int(movies.objects.all().aggregate(Max('Movie_id'))['Movie_id__max'])
+            # 分配一个id
+        try:
+            if movie_info.is_valid():
+                movies.objects.create(Movie_id=id,
+                                      Movie_name=movie_info.get('Movie_name'),
+                                      Movie_time=movie_info.get('Movie_time'),
+                                      Movie_img=movie_info.get('Movie_img'),
+                                      Movie_price=movie_info.get('Movie_price'),
+                                      Movie_abstract=movie_info.get('Movie_abstract'),
+                                      Movie_hotplay=movie_info.get('Movie_hotplay'),
+                                      )
+            data = {
+                'errno': Code.OK
+            }
+            return to_json_data(data=data)
+        except:
+            return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.PICERROR])
+        return 0
+
 
 #
 class MovieDetail(View):
@@ -157,10 +182,7 @@ class Rank(View):
             "errno": '1'
         })
 
-
-class RankReFresh(View):
-
-    def post(self, request):
+    def refresh(self):
         tics = tickets.objects.filter(PRI_CHOICES=1)
         for changes in tics:
             user = User.objects.filter(id=changes.Ticket_user)
@@ -216,86 +238,27 @@ class Session(View):
     def get(self, request):
         return render(request, "index/movie.html")
 
-    def post(self, request):
-        return json.dumps({
-            "errno": '1'
-        })
-
-
-#
-class MovieDetail(View):
-
-    def get(self, request):
-        return render(request, "index/movieDetail.html")
-
-    def post(self, request):
-        return json.dumps({
-            "errno": '1'
-        })
-
-
-#
-class Rank(View):
-
-    def get(self, request):
-        return render(request, "index/rank.html")
-
-    def post(self, request):
-        return json.dumps({
-            "errno": '1'
-        })
-
-
-#
-class Ticket(View):
-
-    def get(self, request):
-        return render(request, "index/ticket.html")
-
-    def post(self, request):
-        return json.dumps({
-            "errno": '1'
-        })
-
-
-class Movie_add(View):
-    def post(self, request):
+    def query(self, request):
         movie_info = json.loads(request.body.decode())
-        if not movies.objects.all().exists():
-            id = 1
-        else:
-            id = int(movies.objects.all().aggregate(Max('Movie_id'))['Movie_id__max'])
-            # 分配一个id
-        try:
-            if movie_info.is_valid():
-                movies.objects.create(Movie_id=id,
-                                      Movie_name=movie_info.get('Movie_name'),
-                                      Movie_time=movie_info.get('Movie_time'),
-                                      Movie_img=movie_info.get('Movie_img'),
-                                      Movie_price=movie_info.get('Movie_price'),
-                                      Movie_abstract=movie_info.get('Movie_abstract'),
-                                      Movie_hotplay=movie_info.get('Movie_hotplay'),
-                                      )
-            data = {
-                'errno': Code.OK
-            }
-            return to_json_data(data=data)
-        except:
-            return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.PICERROR])
-        return 0
+        query_id = movie_info.get('Movie_id')
+        sessions = Times.objects.filter(T_movie=query_id)
 
-
-class session_add(View):
+    # 给定场次查询该场次已安排的时间点
     def search(self, request):
-        # 给定场次查询该场次已安排的时间点
-        studio_info = json.loads(request.body.decode())
-        occupies = [s for s in Times.objects.filter(T_studio=studio_info.get('studio_id')) if
-                    s.session_time > datetime.now()]
-        time_list = [S.session_time for S in occupies]
-        return time_list
 
-    def post(self, request):
+        studio_info = json.loads(request.body.decode())
+        occupies = Times.objects.filter(T_studio=studio_info.get('studio_id'), session_time__gt=datetime.now())
+        return occupies
+
+    # 添加场次
+    def add(self, request):
         session_info = json.loads(request.body.decode())
+        check_time = session_info.get('session_time')
+        conflict = Times.objects.filter(T_studio=session_info.get('studio_id'),
+                                        session_time__range=[check_time + timedelta(hours=-3),
+                                                             check_time + timedelta(hours=3)])
+        if not bool(conflict):  # 冲突集合不为空，当前时间段被占用
+            return to_json_data(errno=Code.CONFLICT, errmsg=error_map[Code.CONFLICT])
         if not Times.objects.all().exists():
             id = 1
         else:
@@ -313,8 +276,10 @@ class session_add(View):
             }
             return to_json_data(data=data)
         except:
-            return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.PICERROR])
+            return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.NODATA])
         return 0
+
+
 
 # class Studio_add(View):
 #     def post(self, request):

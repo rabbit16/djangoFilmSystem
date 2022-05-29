@@ -19,6 +19,4 @@ urlpatterns = [
     path("register/", views.Register.as_view(), name="register"),
     path("session/", views.Session.as_view(), name="session"),
     path("Seat/", views.Seat.as_view(), name="seat"),
-    path("session_add/", views.session_add.as_view(), name="session_add"),
-    path("Movie_add/", views.Movie_add.as_view(), name="Movie_add"),
 ]

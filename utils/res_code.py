@@ -18,6 +18,8 @@ class Code:
     ROLEERR = "4105"
     PWDERR = "4106"
 
+    CONFLICT = "4201"
+
     SERVERERR = "4500"
     UNKOWNERR = "4501"
 
@@ -39,6 +41,8 @@ error_map = {
     Code.USERERR: "用户不存在或未激活",
     Code.ROLEERR: "用户身份错误",
     Code.PWDERR: "密码错误",
+
+    Code.CONFLICT: "当前选择有冲突",
 
     Code.SERVERERR: "内部错误",
     Code.UNKOWNERR: "未知错误",
