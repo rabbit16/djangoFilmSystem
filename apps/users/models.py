@@ -122,6 +122,7 @@ class Ticket(models.Model):
     price = models.FloatField(verbose_name="电影票的价格", help_text="电影票的价格")
     Ticket_seat = models.ForeignKey('Seat', on_delete=models.CASCADE)
     Ticket_session = models.ForeignKey('Times', on_delete=models.CASCADE)
+    Ticket_studio = models.ForeignKey('Studio', on_delete=models.CASCADE)
     Ticket_user = models.ForeignKey('User', on_delete=models.CASCADE)
     PRI_CHOICES = [
         (1, "正常"),
