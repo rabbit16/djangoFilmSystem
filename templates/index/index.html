@@ -34,10 +34,19 @@
             </ul>
         </div>
         <div class="h_c_search">
-            <form action="#">
-                <input type="text" placeholder="请输入电影名" class="t_input">
-                <button type="submit" class="t_button"><i class="fa fa-search"></i></button>
+            <form action="/search/" method="get" id="searchform">
+{#                <input name="q" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">#}
+                <input name="q" id="keyboard" class="input_text" value="请输入关键字" type="text" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}">
+{#              <input name="show" value="title" type="hidden">#}
+{#              <input name="tempid" value="1" type="hidden">#}
+{#              <input name="tbname" value="news" type="hidden">#}
+                <button name="Submit" class="input_submit" type="submit"><i class="fa fa-search"></i></button>
             </form>
+
+{#            <form action="#">#}
+{#                <input type="text" placeholder="请输入电影名" class="t_input">#}
+{#                <button type="submit" class="t_button"><i class="fa fa-search"></i></button>#}
+{#            </form>#}
         </div>
         <div class="user_message">
             <a href="{% url 'index:register' %}">

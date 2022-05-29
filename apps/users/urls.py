@@ -16,4 +16,5 @@ urlpatterns = [
     path("rank/", views.Rank.as_view(), name="rank"),
     path("movieDetail/", views.MovieDetail.as_view(), name="movieDetail"),
     path("ticket/", views.Ticket.as_view(), name="ticket"),
+    path("search/", views.Search.as_view(), name="search"),
 ]

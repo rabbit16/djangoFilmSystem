@@ -149,3 +149,13 @@ class Ticket(View):
         return json.dumps({
             "errno": '1'
         })
+
+class Search(View):
+
+    def get(self, request):
+        return render(request, "index/search.html")
+
+    def post(self, request):
+        return json.dumps({
+            "errno": '1'
+        })
