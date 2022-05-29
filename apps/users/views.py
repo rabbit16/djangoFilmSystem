@@ -182,6 +182,34 @@ class Ticket(View):
             "errno": '1'
         })
 
+    def add(self, request):
+        ticinfo = json.loads(request.body.decode())
+        time = datetime.now()
+        time_str = time.strftime('%Y%m%d%H%M')[2:]
+        ticket_id = int(time_str + "%04d" % ticinfo.get('Seat_id') + "%02d" % ticinfo.get('Studio_id'))
+        rate_discount = discount(User.objects.filter(id=ticinfo.get("user_id"))[0].Integral)
+        session = Times.objects.filter(Times_id=ticinfo.get('session_id'))[0]
+        movie_price = movies.objects.filter(Movie_id=session.T_movie)[0].Movie_price
+        session_rate = Studio.objects.filter(Studio_id=session.T_studio)[0].price_weight
+        price_discount = rate_discount * movie_price * session_rate
+
+        try:
+            if ticinfo.is_valid():
+                tickets.objects.create(Ticket_id=ticket_id,
+                                       Ticket_seat=ticinfo.get('Seat_id'),
+                                       Ticket_session=ticinfo.get('Studio_id'),
+                                       price=price_discount,
+                                       Ticket_user=ticinfo.get("user_id"),
+                                       PRI_CHOICES=1,
+                                       )
+            data = {
+                'errno': Code.OK
+            }
+            return to_json_data(data=data)
+        except:
+            return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.PICERROR])
+        return 0
+
 
 class Session(View):
 
@@ -228,37 +256,6 @@ class Ticket(View):
         return json.dumps({
             "errno": '1'
         })
-
-
-class Ticket_add(View):
-
-    def post(self, request):
-        ticinfo = json.loads(request.body.decode())
-        time = datetime.now()
-        time_str = time.strftime('%Y%m%d%H%M')[2:]
-        ticket_id = int(time_str + "%04d" % ticinfo.get('Seat_id') + "%02d" % ticinfo.get('Studio_id'))
-        rate_discount = discount(User.objects.filter(id=ticinfo.get("user_id"))[0].Integral)
-        session = Times.objects.filter(Times_id=ticinfo.get('session_id'))[0]
-        movie_price = movies.objects.filter(Movie_id=session.T_movie)[0].Movie_price
-        session_rate = Studio.objects.filter(Studio_id=session.T_studio)[0].price_weight
-        price_discount = rate_discount * movie_price * session_rate
-
-        try:
-            if ticinfo.is_valid():
-                tickets.objects.create(Ticket_id=ticket_id,
-                                       Ticket_seat=ticinfo.get('Seat_id'),
-                                       Ticket_session=ticinfo.get('Studio_id'),
-                                       price=price_discount,
-                                       Ticket_user=ticinfo.get("user_id"),
-                                       PRI_CHOICES=1,
-                                       )
-            data = {
-                'errno': Code.OK
-            }
-            return to_json_data(data=data)
-        except:
-            return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.PICERROR])
-        return 0
 
 
 class Movie_add(View):
@@ -318,7 +315,6 @@ class session_add(View):
         except:
             return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.PICERROR])
         return 0
-
 
 # class Studio_add(View):
 #     def post(self, request):

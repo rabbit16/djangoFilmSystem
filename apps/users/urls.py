@@ -21,5 +21,4 @@ urlpatterns = [
     path("Seat/", views.Seat.as_view(), name="seat"),
     path("session_add/", views.session_add.as_view(), name="session_add"),
     path("Movie_add/", views.Movie_add.as_view(), name="Movie_add"),
-    path("Ticket_add/", views.Ticket_add.as_view(), name="Ticket_add")
 ]
