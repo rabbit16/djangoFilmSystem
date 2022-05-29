@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     {% block title %}<title>主页</title>{% endblock %}
     {% block link %}
-        <link rel="shortcut icon" href="{% static 'images/logo.png' %}">
         <link rel="stylesheet" href="{% static 'css/Index.css' %}">
     {% endblock %}
+        <link rel="shortcut icon" href="{% static 'images/logo.png' %}">
         <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
         <link rel="stylesheet" href="{% static 'css/footer.css' %}">
         <link rel="stylesheet" href="{% static 'css/Header.css' %}">
@@ -34,14 +34,27 @@
             </ul>
         </div>
         <div class="h_c_search">
-            <form action="#">
-                <input type="text" placeholder="请输入电影名" class="t_input">
-                <button type="submit" class="t_button"><i class="fa fa-search"></i></button>
+            <form action="/search/" method="get" id="searchform">
+{#                <input name="q" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">#}
+                <input name="q" id="keyboard" class="input_text" value="请输入关键字" type="text" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}">
+{#              <input name="show" value="title" type="hidden">#}
+{#              <input name="tempid" value="1" type="hidden">#}
+{#              <input name="tbname" value="news" type="hidden">#}
+                <button name="Submit" class="input_submit" type="submit"><i class="fa fa-search"></i></button>
             </form>
+
+{#            <form action="#">#}
+{#                <input type="text" placeholder="请输入电影名" class="t_input">#}
+{#                <button type="submit" class="t_button"><i class="fa fa-search"></i></button>#}
+{#            </form>#}
         </div>
         <div class="user_message">
-            <a href="{% url 'index:login' %}">
+            <a href="{% url 'index:register' %}">
                 <img class="user_photo" src="{% static 'images/username.png' %}">
+                <p>注册</p>
+            </a>
+            <p>|</p>
+            <a href="{% url 'index:login' %}">
                 <p>登录</p>
             </a>
         </div>
@@ -83,7 +96,7 @@
                 {% for hotfilm in hotfilmlefts %}
                     <li>
 {#                    <a href="{% url 'index:movieDetail' %}">#}
-                    <a href="#">
+                    <a href="{% url 'index:movieDetail' %}">
                         <img src="{{ hotfilm.Movie_img }}" alt="">
                         <p class="name">{{ hotfilm.Movie_name }}</p>
                         <div class="photoby">
@@ -120,7 +133,7 @@
                 {% for hotfilm in hotfilmcenters %}
                     <li>
 {#                    <a href="{% url 'index:movieDetail' %}">#}
-                    <a href="#">
+                    <a href="{% url 'index:movieDetail' %}">
                         <img src="{{ hotfilm.Movie_img }}" alt="">
                         <p class="name">{{ hotfilm.Movie_name }}</p>
                         <div class="photoby">
@@ -167,7 +180,7 @@
                 {% for hotfilm in hotfilmrights %}
                     <li>
 {#                    <a href="{% url 'index:movieDetail' %}">#}
-                    <a href="#">
+                    <a href="{% url 'index:movieDetail' %}">
                         <img src="{{ hotfilm.Movie_img }}" alt="">
                         <p class="name">{{ hotfilm.Movie_name }}</p>
                         <div class="photoby">

@@ -70,7 +70,7 @@ a{
     height: 55px;
     background-size: 1200px 55px;
     line-height: 55px;
-    margin-left: 115px;
+    margin-left: 190px;
     border-radius: 0px;
     margin-top: 0px;
     background: #CAEBF2;
@@ -89,6 +89,8 @@ a{
     margin-left: 85px;
     display: flex;
     /*margin: 0 auto;*/
+    position: relative;
+    left: 75px;
 }
 
 #ms .ms_body .ms_body_left li{
