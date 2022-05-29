@@ -13,7 +13,7 @@ from verifications.forms import RegisterForm
 from django.contrib.auth import authenticate, login
 
 
-class index(View):
+class Index(View):
 
     def get(self, request):
         return render(request, "index/index.html", context={
@@ -144,6 +144,16 @@ class Ticket(View):
 
     def get(self, request):
         return render(request, "index/ticket.html")
+
+    def post(self, request):
+        return json.dumps({
+            "errno": '1'
+        })
+
+class Search(View):
+
+    def get(self, request):
+        return render(request, "index/search.html")
 
     def post(self, request):
         return json.dumps({
