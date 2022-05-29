@@ -1938,3 +1938,35 @@ success: true
 	"success":true
 }
 ```
+
+# 订单添加数据格式
+```json
+{
+  "user_id": 1, 
+  "session_id": 2, 
+  "Seat_id": 1037,
+}
+```
+# 电影添加数据格式
+# movie_time是时间格式，怎么返回之后再调试
+```json
+{
+  "Movie_name":"花园宝宝", 
+  "Movie_time": "1995-04-07T00:00:00",
+  "Movie_img": "https://img2.doubanio.com/view/photo/m/public/p2377982803.webp",
+  "Movie_price": 40,
+  "Movie_abstract": "最适合你的电影",
+  "Movie_hotplay": 1
+}
+```
+# 场次演播厅场次返回格式
+# 目前是返回一个包含占用时间的list,之后再讨论怎么改能被前端读取
+
+# 场次添加数据格式
+```json
+{
+  "studio_id":1, 
+  "session_time": "1995-04-07T00:00:00",
+  "movie_id": 2
+}
+```
