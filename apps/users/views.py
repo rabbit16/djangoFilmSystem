@@ -26,7 +26,7 @@ def discount(user_rank):
         return 1
 
 
-class index(View):
+class Index(View):
 
     def get(self, request):
         return render(request, "index/index.html", context={
@@ -203,7 +203,6 @@ class Ticket(View):
         return json.dumps({
             "errno": '1'
         })
-
     def add(self, request):
         ticinfo = json.loads(request.body.decode())
         time = datetime.now()
@@ -323,3 +322,12 @@ class Seat(View):
 #         except:
 #             return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.PICERROR])
 #         return 0
+class Search(View):
+
+    def get(self, request):
+        return render(request, "index/search.html")
+
+    def post(self, request):
+        return json.dumps({
+            "errno": '1'
+        })

@@ -1,0 +1,62 @@
+{% extends 'index/index.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title>搜索</title>{% endblock %}
+    {% block link %}
+        <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    {% endblock %}
+</head>
+
+<body>
+
+{% block banner %}
+{% endblock %}
+
+{% block main %}
+<div id="ms">
+    <div class="ms_body">
+        <div class="ms_body_center">
+            <ul>
+                <li>
+                    <a href="">
+                        <img src="https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2395517414.webp" alt="">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <ul>
+            <li>
+                <div class="ms_body_right"> <!-- 可改成电影信息 -->
+                    <ul>
+                        <li>
+                            <p class="name">我是真的讨厌异地恋</p>
+                            <p class="englishName">Stay With Me</p>
+                            <p class="tags">爱情 青春 喜剧</p>
+                            <p class="timeLength">108分钟</p>
+                            <p class="releaseDate">2022-04-29</p>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div class="want_to_see">
+                    <i class="fa fa-heart-o" style="color: black;"></i><input type="button" value="想看" class="btn">
+                </div>
+            </li>
+            <li>
+                <div class="ticket">
+                    <a href="{% url 'index:ticket'%}">
+                        <i class="fa fa-money" style="color: black;"></i><input type="button" value="购票" class="btn">
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>
+
