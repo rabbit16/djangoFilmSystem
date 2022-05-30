@@ -293,7 +293,7 @@ class Seat(View):
         seat_list = [0 for i in range(seat_num)]
         for i in occupied:
             seat_list[i.Ticket_seat % 1000] = 1  # 被占用的座位取1，空闲的取0
-        return to_json_data({
+        return to_json_data(data={
             'type': studio_type,
             'occupy': seat_list,
         })
