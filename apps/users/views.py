@@ -156,7 +156,6 @@ class Movie(View):
             return to_json_data(data=data)
         except:
             return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.PICERROR])
-        return 0
 
 
 #
@@ -182,7 +181,8 @@ class Rank(View):
             "errno": '1'
         })
 
-    def refresh(self):
+    # 刷新积分数据
+    def put(self):
         tics = tickets.objects.filter(PRI_CHOICES=1)
         for changes in tics:
             user = User.objects.filter(id=changes.Ticket_user)
@@ -238,48 +238,65 @@ class Session(View):
     def get(self, request):
         return render(request, "index/movie.html")
 
-    def query(self, request):
-        movie_info = json.loads(request.body.decode())
-        query_id = movie_info.get('Movie_id')
-        sessions = Times.objects.filter(T_movie=query_id)
-
-    # 给定场次查询该场次已安排的时间点
-    def search(self, request):
-
-        studio_info = json.loads(request.body.decode())
-        occupies = Times.objects.filter(T_studio=studio_info.get('studio_id'), session_time__gt=datetime.now())
-        return occupies
-
     # 添加场次
-    def add(self, request):
-        session_info = json.loads(request.body.decode())
-        check_time = session_info.get('session_time')
-        conflict = Times.objects.filter(T_studio=session_info.get('studio_id'),
-                                        session_time__range=[check_time + timedelta(hours=-3),
-                                                             check_time + timedelta(hours=3)])
-        if not bool(conflict):  # 冲突集合不为空，当前时间段被占用
-            return to_json_data(errno=Code.CONFLICT, errmsg=error_map[Code.CONFLICT])
-        if not Times.objects.all().exists():
-            id = 1
-        else:
-            id = int(movies.objects.all().aggregate(Max('Times_id'))['Times_id__max'])
-            # 分配一个id
-        try:
-            if session_info.is_valid():
-                Times.objects.create(Times_id=id,
-                                     T_studio=session_info.get('studio_id'),
-                                     T_movie=session_info.get('movie_id'),
-                                     session_time=session_info.get('session_time'),
-                                     )
-            data = {
-                'errno': Code.OK
-            }
-            return to_json_data(data=data)
-        except:
-            return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.NODATA])
-        return 0
+    def post(self, request):
+        request_info = json.loads(request.body.decode())
+        request_type = request_info.get('type')
+        # add:添加场次，occupy:查询演播厅占用情况，search:查询电影的场次信息
+        if request_type == 'add':
+            session_info = json.loads(request.body.decode())
+            check_time = session_info.get('session_time')
+            conflict = Times.objects.filter(T_studio=session_info.get('studio_id'),
+                                            session_time__range=[check_time + timedelta(hours=-3),
+                                                                 check_time + timedelta(hours=3)])
+            if not bool(conflict):  # 冲突集合不为空，当前时间段被占用
+                return to_json_data(errno=Code.CONFLICT, errmsg=error_map[Code.CONFLICT])
+            if not Times.objects.all().exists():
+                id = 1
+            else:
+                id = int(movies.objects.all().aggregate(Max('Times_id'))['Times_id__max'])
+                # 分配一个id
+            try:
+                if session_info.is_valid():
+                    Times.objects.create(Times_id=id,
+                                         T_studio=session_info.get('studio_id'),
+                                         T_movie=session_info.get('movie_id'),
+                                         session_time=session_info.get('session_time'),
+                                         )
+                data = {
+                    'errno': Code.OK
+                }
+                return to_json_data(data=data)
+            except:
+                return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.NODATA])
+        elif request_type == 'occupy':
+            studio_info = json.loads(request.body.decode())
+            occupies = Times.objects.filter(T_studio=studio_info.get('studio_id'), session_time__gt=datetime.now())
+            return to_json_data(data=occupies)
+        elif request_type == 'search':
+            movie_info = json.loads(request.body.decode())
+            query_id = movie_info.get('Movie_id')
+            sessions = Times.objects.filter(T_movie=query_id)
+            return to_json_data(data=sessions)
 
 
+class Seat(View):
+    def post(self, request):
+        request_info = json.loads(request.body.decode())
+        session_id = request_info.get('session')
+        # 获得当前场次的占用信息
+        occupied = tickets.objects.filter(Ticket_session=session_id, PRI_CHOICES=1)
+        session = Times.objects.filter(Times_id=session_id)[0]
+        # 得到座位数和演播厅类型
+        seat_num = Studio.objects.filter(Studio_id=session.T_studio)[0].Seating
+        studio_type = Studio.objects.filter(Studio_id=session.T_studio)[0].Studio_type
+        seat_list = [0 for i in range(seat_num)]
+        for i in occupied:
+            seat_list[i.Ticket_seat % 1000] = 1  # 被占用的座位取1，空闲的取0
+        return to_json_data({
+            'type': studio_type,
+            'occupy': seat_list,
+        })
 
 # class Studio_add(View):
 #     def post(self, request):
