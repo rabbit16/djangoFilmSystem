@@ -7,7 +7,8 @@ from django.shortcuts import render, HttpResponse
 from django.views import View
 
 # from index.models import User
-from users.models import User, Movie as movies, Studio, Seat, Ticket as tickets, Times
+from users.models import User, Movie as movies, Studio, \
+    Seat, Ticket as tickets, Times, Movie_type, Comment
 from utils.res_code import to_json_data, Code, error_map
 from verifications.forms import RegisterForm
 from django.contrib.auth import authenticate, login
@@ -26,7 +27,7 @@ def discount(user_rank):
         return 1
 
 
-class Index(View):
+class index(View):
 
     def get(self, request):
         return render(request, "index/index.html", context={
@@ -112,7 +113,7 @@ class Register(View):
                                                 sex=registerForm.cleaned_data.get("gender"),
                                                 name=registerForm.cleaned_data.get("real_name"),
                                                 birthday=registerForm.cleaned_data.get("birthday")
-                                                )  # TODO 并没有写完整
+                                                )
                 login(request, user)
             data = {
                 'errno': Code.OK
@@ -128,12 +129,8 @@ class Movie(View):
     def get(self, request):
         return render(request, "index/movie.html")
 
+    # 电影添加
     def post(self, request):
-        return json.dumps({
-            "errno": '1'
-        })
-
-    def add(self, request):
         movie_info = json.loads(request.body.decode())
         if not movies.objects.all().exists():
             id = 1
@@ -142,14 +139,18 @@ class Movie(View):
             # 分配一个id
         try:
             if movie_info.is_valid():
-                movies.objects.create(Movie_id=id,
-                                      Movie_name=movie_info.get('Movie_name'),
-                                      Movie_time=movie_info.get('Movie_time'),
-                                      Movie_img=movie_info.get('Movie_img'),
-                                      Movie_price=movie_info.get('Movie_price'),
-                                      Movie_abstract=movie_info.get('Movie_abstract'),
-                                      Movie_hotplay=movie_info.get('Movie_hotplay'),
-                                      )
+                movie = movies.objects.create(Movie_id=id,
+                                              Movie_name=movie_info.get('Movie_name'),
+                                              Movie_time=movie_info.get('Movie_time'),
+                                              Movie_img=movie_info.get('Movie_img'),
+                                              Movie_price=movie_info.get('Movie_price'),
+                                              Movie_abstract=movie_info.get('Movie_abstract'),
+                                              Movie_hotplay=movie_info.get('Movie_hotplay'),
+                                              )
+                # 添加电影标签
+                for types in movie_info.get('Movie_type'):
+                    movie.m_movietype.add(Movie_type.objects.filter(type_name=types)[0].type_id)
+
             data = {
                 'errno': Code.OK
             }
@@ -165,9 +166,20 @@ class MovieDetail(View):
         return render(request, "index/movieDetail.html")
 
     def post(self, request):
-        return json.dumps({
-            "errno": '1'
-        })
+        movie_info = json.loads(request.body.decode())
+        movie = movies.objects.filter(Movie_id=movie_info)[0]
+        data = {
+            'movie': movie,
+            'm_movietype': [],
+            'comments': [],
+        }
+        # 调用类型
+        for types in movie.m_movietype.all():
+            data['m_movietype'].append(types.type_name)
+        # 调用评论
+        for comments in Comment.objects.filter():
+            pass  # TODO 等完善数据库
+        return to_json_data(data=data)
 
 
 #
@@ -200,10 +212,6 @@ class Ticket(View):
         return render(request, "index/ticket.html")
 
     def post(self, request):
-        return json.dumps({
-            "errno": '1'
-        })
-    def add(self, request):
         ticinfo = json.loads(request.body.decode())
         time = datetime.now()
         time_str = time.strftime('%Y%m%d%H%M')[2:]
