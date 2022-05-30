@@ -18,6 +18,6 @@ urlpatterns = [
     path("ticket/", views.Ticket.as_view(), name="ticket"),
     path("register/", views.Register.as_view(), name="register"),
     path("session/", views.Session.as_view(), name="session"),
-    path("Seat/", views.Seat.as_view(), name="seat"),
+    path("seats/", views.seats.as_view(), name="seats"),
     path("search/", views.Search.as_view(), name="search"),
 ]
