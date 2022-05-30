@@ -82,7 +82,7 @@ class Movie(models.Model):
     Movie_time = models.DateTimeField(verbose_name="电影上映时间", help_text="电影上映时间", default=timezone.now)
     Movie_img = models.URLField(max_length=100, verbose_name="电影图片", help_text="电影图片")
     Movie_price = models.FloatField(verbose_name="电影原价", help_text="电影原价", default=0)
-    Movie_director=models.CharField(max_length=20, verbose_name='导演名', help_text="导演名")
+    Movie_director=models.CharField(max_length=20, verbose_name='导演名', help_text="导演名", default="")
     m_movietype = models.ManyToManyField(Movie_type)
     abstract = models.TextField(max_length=500, verbose_name="简介", help_text="简介", default="")
     hotPlay = models.BooleanField(verbose_name="是否为热映", help_text="是否为热映", default=False)
@@ -97,13 +97,13 @@ class Movie(models.Model):
 
 
 class Times(models.Model):  # 电影场次
-    Times_id = models.IntegerField(help_text="场次id",verbose_name="场次id")
-    T_studio = models.ForeignKey('Studio', on_delete=models.CASCADE)
-    T_movie = models.ForeignKey('Movie', on_delete=models.CASCADE)
+    Times_id = models.IntegerField(help_text="场次id",verbose_name="场次id",primary_key=True)
+    T_studio = models.ForeignKey('Studio', on_delete=models.CASCADE, default="")
+    T_movie = models.ForeignKey('Movie', on_delete=models.CASCADE, default="")
     session_time = models.DateTimeField(verbose_name="场次时间", help_text="场次时间", default=timezone.now)
 
     class Meta:
-        db_table = "tb_occupy"
+        db_table = "tb_session"
         verbose_name = "电影场次"
 
     def __str__(self):
@@ -120,16 +120,16 @@ class Ticket(models.Model):
     # Movie_time = models.DateTimeField(verbose_name="电影时间", help_text="电影时间")
     # s_user = models.ForeignKey(User, on_delete=models.CASCADE)+
     price = models.FloatField(verbose_name="电影票的价格", help_text="电影票的价格")
-    Ticket_seat = models.ForeignKey('Seat', on_delete=models.CASCADE)
-    Ticket_session = models.ForeignKey('Times', on_delete=models.CASCADE)
-    Ticket_studio = models.ForeignKey('Studio', on_delete=models.CASCADE)
-    Ticket_user = models.ForeignKey('User', on_delete=models.CASCADE)
+    Ticket_seat = models.ForeignKey('Seat', on_delete=models.CASCADE, default="")
+    Ticket_session = models.ForeignKey('Times', on_delete=models.CASCADE, default="")
+    Ticket_studio = models.ForeignKey('Studio', on_delete=models.CASCADE, default="")
+    Ticket_user = models.ForeignKey('User', on_delete=models.CASCADE, default="")
     PRI_CHOICES = [
         (1, "正常"),
         (2, "退票"),
         (3, "已积分")
     ]
-    state = models.IntegerField(choices=PRI_CHOICES, verbose_name="电影票状态", help_text="电影票状态")
+    state = models.IntegerField(choices=PRI_CHOICES, verbose_name="电影票状态", help_text="电影票状态", default=0)
     class Meta:
         db_table = 'tb_Ticket'
         verbose_name = '电影票'
@@ -145,6 +145,7 @@ class Comment(models.Model):
     Comment_time = models.DateTimeField(verbose_name="评论时间", help_text="评论时间", default=timezone.now)
     Comment_likes = models.IntegerField(help_text="点赞数",verbose_name="点赞数")
     Comment_author = models.ForeignKey('User', on_delete=models.CASCADE)
+    Comment_movie = models.ForeignKey('Movie', on_delete=models.CASCADE, default="")
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
