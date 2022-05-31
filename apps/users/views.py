@@ -7,7 +7,7 @@ from django.shortcuts import render,HttpResponse
 from django.views import View
 
 # from index.models import User
-from users.models import User, Movie as movies
+from users.models import User, Movie as movies, Movie_type
 from utils.res_code import to_json_data, Code, error_map
 from verifications.forms import RegisterForm
 from django.contrib.auth import authenticate, login
@@ -120,8 +120,20 @@ class Movie(View):
 #
 class MovieDetail(View):
 
-    def get(self, request):
-        return render(request, "index/movieDetail.html")
+    def get(self, request, movie_id):
+        single_movie = movies.objects.filter(Movie_id=movie_id).first()
+        movie_type = Movie_type.objects.filter(movie__Movie_id=movie_id)
+
+        # movies.objects.select_related()
+        tmp = []
+        for i in movie_type:
+            tmp.append(i.type_name)
+        data = {
+            "single_movie": single_movie,
+            "movie_type": " ".join(tmp)
+        }
+
+        return render(request, "index/movieDetail.html", data)
 
     def post(self, request):
         return json.dumps({
@@ -154,6 +166,17 @@ class Search(View):
 
     def get(self, request):
         return render(request, "index/search.html")
+
+    def post(self, request):
+        return json.dumps({
+            "errno": '1'
+        })
+
+
+class TicketMedium(View):
+
+    def get(self, request):
+        return render(request, "index/ticketMedium.html")
 
     def post(self, request):
         return json.dumps({

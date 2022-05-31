@@ -96,7 +96,8 @@
                 {% for hotfilm in hotfilmlefts %}
                     <li>
 {#                    <a href="{% url 'index:movieDetail' %}">#}
-                    <a href="{% url 'index:movieDetail' %}">
+                    <a href="{% url 'index:movieDetail'  movie_id=hotfilm.Movie_id %}">
+{#                    <a href="movieDetail/?movie_id={{ hotfilm.Movie_id }}">#}
                         <img src="{{ hotfilm.Movie_img }}" alt="">
                         <p class="name">{{ hotfilm.Movie_name }}</p>
                         <div class="photoby">
