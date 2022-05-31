@@ -159,3 +159,14 @@ class Search(View):
         return json.dumps({
             "errno": '1'
         })
+
+
+class TicketMedium(View):
+
+    def get(self, request):
+        return render(request, "index/ticketMedium.html")
+
+    def post(self, request):
+        return json.dumps({
+            "errno": '1'
+        })

@@ -4,9 +4,9 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	{% block title %}<title>小型厅购票</title>{% endblock %}
+	{% block title %}<title>中型厅购票</title>{% endblock %}
     {% block link %}
-        <link rel="stylesheet" href="{% static 'css/ticketMINI.css' %}">
+        <link rel="stylesheet" href="{% static 'css/ticketBig.css' %}">
     {% endblock %}
 </head>
 
@@ -19,16 +19,15 @@
 
 {% block main %}
 <div class="movie-container">
-    <a href="{% url 'index:ticketMedium'%}">中型厅购票演示</a>
-    <div>
-        <span class="choose">选择影片</span>
-        <select id="movie">
-            <option value="32">白蛇缘起（票价：35元）</option>
-            <option value="35">小丑（票价：35元）</option>
-            <option value="38">疯狂动物城（票价：38元）</option>
-            <option value="30">海蒂（票价：30元）</option>
-        </select>
-    </div>
+		<div>
+			<span class="choose">选择影片</span>
+			<select id="movie">
+				<option value="32">白蛇缘起（票价：35元）</option>
+				<option value="35">小丑（票价：35元）</option>
+				<option value="38">疯狂动物城（票价：38元）</option>
+				<option value="30">海蒂（票价：30元）</option>
+			</select>
+		</div>
     <ul class="showcase">
 		<li>
 			<div class="seat"></div>
@@ -56,6 +55,26 @@
             <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+        </div>
+        <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
         </div>
         <div class="row">
             <div class="seat"></div>
@@ -68,8 +87,64 @@
             <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
         </div>
         <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+        </div>
+        <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+        </div>
+        <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+        </div>
+        <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
@@ -92,6 +167,10 @@
             <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
         </div>
         <div class="row">
             <div class="seat"></div>
@@ -104,8 +183,16 @@
             <div class="seat occupied"></div>
             <div class="seat"></div>
             <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
         </div>
         <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
@@ -126,6 +213,10 @@
 			<div class="seat"></div>
 			<div class="seat"></div>
 			<div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
 		</div>
@@ -138,6 +229,10 @@
 			<div class="seat occupied"></div>
 			<div class="seat occupied"></div>
 			<div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
 		</div>
