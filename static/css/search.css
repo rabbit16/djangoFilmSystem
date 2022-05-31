@@ -18,11 +18,12 @@ a{
 }
 
 #ms{
-    width: 1200px;
-    height: 420px;
+    width: 600px;
+    height: 250px;
     margin-left: 192px;
     margin-top: 20px;
-    background-color: rgba(202, 235, 242, 0.2);
+    max-width: 600px;
+    /*background-color: rgba(202, 235, 242, 0.2);*/
     /*background-color: black;*/
 }
 
@@ -50,14 +51,16 @@ a{
 
 #ms .ms_body{
     width: 1900px;
+    float: left;
     display: flex;
     margin: 0 auto;
 }
 
 #ms .ms_body img{
-    width: 250px;
-    height: 375px;
+    width: 140px;
+    height: 210px;
     margin-top: -70px;
+    margin-left: -140px;
     cursor: auto;
     transition: all 0.6s;
     border: solid 3px rgba(256, 256, 256, 0.8);
@@ -71,24 +74,25 @@ a{
     margin-right: 10px;
 }
 
+#ms .ms_body_center{
+    display: flex;
+    flex-wrap: wrap;
+    width: 1000px;
+    height: 500px;
+    /*border: 10px solid red;*/
+    /*margin: 0 auto;*/
+}
 
 #ms .ms_body_center ul{
     list-style: none;
     flex: 1;
+    max-width: 300px;
     padding-left: 10px;
     margin-left: 200px;
     margin-top: 20px;
 }
 
 /*设置页面右边*/
-#ms .ms_body_right ul{
-    list-style: none;
-    flex: 1;
-    padding-left: 100px;
-    margin-top: -40px;
-    font-size: 18px;
-    color: rgba(256, 256, 256, 0.8);
-}
 
 #ms .ms_body_right p:first-child{
     font-size: 26px;
@@ -105,8 +109,8 @@ a{
     height: 35px;
     background-color: rgba(256, 256, 256, 0.5);
     position: relative;
-    top: 40px;
-    left: 100px;
+    top: 3px;
+    left: 70px;
     font-size: 20px;
     border-radius: 5px;
 }
@@ -133,8 +137,8 @@ a{
     height: 35px;
     background-color: rgba(256, 256, 256, 0.5);
     position: relative;
-    top: 6px;
-    left: 210px;
+    top: -32px;
+    left: 200px;
     font-size: 20px;
     border-radius: 5px;
 }
@@ -149,4 +153,19 @@ a{
     font-weight: bold;
     position: relative;
     top: -1px;
+}
+
+.message_show {
+    position: relative;
+}
+
+.message_show li{
+    position: relative;
+    float: right;
+    margin: -30px 34px;
+}
+.text_show{
+    position: relative;
+    left: 69px;
+    top: -22px;color: white;
 }
