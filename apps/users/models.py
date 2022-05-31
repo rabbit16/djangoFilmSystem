@@ -83,6 +83,7 @@ class Movie(models.Model):
     Movie_img = models.URLField(max_length=100, verbose_name="电影图片", help_text="电影图片")
     Movie_price = models.FloatField(verbose_name="电影原价", help_text="电影原价", default=0)
     Movie_director=models.CharField(max_length=20, verbose_name='导演名', help_text="导演名", default="")
+    Movie_lasts = models.CharField(max_length=20, verbose_name='电影时长', help_text="电影时长", default="")
     m_movietype = models.ManyToManyField(Movie_type)
     abstract = models.TextField(max_length=500, verbose_name="简介", help_text="简介", default="")
     hotPlay = models.BooleanField(verbose_name="是否为热映", help_text="是否为热映", default=False)
