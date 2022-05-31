@@ -21,6 +21,7 @@ class Code:
 
     CONFLICT = "4201"
     REQUEST = "4202"
+    PERMIT = "4203"
 
     SERVERERR = "4500"
     UNKOWNERR = "4501"
@@ -45,9 +46,9 @@ error_map = {
     Code.PWDERR: "密码错误",
     Code.OUTTIME: "超过退票时间",
 
-
     Code.CONFLICT: "当前选择有冲突",
     Code.REQUEST: "未知请求",
+    Code.PERMIT: "没有相应权限",
 
 
     Code.SERVERERR: "内部错误",

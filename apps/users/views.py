@@ -28,7 +28,7 @@ def discount(user_rank):
         return 1
 
 
-class index(View):
+class Index(View):
 
     def get(self, request):
         # 获得有安排场次的电影
@@ -91,7 +91,22 @@ class IndexTest(View):
 class Login(View):
 
     def get(self, request):
-        return render(request, "index/login.html")
+        user_info = json.loads(request.body.decode())
+        username = user_info.get("username")
+        password = user_info.get("password")
+        # 与数据库中的用户名和密码比对，django默认保存密码是以哈希形式存储，并不是明文密码，这里的password验证默认调用的是User类的check_password方法，以哈希值比较。
+        user = authenticate(request, username=username, password=password)
+        try:
+            # 验证如果用户不为空
+            if user is not None:
+                # login方法登录
+                login(request, user)
+                # data = {
+                #     'errno': Code.OK
+                # }
+            return render(request, "index/admin.html")  # 普通用户也能重定向到管理员页面，但无法使用功能
+        except:
+            return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.PICERROR])
 
     # def post(self, request):
     #     return json.dumps({
@@ -115,14 +130,6 @@ class Login(View):
             return to_json_data(errno=Code.OK, errmsg=error_map[Code.OK])
         except:
             return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.PICERROR])
-        #     # 返回登录成功信息
-        #     # return HttpResponse('index.html')
-        #     return redirect("/index/") #这点确实不会，等学长
-        #     # return render(request, 'index.html')
-        # else:
-        #     # 返回登录失败信息
-        #     return HttpResponse('登陆失败，未注册或密码错误！')
-
 
 #
 class Register(View):
@@ -163,10 +170,10 @@ class Movie(View):
     def get(self, request):
         return render(request, "index/movie.html")
 
-    # add_movie电影添加, add_comment评论添加, add_like评论点赞
+    # movie电影添加, comment评论添加
     def post(self, request):
         request_info = json.loads(request.body.decode())
-        if request_info.get('request_type') == 'add_movie':
+        if request_info.get('request_type') == 'movie':
             movie_info = json.loads(request.body.decode())
             if not movies.objects.all().exists():
                 id = 1
@@ -193,7 +200,7 @@ class Movie(View):
                 return to_json_data(data=data)
             except:
                 return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.PICERROR])
-        elif request_info.get('request_type') == 'add_comment':
+        elif request_info.get('request_type') == 'comment':
             comment_info = json.loads(request.body.decode())
             target = movies.objects.filter(Movie_id=comment_info.get('Movie_id'))
             if target.exists():
@@ -206,12 +213,21 @@ class Movie(View):
                 comments = Comment.objects.create(Comment_id=id,
                                                   Comment_content=comment_info.get('Comment_content'),
                                                   Comment_time=datetime.now(),
+                                                  Comment_author=User.objects.get(id=comment_info.get('author')),
+                                                  Comment_movie=target,
                                                   Comment_likes=0)
-                # TODO 等数据库完善归属电影
+                if comment_info.get('son'):
+                    comments.parent = Comment.objects.get(Comment_id=comment_info.get('son'))
 
             else:
                 return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.NODATA])
-        elif request_info.get('request_type') == 'add_like':
+        else:
+            return to_json_data(errno=Code.REQUEST, errmsg=error_map[Code.REQUEST])
+
+    # like评论点赞， info电影信息更改
+    def put(self,request):
+        request_info = json.loads(request.body.decode())
+        if request_info.get('request_type') == 'like':
             comment_info = json.loads(request.body.decode())
             comment = Comment.objects.filter(Comment_id=comment_info.get('Comment_id'))
             comment.update(Comment_likes=comment[0].Comment_likes + 1)
@@ -219,8 +235,17 @@ class Movie(View):
                 'errno': Code.OK
             }
             return to_json_data(data=data)
-        else:
-            return to_json_data(errno=Code.REQUEST, errmsg=error_map[Code.REQUEST])
+        elif request_info.get('request_type') == 'info':
+            new_info = json.loads(request.body.decode())
+            movie = movies.objects.filter(Movie_id=new_info.get('Movie_id'))
+            if new_info.get('abstract_change'):
+                movie.update(abstract=new_info.get('abstract'))
+            if new_info.get('hotPlay_change'):
+                movie.update(hotPlay=new_info.get('hotPlay'))
+            data = {
+                'errno': Code.OK
+            }
+            return to_json_data(data=data)
 
 
 #
@@ -231,18 +256,15 @@ class MovieDetail(View):
 
     def post(self, request):
         movie_info = json.loads(request.body.decode())
-        movie = movies.objects.filter(Movie_id=movie_info)[0]
+        movie = movies.objects.get(Movie_id=movie_info)
         data = {
             'movie': movie,
             'm_movietype': [],
-            'comments': [],
+            'comments': Comment.objects.filter(Comment_movie=movie),
         }
         # 调用类型
         for types in movie.m_movietype.all():
             data['m_movietype'].append(types.type_name)
-        # 调用评论
-        for comments in Comment.objects.filter():
-            pass  # TODO 等完善数据库
         return to_json_data(data=data)
 
 
@@ -263,7 +285,7 @@ class Rank(View):
         for changes in tics:
             user = User.objects.filter(id=changes.Ticket_user)
             user.update(Rank=user[0].Rank + changes.price)
-            changes.update(PRI_CHOICES=3)
+        tics.update(PRI_CHOICES=2)
         return json.dumps({
             "errno": '1'
         })
@@ -283,10 +305,10 @@ class Ticket(View):
             time = datetime.now()
             time_str = time.strftime('%Y%m%d%H%M')[2:]
             ticket_id = int(time_str + "%04d" % ticinfo.get('Seat_id') + "%02d" % ticinfo.get('Studio_id'))
-            rate_discount = discount(User.objects.filter(id=ticinfo.get("user_id"))[0].Integral)
-            session = Times.objects.filter(Times_id=ticinfo.get('session_id'))[0]
-            movie_price = movies.objects.filter(Movie_id=session.T_movie)[0].Movie_price
-            session_rate = Studio.objects.filter(Studio_id=session.T_studio)[0].price_weight
+            rate_discount = discount(User.objects.get(id=ticinfo.get("user_id")).Integral)
+            session = Times.objects.get(Times_id=ticinfo.get('session_id'))
+            movie_price = movies.objects.get(Movie_id=session.T_movie).Movie_price
+            session_rate = Studio.objects.get(Studio_id=session.T_studio).price_weight
             price_discount = rate_discount * movie_price * session_rate
 
             try:
@@ -426,6 +448,60 @@ class UserCenter(View):
             return to_json_data(data=data)
         else:
             return to_json_data(errno=Code.REQUEST, errmsg=error_map[Code.REQUEST])
+
+class AdminCenter(View):
+    def get(self, request):
+        request_info = json.loads(request.body.decode())
+        user = User.objects.get(id=request_info.get('user_id'))
+        if request_info.get('type') == 'movie':
+            if user.is_superuser | user.buyManager:
+                return render(request, "index/movie_add.html")
+            else:
+                return to_json_data(errno=Code.PERMIT, errmsg=error_map[Code.PERMIT])
+        elif request_info.get('type') == 'session':
+            if user.is_superuser | user.buyManager:
+                return render(request, "index/session_add.html")
+            else:
+                return to_json_data(errno=Code.PERMIT, errmsg=error_map[Code.PERMIT])
+        elif request_info.get('type') == 'box':  # 票房收入
+            if user.is_superuser:
+                return render(request, "index/box_list.html")
+            else:
+                return to_json_data(errno=Code.PERMIT, errmsg=error_map[Code.PERMIT])
+        elif request_info.get('type') == 'admin_add':  # 添加管理员
+            if user.is_superuser:
+                return render(request, "index/admin_add.html")
+            else:
+                return to_json_data(errno=Code.PERMIT, errmsg=error_map[Code.PERMIT])
+
+    # # 添加管理员
+    # def post(self, request):
+    #     userInfo = json.loads(request.body.decode())
+    #     if userInfo["gender"] == 'male':
+    #         userInfo["gender"] = True
+    #     else:
+    #         userInfo["gender"] = False
+    #     registerForm = RegisterForm(userInfo)
+    #
+    #     try:
+    #         if registerForm.is_valid():
+    #             user = User.objects.create_user(username=registerForm.cleaned_data.get('username'),
+    #                                             password=registerForm.cleaned_data.get('password'),
+    #                                             mobile=registerForm.cleaned_data.get('mobile'),
+    #                                             email=registerForm.cleaned_data.get('email'),
+    #                                             sex=registerForm.cleaned_data.get("gender"),
+    #                                             name=registerForm.cleaned_data.get("real_name"),
+    #                                             birthday=registerForm.cleaned_data.get("birthday")
+    #                                             )
+    #             login(request, user)
+    #         data = {
+    #             'errno': Code.OK
+    #         }
+    #         return to_json_data(data=data)
+    #     except:
+    #         return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.PICERROR])
+    #
+
 
 
 # class Studio_add(View):
