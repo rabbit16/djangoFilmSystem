@@ -26,7 +26,7 @@ class User(AbstractUser):
         return self.mobile
 
 class Seat(models.Model):
-    Seat_id = models.IntegerField(max_length=20, help_text="座位id", verbose_name="座位id")
+    Seat_id = models.IntegerField(help_text="座位id", verbose_name="座位id")
     Seat_name = models.CharField(max_length=20, verbose_name="座位编号", help_text="座位编号")
     s_stu = models.ManyToManyField('Studio')
     class Meta:
@@ -36,7 +36,7 @@ class Seat(models.Model):
         return self.Seat_name
 
 class Studio(models.Model):
-    Studio_id = models.CharField(max_length=20,help_text="演播厅id",verbose_name="演播厅id")
+    Studio_id = models.IntegerField(help_text="演播厅id",verbose_name="演播厅id")
     Studio_name = models.CharField(max_length=20, help_text="演播厅名称", verbose_name="演播厅名称")
     Studio_type = models.CharField(max_length=20, help_text="演播厅类型", verbose_name="演播厅类型")
     Seating = models.CharField(max_length=20, help_text="座位个数", verbose_name="座位个数")
@@ -76,29 +76,13 @@ class Movie_type(models.Model):  # 电影标签
     def __str__(self):
         return self.type_name
 
-class Ticket(models.Model):
-    Ticket_id = models.IntegerField(max_length=20,help_text="电影票id",verbose_name="电影票id")
-    Seat_id = models.IntegerField(max_length=20, help_text="座位id", verbose_name="座位id")
-    Seat_name = models.CharField(max_length=20, help_text="座位名称", verbose_name="座位名称")
-    Studio_id = models.IntegerField(max_length=20, help_text="演播厅id", verbose_name="演播厅id")
-    Studio_name = models.CharField(max_length=20, help_text="演播厅名称", verbose_name="演播厅名称")
-    Movie_name = models.CharField(max_length=20, verbose_name='电影名' , help_text="电影名")
-    Movie_time = models.DateTimeField(verbose_name="电影时间", help_text="电影时间")
-    s_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    price = models.FloatField(verbose_name="电影票的价格", help_text="电影票的价格")
-    class Meta:
-        db_table = 'tb_Ticket'
-        verbose_name = '电影票'
-
-    def __str__(self):
-        return self.Ticket_id
-
 class Movie(models.Model):
-    Movie_id = models.CharField(max_length=20, help_text="电影id", verbose_name="电影id")
+    Movie_id = models.IntegerField(help_text="电影id", verbose_name="电影id")
     Movie_name = models.CharField(max_length=20, verbose_name='电影名', help_text="电影名")
     Movie_time = models.DateTimeField(verbose_name="电影上映时间", help_text="电影上映时间", default=timezone.now)
-    Movie_img = models.CharField(max_length=100, verbose_name="电影图片", help_text="电影图片")
+    Movie_img = models.URLField(max_length=100, verbose_name="电影图片", help_text="电影图片")
     Movie_price = models.FloatField(verbose_name="电影原价", help_text="电影原价", default=0)
+    Movie_director=models.CharField(max_length=20, verbose_name='导演名', help_text="导演名", default="")
     m_movietype = models.ManyToManyField(Movie_type)
     abstract = models.TextField(max_length=500, verbose_name="简介", help_text="简介", default="")
     hotPlay = models.BooleanField(verbose_name="是否为热映", help_text="是否为热映", default=False)
@@ -110,26 +94,58 @@ class Movie(models.Model):
     def __str__(self):
         return self.Movie_name
 
+
+
 class Times(models.Model):  # 电影场次
-    S_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    S_studio = models.ForeignKey(Studio, on_delete=models.CASCADE)
-    S_seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
-    S_movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    session = models.IntegerField(verbose_name="场次", help_text="场次")
+    Times_id = models.IntegerField(help_text="场次id",verbose_name="场次id",primary_key=True)
+    T_studio = models.ForeignKey('Studio', on_delete=models.CASCADE, default="")
+    T_movie = models.ForeignKey('Movie', on_delete=models.CASCADE, default="")
+    session_time = models.DateTimeField(verbose_name="场次时间", help_text="场次时间", default=timezone.now)
 
     class Meta:
         db_table = "tb_session"
         verbose_name = "电影场次"
 
     def __str__(self):
-        return self.session
+        return self.Times_id
+
+
+class Ticket(models.Model):
+    Ticket_id = models.IntegerField(help_text="订单号",verbose_name="订单号")
+    # Seat_id = models.IntegerField(max_length=20, help_text="座位id", verbose_name="座位id")
+    # Seat_name = models.CharField(max_length=20, help_text="座位名称", verbose_name="座位名称")
+    # Studio_id = models.IntegerField(max_length=20, help_text="演播厅id", verbose_name="演播厅id")
+    # Studio_name = models.CharField(max_length=20, help_text="演播厅名称", verbose_name="演播厅名称")
+    # Movie_name = models.CharField(max_length=20, verbose_name='电影名' , help_text="电影名")
+    # Movie_time = models.DateTimeField(verbose_name="电影时间", help_text="电影时间")
+    # s_user = models.ForeignKey(User, on_delete=models.CASCADE)+
+    price = models.FloatField(verbose_name="电影票的价格", help_text="电影票的价格")
+    Ticket_seat = models.ForeignKey('Seat', on_delete=models.CASCADE, default="")
+    Ticket_session = models.ForeignKey('Times', on_delete=models.CASCADE, default="")
+    Ticket_studio = models.ForeignKey('Studio', on_delete=models.CASCADE, default="")
+    Ticket_user = models.ForeignKey('User', on_delete=models.CASCADE, default="")
+    PRI_CHOICES = [
+        (1, "正常"),
+        (2, "退票"),
+        (3, "已积分")
+    ]
+    state = models.IntegerField(choices=PRI_CHOICES, verbose_name="电影票状态", help_text="电影票状态", default=0)
+    class Meta:
+        db_table = 'tb_Ticket'
+        verbose_name = '电影票'
+
+    def __str__(self):
+        return self.Ticket_id
+
+
 
 class Comment(models.Model):
-    Comment_id = models.IntegerField(max_length=20,help_text="评论id",verbose_name="评论id")
+    Comment_id = models.IntegerField(help_text="评论id",verbose_name="评论id")
     Comment_content = models.TextField(help_text="评论内容", verbose_name="评论内容")
     Comment_time = models.DateTimeField(verbose_name="评论时间", help_text="评论时间", default=timezone.now)
-    Comment_likes = models.IntegerField(max_length=100,help_text="点赞数",verbose_name="点赞数")
+    Comment_likes = models.IntegerField(help_text="点赞数",verbose_name="点赞数")
     Comment_author = models.ForeignKey('User', on_delete=models.CASCADE)
+    Comment_movie = models.ForeignKey('Movie', on_delete=models.CASCADE, default="")
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
