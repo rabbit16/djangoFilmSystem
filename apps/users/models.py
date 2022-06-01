@@ -39,8 +39,7 @@ class Studio(models.Model):
     Studio_id = models.IntegerField(help_text="演播厅id",verbose_name="演播厅id")
     Studio_name = models.CharField(max_length=20, help_text="演播厅名称", verbose_name="演播厅名称")
     Studio_type = models.CharField(max_length=20, help_text="演播厅类型", verbose_name="演播厅类型")
-    Seating = models.CharField(max_length=20, help_text="座位个数", verbose_name="座位个数")
-    price_weight = models.FloatField(verbose_name="价格权重", help_text="价格权重", default=0)
+    Seating = models.intField(max_length=20, help_text="座位个数", verbose_name="座位个数")
 
     class Meta:
         db_table = 'tb_Studio'
