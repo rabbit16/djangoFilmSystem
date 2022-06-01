@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'haystack',
     "verifications",
-    "haystack",
+    # "haystack",
     "users",
     "administer",
     "online_help"
@@ -225,13 +226,6 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.elasticsearch7_backend.Elasticsearch7SearchEngine',
-        'URL': 'http://121.37.87.67:9200/',  # 此处为elasticsearch运行的服务器ip地址，端口号默认为9200
-        'INDEX_NAME': 'djf',  # 指定elasticsearch建立的索引库的名称 数据库名
-    },
-}
-HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 4
+#指定simpleui默认的主题,指定一个文件名，相对路径就从simpleui的theme目录读取
+SIMPLEUI_DEFAULT_THEME = 'admin.lte.css'
