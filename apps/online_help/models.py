@@ -22,5 +22,5 @@ class Problems(models.Model):
         db_table = 'tb_Problems'
         verbose_name = '问题咨询'
     def __str__(self):
-        return self.Problems_id
+        return str(self.Problems_id)
 
