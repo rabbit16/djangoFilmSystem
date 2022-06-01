@@ -15,12 +15,12 @@ class Problems_type(models.Model):  # 问题标签
         return self.type_name
 
 class Problems(models.Model):
-    Problems_id = models.CharField(max_length=20,help_text="问题id",verbose_name="问题id")
-    Problems_contain = models.CharField(max_length=1000, help_text="问题内容", verbose_name="问题内容")
+    Problems_id = models.IntegerField(help_text="问题id",verbose_name="问题id")
+    Problems_contain = models.TextField(help_text="问题内容", verbose_name="问题内容")
     p_problemtype = models.ManyToManyField(Problems_type)
     class Meta:
         db_table = 'tb_Problems'
         verbose_name = '问题咨询'
     def __str__(self):
-        return self.Problems_id
+        return str(self.Problems_id)
 
