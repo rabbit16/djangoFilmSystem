@@ -21,6 +21,13 @@
 <div class="movie-container">
     <a href="{% url 'index:ticketMedium'%}">中型厅购票演示</a>
     <div>
+        <span class="choose">选择场次</span>
+        <select id="screening">
+            <option value="1">上午场</option>
+            <option value="2">中午场</option>
+            <option value="3">下午场</option>
+            <option value="4">夜场</option>
+        </select>
         <span class="choose">选择影片</span>
         <select id="movie">
             <option value="32">白蛇缘起（票价：35元）</option>
@@ -46,100 +53,100 @@
     <div class="screen"></div>
     <div class="container">
         <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
+            <div class="seat" title="1排1座"></div>
+            <div class="seat" title="1排2座"></div>
+            <div class="seat" title="1排3座"></div>
+            <div class="seat" title="1排4座"></div>
+            <div class="seat" title="1排5座"></div>
+            <div class="seat" title="1排6座"></div>
+            <div class="seat" title="1排7座"></div>
+            <div class="seat" title="1排8座"></div>
+            <div class="seat" title="1排9座"></div>
+            <div class="seat" title="1排10座"></div>
         </div>
         <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
+            <div class="seat" title="2排1座"></div>
+            <div class="seat" title="2排2座"></div>
+            <div class="seat" title="2排3座"></div>
+            <div class="seat" title="2排4座"></div>
+            <div class="seat" title="2排5座"></div>
+            <div class="seat" title="2排6座"></div>
+            <div class="seat" title="2排7座"></div>
+            <div class="seat" title="2排8座"></div>
+            <div class="seat" title="2排9座"></div>
+            <div class="seat" title="2排10座"></div>
         </div>
         <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
+            <div class="seat" title="3排1座"></div>
+            <div class="seat" title="3排2座"></div>
+            <div class="seat" title="3排3座"></div>
+            <div class="seat" title="3排4座"></div>
+            <div class="seat" title="3排5座"></div>
+            <div class="seat" title="3排6座"></div>
+            <div class="seat" title="3排7座"></div>
+            <div class="seat" title="3排8座"></div>
+            <div class="seat" title="3排9座"></div>
+            <div class="seat" title="3排10座"></div>
         </div>
         <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat occupied"></div>
-            <div class="seat occupied"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
+            <div class="seat" title="4排1座"></div>
+            <div class="seat" title="4排2座"></div>
+            <div class="seat" title="4排3座"></div>
+            <div class="seat occupied"  title="4排4座"></div>
+            <div class="seat occupied"  title="4排5座"></div>
+            <div class="seat" title="4排6座"></div>
+            <div class="seat" title="4排7座"></div>
+            <div class="seat" title="4排8座"></div>
+            <div class="seat" title="4排9座"></div>
+            <div class="seat" title="4排10座"></div>
         </div>
         <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat occupied"></div>
-            <div class="seat occupied"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
+            <div class="seat" title="5排1座"></div>
+            <div class="seat" title="5排2座"></div>
+            <div class="seat" title="5排3座"></div>
+            <div class="seat" title="5排4座"></div>
+            <div class="seat" title="5排5座"></div>
+            <div class="seat" title="5排6座"></div>
+            <div class="seat occupied" title="5排7座"></div>
+            <div class="seat occupied" title="5排8座"></div>
+            <div class="seat" title="5排9座"></div>
+            <div class="seat" title="5排10座"></div>
         </div>
         <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
+            <div class="seat" title="6排1座"></div>
+            <div class="seat" title="6排2座"></div>
+            <div class="seat" title="6排3座"></div>
+            <div class="seat" title="6排4座"></div>
+            <div class="seat" title="6排5座"></div>
+            <div class="seat" title="6排6座"></div>
+            <div class="seat" title="6排7座"></div>
+            <div class="seat" title="6排8座"></div>
+            <div class="seat" title="6排9座"></div>
+            <div class="seat" title="6排10座"></div>
         </div>
 		<div class="row">
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat occupied"></div>
-			<div class="seat occupied"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
+            <div class="seat" title="7排1座"></div>
+            <div class="seat" title="7排2座"></div>
+            <div class="seat" title="7排3座"></div>
+            <div class="seat occupied"  title="7排4座"></div>
+            <div class="seat occupied"  title="7排5座"></div>
+            <div class="seat" title="7排6座"></div>
+            <div class="seat" title="7排7座"></div>
+            <div class="seat" title="7排8座"></div>
+            <div class="seat" title="7排9座"></div>
+            <div class="seat" title="7排10座"></div>
 		</div>
 		<div class="row">
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat occupied"></div>
-			<div class="seat occupied"></div>
-			<div class="seat occupied"></div>
-			<div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
+            <div class="seat" title="8排1座"></div>
+            <div class="seat" title="8排2座"></div>
+            <div class="seat" title="8排3座"></div>
+            <div class="seat" title="8排4座"></div>
+			<div class="seat occupied" title="8排5座"></div>
+			<div class="seat occupied" title="8排6座"></div>
+			<div class="seat occupied" title="8排7座"></div>
+            <div class="seat" title="8排8座"></div>
+            <div class="seat" title="8排9座"></div>
+            <div class="seat" title="8排10座"></div>
 		</div>
 	</div>
 	<p class="text">
@@ -155,6 +162,7 @@
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'js/message.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/ticket.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/ticketTest.js' %}"></script>
 {% endblock %}
 
 </body>

@@ -1,7 +1,8 @@
-const container = document.querySelector(".container");
+const container = document.querySelector(".container");////返回class为container的dom
 			const seats = document.querySelectorAll(".row .seat:not(.occupied)");
 			const count = document.getElementById("count");
 			const total = document.getElementById("total");
+			const screeningSelect = document.getElementById("screening");
 			const movieSelect = document.getElementById("movie");
 			let ticketPrice = +movieSelect.value;//加+代表Number,不加代表字符串
 			populateUI();
