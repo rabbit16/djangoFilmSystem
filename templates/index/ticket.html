@@ -8,6 +8,7 @@
     {% block link %}
         <link rel="stylesheet" href="{% static 'css/ticketMINI.css' %}">
     {% endblock %}
+
 </head>
 
 <body>
@@ -19,9 +20,16 @@
 
 {% block main %}
 <div class="movie-container">
+    <script type="application/javascript">
+        function findSeat() {
+            let select_value = document.getElementById("screening")
+            let value_select = select_value.options[select_value.selectedIndex].value
+            console.log(value_select)
+        }
+    </script>
     <div>
         <span class="choose">选择场次</span>
-        <select id="screening">
+        <select id="screening" onchange="findSeat()">
             <option value="0" selected="selected">请选择场次</option>
             {% for times in sessions %}
                 <option value="{{ times.Times_id }}">{{ times.session_time }}</option>
@@ -166,6 +174,7 @@
     <script type="text/javascript" src="{% static 'js/message.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/ticket.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/ticketTest.js' %}"></script>
+
 {% endblock %}
 
 </body>
