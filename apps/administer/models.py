@@ -12,4 +12,4 @@ class Carousel_figure(models.Model):
         verbose_name = '轮播图'
 
     def __str__(self):
-        return self.Figure_id
+        return str(self.Figure_id)

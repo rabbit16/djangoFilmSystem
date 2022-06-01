@@ -17,7 +17,7 @@ class User(AbstractUser):
     registration_data = models.DateTimeField(verbose_name="注册时间", help_text="注册时间",default=timezone.now)
     sex = models.BooleanField(verbose_name="性别", help_text="性别", default=True)
     birthday = models.DateTimeField(verbose_name="生日", help_text="生日", default=timezone.now)
-    Integral = models.IntegerField(help_text="积分", verbose_name="积分")
+    Integral = models.IntegerField(help_text="积分", verbose_name="积分",default=0)
     class Meta:
         db_table = 'tb_users'
         verbose_name = '用户'
@@ -39,15 +39,14 @@ class Studio(models.Model):
     Studio_id = models.IntegerField(help_text="演播厅id",verbose_name="演播厅id")
     Studio_name = models.CharField(max_length=20, help_text="演播厅名称", verbose_name="演播厅名称")
     Studio_type = models.CharField(max_length=20, help_text="演播厅类型", verbose_name="演播厅类型")
-    Seating = models.CharField(max_length=20, help_text="座位个数", verbose_name="座位个数")
-    price_weight = models.FloatField(verbose_name="价格权重", help_text="价格权重", default=0)
+    Seating = models.IntegerField(max_length=20, help_text="座位个数", verbose_name="座位个数")
 
     class Meta:
         db_table = 'tb_Studio'
         verbose_name = '演播厅'
 
     def __str__(self):
-        return self.Studio_id
+        return str(self.Studio_id)
 
 class Movie_type(models.Model):  # 电影标签
     # Romance = models.CharField(max_length=20, help_text="爱情片", verbose_name="爱情片")
@@ -108,7 +107,7 @@ class Times(models.Model):  # 电影场次
         verbose_name = "电影场次"
 
     def __str__(self):
-        return self.Times_id
+        return str(self.Times_id)
 
 
 class Ticket(models.Model):
@@ -136,7 +135,7 @@ class Ticket(models.Model):
         verbose_name = '电影票'
 
     def __str__(self):
-        return self.Ticket_id
+        return str(self.Ticket_id)
 
 
 
@@ -166,4 +165,4 @@ class Comment(models.Model):
         return comment_dict
 
     def __str__(self):
-        return self.Comment_id
+        return str(self.Comment_id)
