@@ -19,22 +19,25 @@
 
 {% block main %}
 <div class="movie-container">
-    <a href="{% url 'index:ticketMedium'%}">中型厅购票演示</a>
     <div>
         <span class="choose">选择场次</span>
         <select id="screening">
-            <option value="1">上午场</option>
-            <option value="2">中午场</option>
-            <option value="3">下午场</option>
-            <option value="4">夜场</option>
+            <option value="0" selected="selected">请选择场次</option>
+            {% for times in sessions %}
+                <option value="{{ times.Times_id }}">{{ times.session_time }}</option>
+            {% endfor %}
+{#            <option value="1">上午场</option>#}
+{#            <option value="2">中午场</option>#}
+{#            <option value="3">下午场</option>#}
+{#            <option value="4">夜场</option>#}
         </select>
-        <span class="choose">选择影片</span>
-        <select id="movie">
-            <option value="32">白蛇缘起（票价：35元）</option>
-            <option value="35">小丑（票价：35元）</option>
-            <option value="38">疯狂动物城（票价：38元）</option>
-            <option value="30">海蒂（票价：30元）</option>
-        </select>
+{#        <span class="choose">选择影片</span>#}
+{#        <select id="movie">#}
+{#            <option value="{{  }}">{{  }}</option>#}
+{#            <option value="35">小丑（票价：35元）</option>#}
+{#            <option value="38">疯狂动物城（票价：38元）</option>#}
+{#            <option value="30">海蒂（票价：30元）</option>#}
+{#        </select>#}
     </div>
     <ul class="showcase">
 		<li>

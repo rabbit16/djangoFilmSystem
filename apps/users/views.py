@@ -257,11 +257,11 @@ class Rank(View):
 
     # 刷新积分数据
     def put(self):
-        tics = tickets.objects.filter(PRI_CHOICES=1)
+        tics = tickets.objects.filter(state=1)
         for changes in tics:
             user = User.objects.filter(id=changes.Ticket_user)
             user.update(Rank=user[0].Rank + changes.price)
-        tics.update(PRI_CHOICES=2)
+        tics.update(state=2)
         return json.dumps({
             "errno": '1'
         })
@@ -270,10 +270,14 @@ class Rank(View):
 #
 class Ticket(View):
 
-    def get(self, request):
-        return render(request, "index/ticket.html")
+    def get(self, request, movie_id):
+        sessions = Times.objects.filter(T_movie=movies.objects.get(Movie_id=movie_id).id)
+        data = {
+            'sessions': sessions
+        }
+        return render(request, "index/ticket.html", data)
 
-    # buy:购票，refund:退票
+    # buy:购票，refund:退票,occupy:占用情况
     def post(self, request):
         request_info = json.loads(request.body.decode())
         if request_info.get('request_type') == 'buy':
@@ -294,7 +298,7 @@ class Ticket(View):
                                            Ticket_session=ticinfo.get('Studio_id'),
                                            price=price_discount,
                                            Ticket_user=ticinfo.get("user_id"),
-                                           PRI_CHOICES=1,
+                                           state=1,
                                            )
                 data = {
                     'errno': Code.OK
@@ -313,29 +317,36 @@ class Ticket(View):
             if session[0].session_time < datetime.now():  # 超过了退款时间
                 return to_json_data(errno=Code.OUTTIME, errmsg=error_map[Code.OUTTIME])
             # 审查完毕，可以退票程序
-            target.update(PRI_CHOICES=3)
+            target.update(state=3)
             data = {
                 'errno': Code.OK
             }
             return to_json_data(data=data)
+        elif request_info.get('request_type') == 'occupy':
+            request_info = json.loads(request.body.decode())
+            session_id = request_info.get('screening')
+            # 获得当前场次的占用信息
+            occupied = tickets.objects.filter(Ticket_session=session_id, state=1)
+            session = Times.objects.filter(Times_id=session_id)[0]
+            # 得到座位数和演播厅类型
+            seat_num = session.T_studio.Seating
+            seat_list = [0 for _ in range(int(seat_num))]
+            for i in occupied:
+                seat_list[i.Ticket_seat_id % 1000] = 1   # 被占用的座位取1，空闲的取0
+            return to_json_data(data={
+                'occupy': seat_list,
+            })
         else:
             return to_json_data(errno=Code.REQUEST, errmsg=error_map[Code.REQUEST])
 
 
 class Session(View):
 
-    def get(self, request, movie_id):
-        sessions = Times.objects.filter(T_movie=movie_id)
-        data = {
-            'sessions': sessions
-        }
-        return render(request, "index/sessionlist.html",data)
-
     # 添加场次
     def post(self, request):
         request_info = json.loads(request.body.decode())
         request_type = request_info.get('type')
-        # add:添加场次，occupy:查询演播厅占用情况，search:查询电影的场次信息
+        # add:添加场次，occupy:查询演播厅占用情况
         if request_type == 'add':
             session_info = json.loads(request.body.decode())
             check_time = session_info.get('session_time')
@@ -370,23 +381,6 @@ class Session(View):
             return to_json_data(errno=Code.REQUEST, errmsg=error_map[Code.REQUEST])
 
 
-class seats(View):
-    def post(self, request):
-        request_info = json.loads(request.body.decode())
-        session_id = request_info.get('session')
-        # 获得当前场次的占用信息
-        occupied = tickets.objects.filter(Ticket_session=session_id, PRI_CHOICES=1)
-        session = Times.objects.filter(Times_id=session_id)[0]
-        # 得到座位数和演播厅类型
-        seat_num = Studio.objects.filter(Studio_id=session.T_studio)[0].Seating
-        studio_type = Studio.objects.filter(Studio_id=session.T_studio)[0].Studio_type
-        seat_list = [0 for _ in range(seat_num)]
-        for i in occupied:
-            seat_list[i.Ticket_seat % 1000] = 1  # 被占用的座位取1，空闲的取0
-        return to_json_data(data={
-            'type': studio_type,
-            'occupy': seat_list,
-        })
 
 
 class UserCenter(View):

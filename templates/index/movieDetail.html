@@ -47,7 +47,7 @@
             </li>
             <li>
                 <div class="ticket">
-                    <a href="{% url 'index:ticket'%}">
+                    <a href="{% url 'index:ticket' movie_id=single_movie.Movie_id %}">
                         <i class="fa fa-money" style="color: black;"></i><input type="button" value="购票" class="btn">
                     </a>
                 </div>

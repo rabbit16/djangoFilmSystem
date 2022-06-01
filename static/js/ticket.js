@@ -58,6 +58,6 @@ const container = document.querySelector(".container");////返回class为contain
 				  //意思是option的index值,在不为空的条件下,点击的是哪一个就赋值设置哪一个·的座位与票价。
 				  // movieSelect.selectedIndex 代表哪一个option从0开始
 				   if (selectedMovieIndex !== null) {
-	    movieSelect.selectedIndex = selectedMovieIndex;
-	  }
+	    				movieSelect.selectedIndex = selectedMovieIndex;
+				   }
 			}
