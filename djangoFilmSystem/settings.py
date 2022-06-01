@@ -34,14 +34,16 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'haystack',
     "verifications",
-    "haystack",
+    # "haystack",
     "users",
     "administer",
     "online_help"
@@ -214,8 +216,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch7_backend.Elasticsearch7SearchEngine',
@@ -225,4 +225,7 @@ HAYSTACK_CONNECTIONS = {
 }
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 4
+#指定simpleui默认的主题,指定一个文件名，相对路径就从simpleui的theme目录读取
+SIMPLEUI_DEFAULT_THEME = 'admin.lte.css'
