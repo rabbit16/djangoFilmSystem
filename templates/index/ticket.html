@@ -7,6 +7,7 @@
 	{% block title %}<title>小型厅购票</title>{% endblock %}
     {% block link %}
         <link rel="stylesheet" href="{% static 'css/ticketMINI.css' %}">
+        <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     {% endblock %}
 
 </head>
@@ -20,16 +21,13 @@
 
 {% block main %}
 <div class="movie-container">
-    <script type="application/javascript">
-        function findSeat() {
-            let select_value = document.getElementById("screening")
-            let value_select = select_value.options[select_value.selectedIndex].value
-            console.log(value_select)
-        }
-    </script>
+<form action="" method="get" class="movie-contain">
+{% csrf_token %}
+
     <div>
         <span class="choose">选择场次</span>
-        <select id="screening" onchange="findSeat()">
+        <select id="screening">
+{#        <select id="screening" onchange="findSeat()">#}
             <option value="0" selected="selected">请选择场次</option>
             {% for times in sessions %}
                 <option value="{{ times.Times_id }}">{{ times.session_time }}</option>
@@ -39,13 +37,13 @@
 {#            <option value="3">下午场</option>#}
 {#            <option value="4">夜场</option>#}
         </select>
-{#        <span class="choose">选择影片</span>#}
-{#        <select id="movie">#}
-{#            <option value="{{  }}">{{  }}</option>#}
+        <span class="choose">选择影片</span>
+        <select id="movie">
+            <option value="{{ movie.Movie_price }}" selected="selected">{{ movie.Movie_name }}</option>
 {#            <option value="35">小丑（票价：35元）</option>#}
 {#            <option value="38">疯狂动物城（票价：38元）</option>#}
 {#            <option value="30">海蒂（票价：30元）</option>#}
-{#        </select>#}
+        </select>
     </div>
     <ul class="showcase">
 		<li>
@@ -103,8 +101,8 @@
             <div class="seat" title="4排1座"></div>
             <div class="seat" title="4排2座"></div>
             <div class="seat" title="4排3座"></div>
-            <div class="seat occupied"  title="4排4座"></div>
-            <div class="seat occupied"  title="4排5座"></div>
+            <div class="seat"  title="4排4座"></div>
+            <div class="seat"  title="4排5座"></div>
             <div class="seat" title="4排6座"></div>
             <div class="seat" title="4排7座"></div>
             <div class="seat" title="4排8座"></div>
@@ -118,8 +116,8 @@
             <div class="seat" title="5排4座"></div>
             <div class="seat" title="5排5座"></div>
             <div class="seat" title="5排6座"></div>
-            <div class="seat occupied" title="5排7座"></div>
-            <div class="seat occupied" title="5排8座"></div>
+            <div class="seat" title="5排7座"></div>
+            <div class="seat" title="5排8座"></div>
             <div class="seat" title="5排9座"></div>
             <div class="seat" title="5排10座"></div>
         </div>
@@ -139,8 +137,8 @@
             <div class="seat" title="7排1座"></div>
             <div class="seat" title="7排2座"></div>
             <div class="seat" title="7排3座"></div>
-            <div class="seat occupied"  title="7排4座"></div>
-            <div class="seat occupied"  title="7排5座"></div>
+            <div class="seat"  title="7排4座"></div>
+            <div class="seat"  title="7排5座"></div>
             <div class="seat" title="7排6座"></div>
             <div class="seat" title="7排7座"></div>
             <div class="seat" title="7排8座"></div>
@@ -152,9 +150,9 @@
             <div class="seat" title="8排2座"></div>
             <div class="seat" title="8排3座"></div>
             <div class="seat" title="8排4座"></div>
-			<div class="seat occupied" title="8排5座"></div>
-			<div class="seat occupied" title="8排6座"></div>
-			<div class="seat occupied" title="8排7座"></div>
+			<div class="seat" title="8排5座"></div>
+			<div class="seat" title="8排6座"></div>
+			<div class="seat" title="8排7座"></div>
             <div class="seat" title="8排8座"></div>
             <div class="seat" title="8排9座"></div>
             <div class="seat" title="8排10座"></div>
@@ -162,7 +160,11 @@
 	</div>
 	<p class="text">
         您已经选择了<span id="count">0</span>个座位,总计票价为<span id="total">0</span>元
+        <a href="{% url 'index:index' %}">
+            <input type="submit" value="确认购票">
+        </a>
     </p>
+</form>
 </div>
 {% endblock %}
 
@@ -173,8 +175,6 @@
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'js/message.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/ticket.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/ticketTest.js' %}"></script>
-
 {% endblock %}
 
 </body>
