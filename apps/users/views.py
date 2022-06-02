@@ -35,8 +35,8 @@ class Index(View):
         # 获得有安排场次的电影
         movie_onplay = movies.objects.filter(
             id__in=[times['T_movie_id'] for times in
-                          Times.objects.filter(session_time__gt=datetime.now()).values()
-                          ])
+                    Times.objects.filter(session_time__gt=datetime.now()).values()
+                    ])
         # 存相应电影的id
         movie_ids = [i['Movie_id'] for i in movie_onplay.values()]
         # 票房数据
@@ -64,9 +64,9 @@ class Index(View):
         movie_top = [i[0] for i in box_sort]
         movie_box = [i[1] for i in box_sort]
         return render(request, "index/index.html", context={
-            "hotfilmlefts": movies.objects.filter(hotPlay=True)[:3],
-            "hotfilmcenters": movies.objects.filter(hotPlay=True)[3:6],
-            "hotfilmrights": movies.objects.filter(hotPlay=True)[6:9],
+            "hotfilmlefts": movies.objects.filter(hotPlay=True)[:2],
+            "hotfilmcenters": movies.objects.filter(hotPlay=True)[2:4],
+            "hotfilmrights": movies.objects.filter(hotPlay=True)[4:6],
             "movie_top": movie_top[:10],  # 票房前十的电影
             "movie_box": movie_box[:10],  # 上述电影的票房
         })
@@ -112,6 +112,7 @@ class Login(View):
             return to_json_data(errno=Code.OK, errmsg=error_map[Code.OK])
         except:
             return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.PICERROR])
+
 
 #
 class Register(View):
@@ -340,7 +341,6 @@ class Ticket(View):
         else:
             return to_json_data(errno=Code.REQUEST, errmsg=error_map[Code.REQUEST])
 
-
     # buy:购票，refund:退票,occupy:占用情况
     def post(self, request):
         request_info = json.loads(request.body.decode())
@@ -390,15 +390,17 @@ class Ticket(View):
             request_info = json.loads(request.body.decode())
             session_id = request_info.get('screening')
             # 获得当前场次的占用信息
-            occupied = tickets.objects.filter(Ticket_session=session_id, state=1)
-            session = Times.objects.filter(Times_id=session_id)[0]
-            # 得到座位数和演播厅类型
-            seat_num = session.T_studio.Seating
-            seat_list = [0 for _ in range(int(seat_num))]
-            for i in occupied:
-                seat_list[i.Ticket_seat_id % 1000] = 1   # 被占用的座位取1，空闲的取0
+            occupied = [i['Ticket_seat_id'] for i in
+                        tickets.objects.filter(Ticket_session=session_id, state=1).values()]
+            seat_list = Seat.objects.filter(Seat_id__in=occupied)
+            # # 得到座位数和演播厅类型
+            # seat_num = session.T_studio.Seating
+            # seat_list = [0 for _ in range(int(seat_num))]
+            # for i in occupied:
+            #     seat_list[i.Ticket_seat_id % 1000] = 1  # 被占用的座位取1，空闲的取0
             return to_json_data(data={
                 'occupy': seat_list,
+                'errno': Code.OK,
             })
         else:
             return to_json_data(errno=Code.REQUEST, errmsg=error_map[Code.REQUEST])
@@ -443,8 +445,6 @@ class Session(View):
             return to_json_data(data=occupies)
         else:
             return to_json_data(errno=Code.REQUEST, errmsg=error_map[Code.REQUEST])
-
-
 
 
 class UserCenter(View):
@@ -512,7 +512,7 @@ class AdminCenter(View):
                     'box': box,
                     'movie_info': movie_info,
                 }
-                return render(request, "index/box_list.html",data)
+                return render(request, "index/box_list.html", data)
             else:
                 return to_json_data(errno=Code.PERMIT, errmsg=error_map[Code.PERMIT])
         elif request_info.get('type') == 'admin_add':  # 添加管理员
