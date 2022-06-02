@@ -209,6 +209,8 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # 用于存放静态文件
 ]
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 AUTH_USER_MODEL = 'users.User'  # 指定替换的用户模型类
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -229,3 +231,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 4
 #指定simpleui默认的主题,指定一个文件名，相对路径就从simpleui的theme目录读取
 SIMPLEUI_DEFAULT_THEME = 'admin.lte.css'
+
+SIMPLEUI_LOGO = 'https://github.com/rabbit16/djangoFilmSystem/blob/main/static/images/logo.png?raw=true'
+SIMPLEUI_HOME_TITLE = "早起的萝卜等天亮"
