@@ -389,11 +389,9 @@ class Ticket(View):
             session_id = request_info.get('screening')
             # 获得当前场次的占用信息
             occupied = tickets.objects.filter(Ticket_session=session_id, state=1).values()
-            seat_list = Seat.objects.filter(Seat_id__in=[i['Ticket_seat_id'] for i in occupied])
-            return to_json_data(data={
-                'occupy': seat_list,
-                'errno': Code.OK
-            })
+            seat_list = Seat.objects.filter(Seat_id__in=[i['Ticket_seat_id'] for i in occupied]).values()
+            seats = [{'seat_occupied': i['Seat_name']} for i in seat_list]
+            return to_json_data(data={'seat_dict': seats}, errno=Code.OK)
         else:
             return to_json_data(errno=Code.REQUEST, errmsg=error_map[Code.REQUEST])
 
