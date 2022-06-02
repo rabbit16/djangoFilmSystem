@@ -48,14 +48,28 @@
 {#            </form>#}
         </div>
         <div class="user_message">
-            <a href="{% url 'index:register' %}">
+{#        <p>{{ user.is_authenticated }}</p>#}
+            {% if user.is_authenticated %}
+
+                <img class="user_photo" src="{% static 'images/username.png' %}" style="left: -130px">
+                <p>{{ user.username }}</p>
+                <p>|</p>
+                {% if user.is_staff %}
+                    <a href="admin/">
+                    <p>后台管理</p>
+                </a>
+                {% endif %}
+                {% else %}
+                    <a href="{% url 'index:register' %}">
                 <img class="user_photo" src="{% static 'images/username.png' %}">
                 <p>注册</p>
-            </a>
-            <p>|</p>
-            <a href="{% url 'index:who' %}">
-                <p>登录</p>
-            </a>
+                </a>
+                <p>|</p>
+                <a href="{% url 'index:login' %}">
+                    <p>登录</p>
+                </a>
+            {% endif %}
+
         </div>
     </div>
 </div>
