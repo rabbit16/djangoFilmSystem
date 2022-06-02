@@ -272,8 +272,10 @@ class Ticket(View):
 
     def get(self, request, movie_id):
         sessions = Times.objects.filter(T_movie=movies.objects.get(Movie_id=movie_id).id)
+        movie = movies.objects.get(Movie_id=movie_id)
         data = {
-            'sessions': sessions
+            'sessions': sessions,
+            'movie': movie
         }
         return render(request, "index/ticket.html", data)
 
@@ -323,69 +325,6 @@ class Ticket(View):
             return to_json_data(data=data)
         elif request_info.get('request_type') == 'occupy':
             request_info = json.loads(request.body.decode())
-            session_id = int(request_info.get('screening'))
-            # 获得当前场次的占用信息
-            occupied = tickets.objects.filter(Ticket_session=session_id, state=1)
-            session = Times.objects.filter(Times_id=session_id)[0]
-            # 得到座位数和演播厅类型
-            seat_num = session.T_studio.Seating
-            seat_list = [0 for _ in range(int(seat_num))]
-            for i in occupied:
-                seat_list[i.Ticket_seat_id % 1000] = 1  # 被占用的座位取1，空闲的取0
-            return to_json_data(data={
-                'seat_dict': seat_list,
-                'errno': Code.OK
-            })
-        else:
-            return to_json_data(errno=Code.REQUEST, errmsg=error_map[Code.REQUEST])
-
-    # buy:购票，refund:退票,occupy:占用情况
-    def post(self, request):
-        request_info = json.loads(request.body.decode())
-        if request_info.get('request_type') == 'buy':
-            ticinfo = json.loads(request.body.decode())
-            time = datetime.now()
-            time_str = time.strftime('%Y%m%d%H%M')[2:]
-            ticket_id = int(time_str + "%04d" % ticinfo.get('Seat_id') + "%02d" % ticinfo.get('Studio_id'))
-            rate_discount = discount(User.objects.get(id=ticinfo.get("user_id")).Integral)
-            session = Times.objects.get(Times_id=ticinfo.get('session_id'))
-            movie_price = movies.objects.get(Movie_id=session.T_movie).Movie_price
-            session_rate = Studio.objects.get(Studio_id=session.T_studio).price_weight
-            price_discount = rate_discount * movie_price * session_rate
-
-            try:
-                if ticinfo.is_valid():
-                    tickets.objects.create(Ticket_id=ticket_id,
-                                           Ticket_seat=ticinfo.get('Seat_id'),
-                                           Ticket_session=ticinfo.get('Studio_id'),
-                                           price=price_discount,
-                                           Ticket_user=ticinfo.get("user_id"),
-                                           state=1,
-                                           )
-                data = {
-                    'errno': Code.OK
-                }
-                return to_json_data(data=data)
-            except:
-                return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.PICERROR])
-        elif request_info.get('request_type') == 'refund':
-            ticinfo = json.loads(request.body.decode())
-            target = tickets.objects.filter(Ticket_id=ticinfo.get('id'))
-            if not target.exists():
-                return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.NODATA])
-            session = Times.objects.filter(Times_id=target[0].Ticket_session)
-            if not session.exists():
-                return to_json_data(errno=Code.NODATA, errmsg=error_map[Code.NODATA])
-            if session[0].session_time < datetime.now():  # 超过了退款时间
-                return to_json_data(errno=Code.OUTTIME, errmsg=error_map[Code.OUTTIME])
-            # 审查完毕，可以退票程序
-            target.update(state=3)
-            data = {
-                'errno': Code.OK
-            }
-            return to_json_data(data=data)
-        elif request_info.get('request_type') == 'occupy':
-            request_info = json.loads(request.body.decode())
             session_id = request_info.get('screening')
             # 获得当前场次的占用信息
             occupied = tickets.objects.filter(Ticket_session=session_id, state=1).values()
@@ -394,7 +333,6 @@ class Ticket(View):
             return to_json_data(data={'seat_dict': seats}, errno=Code.OK)
         else:
             return to_json_data(errno=Code.REQUEST, errmsg=error_map[Code.REQUEST])
-
 
 class Session(View):
 
