@@ -20,10 +20,10 @@ a{
 #ms{
     width: 1200px;
     height: 420px;
-    margin-left: 192px;
+    margin-left: 113px;
     margin-top: 20px;
     background-color: rgba(202, 235, 242, 0.2);
-    /*background-color: black;*/
+    /* background-color: black; */
 }
 
 #ms .ms_top{
@@ -51,8 +51,8 @@ a{
 #ms .ms_body{
     width: 1900px;
     display: flex;
-    margin: 0 auto;
-}
+    position: relative;margin: 0 auto;
+/* background-color: rgba(202, 235, 242, 0.2); */}
 
 #ms .ms_body img{
     width: 250px;
@@ -80,7 +80,7 @@ a{
     margin-top: 20px;
 }
 
-/*设置页面右边*/
+/*è®¾ç½®é¡µé¢å³è¾¹*/
 #ms .ms_body_right ul{
     list-style: none;
     flex: 1;
