@@ -144,6 +144,7 @@ const container = document.querySelector(".container");////返回class为contain
 				let OdataParams = {
 					"count": count.innerText,
 					"total": total.innerText,
+					"request_type": "buy"
 				};
 				console.log(OdataParams)
 				//2、创建ajax请求
