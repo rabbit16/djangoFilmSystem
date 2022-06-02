@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# @Time    : 2022/5/18 8:14 下午
-# @Author  : rabbit
-# @File    : urls.py
-# @Software: PyCharm
+# # @Time    : 2022/5/18 8:14 下午
+# # @Author  : rabbit
+# # @File    : urls.py
+# # @Software: PyCharm
 
 from django.urls import path, re_path
 from users import views
