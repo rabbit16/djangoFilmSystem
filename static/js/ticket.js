@@ -102,7 +102,7 @@ const container = document.querySelector(".container");////返回class为contain
 								  seat_me[i].classList.add("occupied")
 							  }
 							}
-						  console.log(seat_me)
+						  // console.log(seat_me)
 						  // for (let i = 0; i < seat_me.length; i++) {
 							//   if (seat_me[i].class === "seat occupied"){
 							// 	  seat_me[i].classList.add("occupied")
@@ -128,6 +128,49 @@ const container = document.querySelector(".container");////返回class为contain
 					undateSeletedCount();
 				}
 			});
+
+			$ticket.submit(function (e){
+				//1、创建请求参数
+				let OdataParams = {
+					"count": count.innerText,
+					"total": total.innerText,
+				};
+				//2、创建ajax请求
+				$.ajaxSetup({
+					data: {csrfmiddlewaretoken: '{% csrf_token %}' },
+				});
+				$.ajax({
+					// 请求地址
+					url: "",  // url尾部需要添加/
+					// url: "{% url 'ticket_update' %}",  // url尾部需要添加/
+					// 请求方式
+					type: "POST",
+					data: JSON.stringify(OdataParams),
+					// 请求内容的数据类型（前端发给后端的格式）
+					contentType: "application/json; charset=utf-8",//将文字内容指定为json格式
+					// 响应数据的格式（后端返回给前端的格式）
+					dataType: "json",
+				})
+				console.log(OdataParams)
+				.done(function (log) {
+					if (log.errno === "0") {
+						// 登录成功
+						message.showSuccess('订票成功！');
+						setTimeout(() => {
+							// 登录成功之后重定向到主页
+							window.location.href = '/';
+						  }, 1000)
+					} else {
+						// 注册失败，打印错误信息
+						message.showError(log.errmsg);
+					}
+				})
+			})
+
+
+
+
+
 			function setMovieData(movieIndex, moviePrice)//保存电影索引值和票价
 			{
 				//保存到本地存储中

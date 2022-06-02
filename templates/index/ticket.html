@@ -21,9 +21,8 @@
 
 {% block main %}
 <div class="movie-container">
-<form action="" method="get" class="movie-contain">
+<form action="" method="post" class="movie-contain">
 {% csrf_token %}
-
     <div>
         <span class="choose">选择场次</span>
         <select id="screening">
