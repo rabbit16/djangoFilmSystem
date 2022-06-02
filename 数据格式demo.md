@@ -1,10 +1,18 @@
+# 场次返回数据格式
+```json
+{
+  "count": 3, 
+  "timetable": ["6.1 15:00", "6.2 18:00", "6.3 10:00"], 
+  "price": [50, 60, 50],
+  "imax": [0, 1, 0], 
+  "session_id": [1, 2, 3]
+}
+```
 # 座位返回数据格式
 ```json
 {
-  "演播厅1": {
-    "座位1": true,
-    "座位2": false
-  }
+  "type": "小型厅" ,
+  "occupy": [0,0,1,0,1,1,0,0,0,0,1,0,1,0,1,0]
 }
 ```
 
@@ -1927,5 +1935,37 @@ success: true
 	"ext":{},
 	"state":"SUCCESS",
 	"success":true
+}
+```
+
+# 订单添加数据格式
+```json
+{
+  "user_id": 1, 
+  "session_id": 2, 
+  "Seat_id": 1037,
+}
+```
+# 电影添加数据格式
+# movie_time是时间格式，怎么返回之后再调试
+```json
+{
+  "Movie_name":"花园宝宝", 
+  "Movie_time": "1995-04-07T00:00:00",
+  "Movie_img": "https://img2.doubanio.com/view/photo/m/public/p2377982803.webp",
+  "Movie_price": 40,
+  "Movie_abstract": "最适合你的电影",
+  "Movie_hotplay": 1
+}
+```
+# 场次演播厅场次返回格式
+# 返回当前选择电影院所有之后放映的场次
+
+# 场次添加数据格式
+```json
+{
+  "studio_id":1, 
+  "session_time": "1995-04-07T00:00:00",
+  "movie_id": 2
 }
 ```

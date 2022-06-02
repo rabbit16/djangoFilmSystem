@@ -10,7 +10,6 @@
         <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
         <link rel="stylesheet" href="{% static 'css/footer.css' %}">
         <link rel="stylesheet" href="{% static 'css/Header.css' %}">
-{#现在有一个问题就是css改名字不行，只有改成header不行#}
     <style>
         {#body{background-color: #EFEFEF}#}
         body{background-color: #333333}
@@ -30,7 +29,7 @@
                 <li><a href="{% url 'index:index' %}">首页</a></li>
                 <li><a href="{% url 'index:movie' %}">电影</a></li>
                 <li><a href="{% url 'index:rank' %}">榜单</a></li>
-                <li><a href="{% url 'index:indexTest' %}">原主页</a></li>
+{#                <li><a href="{% url 'index:indexTest' %}">原主页</a></li>#}
             </ul>
         </div>
         <div class="h_c_search">
@@ -96,12 +95,13 @@
                 {% for hotfilm in hotfilmlefts %}
                     <li>
 {#                    <a href="{% url 'index:movieDetail' %}">#}
-                    <a href="{% url 'index:movieDetail' %}">
+                    <a href="{% url 'index:movieDetail' movie_id=hotfilm.Movie_id %}">
+{#                    <a href="movieDetail/?movie_id={{ hotfilm.Movie_id }}">#}
                         <img src="{{ hotfilm.Movie_img }}" alt="">
                         <p class="name">{{ hotfilm.Movie_name }}</p>
                         <div class="photoby">
                             <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
-                            <p>{{ hotfilm.abstract }}</p>
+                            <p>{{ hotfilm.Movie_price }}</p>
                         </div>
                     </a>
                 </li>
@@ -133,12 +133,12 @@
                 {% for hotfilm in hotfilmcenters %}
                     <li>
 {#                    <a href="{% url 'index:movieDetail' %}">#}
-                    <a href="{% url 'index:movieDetail' %}">
+                    <a href="{% url 'index:movieDetail' movie_id=hotfilm.Movie_id %}">
                         <img src="{{ hotfilm.Movie_img }}" alt="">
                         <p class="name">{{ hotfilm.Movie_name }}</p>
                         <div class="photoby">
                             <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
-                            <p>{{ hotfilm.abstract }}</p>
+                            <p>{{ hotfilm.Movie_price }}</p>
                         </div>
                     </a>
                 </li>
@@ -180,12 +180,12 @@
                 {% for hotfilm in hotfilmrights %}
                     <li>
 {#                    <a href="{% url 'index:movieDetail' %}">#}
-                    <a href="{% url 'index:movieDetail' %}">
+                    <a href="{% url 'index:movieDetail' movie_id=hotfilm.Movie_id %}">
                         <img src="{{ hotfilm.Movie_img }}" alt="">
                         <p class="name">{{ hotfilm.Movie_name }}</p>
                         <div class="photoby">
                             <img src="{% static 'images/movie.png' %}" width="10" height="10" alt=""/>
-                            <p>{{ hotfilm.abstract }}</p>
+                            <p>{{ hotfilm.Movie_price }}</p>
                         </div>
                     </a>
                 </li>

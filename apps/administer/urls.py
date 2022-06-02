@@ -10,5 +10,6 @@ app_name = 'admin'
 urlpatterns = [
     path('', views.index.as_view(), name='index'),
     path('film/', views.filmPublish.as_view(), name='film'),
-    path('filmmanage/', views.filmManage.as_view(), name='filmManage')
+    path('filmmanage/', views.filmManage.as_view(), name='filmManage'),
+    path('initialize/', views.initialize.as_view(), name='initialize')
 ]
