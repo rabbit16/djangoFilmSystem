@@ -1,0 +1,15 @@
+{% extends 'admin/index.html' %}
+{% load static %}
+{% block title %}
+        <title>后台管理</title>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/jq.js' %}"></script>
+    <script type="text/javascript">
+        let title = $(".left")[1]
+        title.innerHTML = `<span>早起的萝卜等天亮</span>`
+        let hide = $('.el-col-6 .el-card .el-card__body ')[0]
+        hide.innerHTML = ''
+    </script>
+{% endblock %}
