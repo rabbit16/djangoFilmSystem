@@ -19,15 +19,23 @@ body {
 	text-align: center;
 	position: relative;
 	top: 20px;
-	left: 112px;
+	left: 150px;
 	width: 1200px;
     height: 600px;
 	background-color: rgba(202, 235, 242, 0.2);
 }
 
-.movie-container .choose{
+.movie-container .choose_s{
 	position: relative;
-	left: -50px;
+	left: -800px;
+	top: 117px;
+	color: rgba(256, 256, 256, 0.7);
+	font-size: 16px;
+}
+
+.movie-container .choose_m{
+	position: relative;
+	left: -20px;
 	top: 27px;
 	color: rgba(256, 256, 256, 0.7);
 	font-size: 16px;
@@ -139,7 +147,7 @@ body {
 {
 	margin: 5px 30px;
 	position: relative;
-	left: -10px;
+	left: 50px;
 	top: 30px;
 	font-size: 18px;
 	color: rgba(256, 256, 256, 0.7);
@@ -148,4 +156,13 @@ body {
 .text span
 {
 	color: #6feaf6;
+}
+
+.text a
+{
+	margin: 5px 30px;
+	position: relative;
+	left: -200px;
+	top: 40px;
+	color: rgba(256, 256, 256, 0.7);
 }
