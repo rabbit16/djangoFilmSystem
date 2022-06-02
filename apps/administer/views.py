@@ -55,8 +55,7 @@ class initialize(View):
             Studio.objects.create(Studio_id=i[0],
                                   Studio_name=i[1],
                                   Studio_type=i[2],
-                                  Seating=i[3] * i[4],
-                                  price_weight=i[5])
+                                  Seating=i[3] * i[4])
 
         for i in formats:
             idx = 0
