@@ -1,0 +1,162 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+a{
+    text-decoration:none ;
+}
+
+#ms li{
+    list-style:none;
+}
+
+#ms{
+    height: 600px;
+    position: relative;
+    top: 15px;
+    background-image: url("../images/whoBackground.jpg");
+    opacity:0.7;
+    background-position: center;
+    background-size: 1200px 750px;
+    background-repeat: no-repeat;
+}
+
+#ms .ms_top{
+    width: 500px;
+    height: 55px;
+    /*-webkit-background-size: 1200px 55px;*/
+    background-size: 1200px 55px;
+    line-height: 55px;
+    margin-left: 2px;
+    border-top-right-radius: 20px;
+    margin-top: 20px;
+    background: gray;
+}
+
+#ms .ms_top span{
+    color: whitesmoke ;
+}
+
+#ms .ms_top span:first-child{
+    font-weight: bold;
+    margin: 0 10px;
+    font-size: 20px;
+}
+
+#ms .ms_body{
+    width: 1900px;
+    display: flex;
+    position: relative;margin: 0 auto;
+/* background-color: rgba(202, 235, 242, 0.2); */}
+
+#ms .ms_body img{
+    width: 250px;
+    height: 375px;
+    margin-top: -70px;
+    cursor: auto;
+    transition: all 0.6s;
+    border: solid 3px rgba(256, 256, 256, 0.8);
+    border-radius: 10px;
+}
+
+#ms .ms_body li .photoby img{
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-right: 10px;
+}
+
+
+#ms .ms_body_center ul{
+    list-style: none;
+    flex: 1;
+    padding-left: 10px;
+    margin-left: 200px;
+    margin-top: 20px;
+}
+
+/*è®¾ç½®é¡µé¢å³è¾¹*/
+#ms .ms_body_right ul{
+    list-style: none;
+    flex: 1;
+    padding-left: 100px;
+    margin-top: -40px;
+    font-size: 18px;
+    color: rgba(256, 256, 256, 0.8);
+}
+
+#ms .ms_body_right p:first-child{
+    font-size: 26px;
+    font-weight: bold;
+}
+
+#ms .ms_body_right p:nth-child(2){
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.want_to_see{
+    width: 250px;
+    height: 80px;
+    background-color: rgba(256, 256, 256, 0.5);
+    position: relative;
+    top: 140px;
+    left: 400px;
+    font-size: 36px;
+    border-radius: 5px;
+}
+
+.fa-child{
+    margin-top: 7px;
+    margin-left: 18px;
+    position: relative;
+    right: -25px;
+    top: -3px;
+    transform: scale(1.2);
+}
+
+.btn{
+    width: 180px;
+    height: 70px;
+    background-color: rgba(256, 256, 256, 0);
+    border: none;
+    position: relative;
+    top: -2px;
+    left: 6px;
+    font-size: 36px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ticket{
+    width: 250px;
+    height: 80px;
+    background-color: rgba(256, 256, 256, 0.5);
+    position: relative;
+    top: 62px;
+    left: 730px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.fa-group{
+    margin-top: 7px;
+    margin-left: 18px;
+    transform: scale(1.6);
+    position: relative;
+    right: -25px;
+    top: -5px;
+}
+
+.ticket .btn{
+    font-weight: bold;
+    position: relative;
+    top: -1px;
+}

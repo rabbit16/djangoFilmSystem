@@ -1,0 +1,44 @@
+{% extends 'index/index.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/who.css' %}">
+{% endblock %}
+
+{% block title %}<title>身份</title>{% endblock %}
+
+{% block banner %}
+{% endblock %}
+
+<!--中部-->
+{% block main %}
+<div id="ms">
+    <div class="ms_body">
+        <ul>
+            <li>
+                <div class="want_to_see">
+                    <a href="{% url 'index:login' %}">
+                        <i class="fa fa-child" style="color: black;"></i><input type="button" value="用户" class="btn">
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="ticket">
+                    <a href="http://127.0.0.1:8000/admin">
+                        <i class="fa fa-group" style="color: black;"></i><input type="button" value="管理" class="btn">
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block next_button %}
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/jq.js' %}"></script>
+    <script type="text/javascript"  src="{% static 'js/login.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/message.js' %}"></script>
+{% endblock %}

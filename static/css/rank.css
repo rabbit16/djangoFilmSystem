@@ -1,0 +1,60 @@
+.hl_body a {
+    color: white;
+    text-decoration: none;
+}
+
+/*<!-- div 大小设定 -->*/
+.hl_body {
+    float: left;
+    width: 300px;
+    height: 500px;
+    margin-top: 20px;
+    margin-left: 125px;
+    background: #333333;
+    border: 1px solid #FFF;
+    box-shadow: #d0d0d0 1px 1px 1px 0px;
+}
+
+.hl_body ul {
+    counter-reset: section;
+    margin-top: 10px;
+    margin-left: 40px;
+}
+
+.hl_body li {
+    float: left;
+    width: 260px;
+    border: #333333;
+    line-height: 46px;
+    height: 46px;
+    overflow: hidden;
+    color: #CAEBF2;
+    font-size: 16px;
+}
+
+.hl_body li:before {
+    counter-increment: section;
+    content: counter(section);
+    display: inline-block;
+    padding: 0 12px;
+    margin-right: 10px;
+    height: 18px;
+    line-height: 18px;
+    background: #CAEBF2;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+/*<!-- 排名前三名颜色控制 -->*/
+.hl_body li:nth-child(1):before {
+    background: #FF3B3F;
+}
+
+.hl_body li:nth-child(2):before {
+    background: #FF3B3F
+}
+
+.hl_body li:nth-child(3):before {
+    background: #FF3B3F
+}
