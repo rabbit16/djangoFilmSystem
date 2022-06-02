@@ -90,16 +90,26 @@ const container = document.querySelector(".container");////返回class为contain
 					  dataType: "json",
 					})
 					// console.log(SdataParams)
-					.done(function (log) {
-						if (log.errno === "0") {
+					.done(function (res) {
+						if (res.errno === "0") {
 						  // 登录成功
 						  message.showSuccess('恭喜你，传呼成功！');
+							console.log(res)
+						  let seat_dicts = res.data.seat_dict;
+							// let seat_dicts = seat_d.seat_dict
+						  // console.log(seat_dicts)
 
-						  let seat_dict = log.seat_dict;
-						  for (let i = 0; i < seat_me.length; i++) {
-								// arry.push(seat_me[i].getAttribute('title'))
-							  if (seat_dict.get(seat_me[i].getAttribute('title'), 0) !== 0){
-								  seat_me[i].classList.add("occupied")
+						  for (let i = 0; i < seat_dicts.length; i++) {
+								// array.push(seat_me[i].getAttribute('title'))
+							  // console.log(seat_dicts[i].seat_occupied)
+							  let seat_occupied_single = seat_dicts[i].seat_occupied
+							  let selector_seat = $(".seat")
+							  // console.log(selector_seat)
+							  for (let j = 0; j < selector_seat.length; j++) {
+								  if (selector_seat[j].title === seat_occupied_single){
+									  // console.log(selector_seat[j].title)
+									  selector_seat[j].classList.add("occupied")
+								  }
 							  }
 							}
 						  // console.log(seat_me)
@@ -114,7 +124,7 @@ const container = document.querySelector(".container");////返回class为contain
 						  // }, 1000)
 						} else {
 						  // 注册失败，打印错误信息
-						  message.showError(log.errmsg);
+						  message.showError(res.errmsg);
 						}
 					})
 			});//下拉框改变时
@@ -135,6 +145,7 @@ const container = document.querySelector(".container");////返回class为contain
 					"count": count.innerText,
 					"total": total.innerText,
 				};
+				console.log(OdataParams)
 				//2、创建ajax请求
 				$.ajaxSetup({
 					data: {csrfmiddlewaretoken: '{% csrf_token %}' },
@@ -151,7 +162,6 @@ const container = document.querySelector(".container");////返回class为contain
 					// 响应数据的格式（后端返回给前端的格式）
 					dataType: "json",
 				})
-				console.log(OdataParams)
 				.done(function (log) {
 					if (log.errno === "0") {
 						// 登录成功
