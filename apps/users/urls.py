@@ -22,5 +22,6 @@ urlpatterns = [
     path("session/", views.Session.as_view(), name="session"),
     # path("seats/", views.seats.as_view(), name="seats"),
     path("search/", views.Search.as_view(), name="search"),
+    path("who/", views.Who.as_view(), name="who"),
     # path("ticketMedium/", views.TicketMedium.as_view(), name="ticketMedium"),
 ]

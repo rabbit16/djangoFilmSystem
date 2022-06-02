@@ -281,26 +281,33 @@ class Ticket(View):
 
     @csrf_exempt
     def post(self, request, movie_id):
-        request_info = json.loads(request.body.decode())
+        try:
+            request_info = json.loads(request.body.decode())
+        except:
+            data = {
+                'errno': Code.OK
+            }
+            return to_json_data(data=data)
+            # return
         if request_info.get('request_type') == 'buy':
-            ticinfo = json.loads(request.body.decode())
-            time = datetime.now()
-            time_str = time.strftime('%Y%m%d%H%M')[2:]
-            ticket_id = int(time_str + "%04d" % ticinfo.get('Seat_id') + "%02d" % ticinfo.get('Studio_id'))
-            rate_discount = discount(User.objects.get(id=ticinfo.get("user_id")).Integral)
-            session = Times.objects.get(Times_id=ticinfo.get('session_id'))
-            movie_price = movies.objects.get(Movie_id=session.T_movie).Movie_price
-            price_discount = rate_discount * movie_price
+            # ticinfo = json.loads(request.body.decode())
+            # time = datetime.now()
+            # time_str = time.strftime('%Y%m%d%H%M')[2:]
+            # ticket_id = int(time_str + "%04d" % ticinfo.get('Seat_id') + "%02d" % ticinfo.get('Studio_id'))
+            # rate_discount = discount(User.objects.get(id=ticinfo.get("user_id")).Integral)
+            # session = Times.objects.get(Times_id=ticinfo.get('session_id'))
+            # movie_price = movies.objects.get(Movie_id=session.T_movie).Movie_price
+            # price_discount = rate_discount * movie_price
 
             try:
-                if ticinfo.is_valid():
-                    tickets.objects.create(Ticket_id=ticket_id,
-                                           Ticket_seat=ticinfo.get('Seat_id'),
-                                           Ticket_session=ticinfo.get('Studio_id'),
-                                           price=price_discount,
-                                           Ticket_user=ticinfo.get("user_id"),
-                                           state=1,
-                                           )
+                # if ticinfo.is_valid():
+                # tickets.objects.create(Ticket_id=ticket_id,
+                #                            Ticket_seat=ticinfo.get('Seat_id'),
+                #                            Ticket_session=ticinfo.get('Studio_id'),
+                #                            price=price_discount,
+                #                            Ticket_user=ticinfo.get("user_id"),
+                #                            state=1,
+                #                            )
                 data = {
                     'errno': Code.OK
                 }
@@ -325,7 +332,7 @@ class Ticket(View):
             return to_json_data(data=data)
         elif request_info.get('request_type') == 'occupy':
             request_info = json.loads(request.body.decode())
-            session_id = request_info.get('screening')
+            session_id = int(request_info.get('screening'))
             # 获得当前场次的占用信息
             occupied = tickets.objects.filter(Ticket_session=session_id, state=1).values()
             seat_list = Seat.objects.filter(Seat_id__in=[i['Ticket_seat_id'] for i in occupied]).values()
@@ -506,6 +513,16 @@ class Search(View):
 
     def get(self, request):
         return render(request, "index/search.html")
+
+    def post(self, request):
+        return json.dumps({
+            "errno": '1'
+        })
+
+class Who(View):
+
+    def get(self, request):
+        return render(request, "index/who.html")
 
     def post(self, request):
         return json.dumps({
